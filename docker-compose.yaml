@@ -1,0 +1,42 @@
+version: '3.1'
+
+services:
+    
+    php-apache:
+        build: ./docker/php
+        container_name: lr_boilerplate
+        environment:
+            - APACHE_RUN_USER=#1000
+        ports:
+            - 8080:80
+        volumes:
+            - ./web:/var/www/html
+        links:
+            - db
+    
+    db:
+        image: mariadb
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: test
+        volumes:
+            - ./docker/data:/var/lib/mysql
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        links:
+            - db
+        environment:
+            - PMA_ARBITRARY=1
+        ports:
+            - 3080:80
+
+    nodejs:
+        image: node:latest
+        container_name: nodejs
+        working_dir: /var/www/html/
+        ports:
+            - 5000:80
+        volumes:
+            - ./web:/var/www/html/
