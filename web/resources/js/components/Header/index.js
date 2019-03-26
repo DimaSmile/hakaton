@@ -34,9 +34,8 @@ const Header = props => {
 
 const styles = theme => ({
     root: {
-        borderBottom: "10px solid #55a4aa",
         "& header": {
-            position: "static"
+            background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
         }
     }
 });

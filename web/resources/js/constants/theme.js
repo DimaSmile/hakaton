@@ -6,7 +6,7 @@ import cyan from "@material-ui/core/colors/cyan";
 const primary = "#1e262e";
 const primaryLight = grey[300];
 const primaryDark = grey[400];
-const secondary = grey[50];
+const secondary = "#ef375e";
 
 export const CustomTheme = {
     typography: {
@@ -28,10 +28,14 @@ export const CustomTheme = {
     overrides: {
         MuiButton: {
             root: {
-                minWidth: "100px"
+                minWidth: "100px",
+                background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
             },
             outlined: {
-                padding: "5px 30px"
+                padding: "5px 30px",
+                background: "none",
+                border: "none",
+                outline: "none !important"
             },
             outlinedSecondary: {
                 border: "1.2px solid " + secondary

@@ -17,14 +17,22 @@ export const styles = theme => ({
         width: "100%",
         background: "#4265a4",
         color: "#fff",
-        position: "relative"
+        position: "relative",
+        "&:hover": {
+            background: "#4265a4",
+            color: "#fff"
+        }
     },
     GoogleButtton: {
         marginTop: "15px",
         width: "100%",
         background: "#e45f4f",
         color: "#fff",
-        position: "relative"
+        position: "relative",
+        "&:hover": {
+            background: "#e45f4f",
+            color: "#fff"
+        }
     },
     Icon: {
         position: "absolute",

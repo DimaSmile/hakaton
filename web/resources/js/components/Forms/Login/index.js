@@ -44,7 +44,7 @@ class Login extends React.Component {
                             component="h1"
                             variant="h3"
                             gutterBottom
-                            color={"primary"}
+                            color={"secondary"}
                             align="center"
                         >
                             Login
@@ -104,7 +104,6 @@ class Login extends React.Component {
                             ariant="contained"
                             href={"facebook"}
                             className={classNames(
-                                classes.button,
                                 classes.homepageButton,
                                 classes.GoogleButtton
                             )}

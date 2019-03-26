@@ -29,11 +29,12 @@ class Navigation extends Component {
                 <Button
                     color="inherit"
                     value={"loginOpen"}
+                    variant="outlined"
                     onClick={this.handleOpenModal}
                 >
                     Login
                 </Button>
-                <Button color="inherit" value={"signUpOpen"}>
+                <Button color="inherit" value={"signUpOpen"} variant="outlined">
                     Sign Up
                 </Button>
                 <Modal
