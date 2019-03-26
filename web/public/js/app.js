@@ -7218,6 +7218,205 @@ var _InputLabel = _interopRequireDefault(__webpack_require__(/*! ./InputLabel */
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/core/Link/Link.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/@material-ui/core/Link/Link.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.styles = void 0;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js"));
+
+var _utils = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/index.es.js");
+
+var _classnames = _interopRequireDefault(__webpack_require__(/*! classnames */ "./node_modules/classnames/index.js"));
+
+var _helpers = __webpack_require__(/*! ../utils/helpers */ "./node_modules/@material-ui/core/utils/helpers.js");
+
+var _withStyles = _interopRequireDefault(__webpack_require__(/*! ../styles/withStyles */ "./node_modules/@material-ui/core/styles/withStyles.js"));
+
+var _Typography = _interopRequireDefault(__webpack_require__(/*! ../Typography */ "./node_modules/@material-ui/core/Typography/index.js"));
+
+// @inheritedComponent Typography
+var styles = {
+  /* Styles applied to the root element. */
+  root: {},
+
+  /* Styles applied to the root element if `underline="none"`. */
+  underlineNone: {
+    textDecoration: 'none'
+  },
+
+  /* Styles applied to the root element if `underline="hover"`. */
+  underlineHover: {
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline'
+    }
+  },
+
+  /* Styles applied to the root element if `underline="always"`. */
+  underlineAlways: {
+    textDecoration: 'underline'
+  },
+  // Same reset as ButtonBase.root
+
+  /* Styles applied to the root element if `component="button"`. */
+  button: {
+    position: 'relative',
+    // Remove grey highlight
+    WebkitTapHighlightColor: 'transparent',
+    backgroundColor: 'transparent',
+    // Reset default value
+    // We disable the focus ring for mouse, touch and keyboard users.
+    outline: 'none',
+    border: 0,
+    margin: 0,
+    // Remove the margin in Safari
+    borderRadius: 0,
+    padding: 0,
+    // Remove the padding in Firefox
+    cursor: 'pointer',
+    userSelect: 'none',
+    verticalAlign: 'middle',
+    '-moz-appearance': 'none',
+    // Reset
+    '-webkit-appearance': 'none',
+    // Reset
+    '&::-moz-focus-inner': {
+      borderStyle: 'none' // Remove Firefox dotted outline.
+
+    }
+  }
+};
+exports.styles = styles;
+
+function Link(props) {
+  var block = props.block,
+      children = props.children,
+      classes = props.classes,
+      classNameProp = props.className,
+      component = props.component,
+      TypographyClasses = props.TypographyClasses,
+      underline = props.underline,
+      other = (0, _objectWithoutProperties2.default)(props, ["block", "children", "classes", "className", "component", "TypographyClasses", "underline"]);
+  return _react.default.createElement(_Typography.default, (0, _extends2.default)({
+    className: (0, _classnames.default)(classes.root, (0, _defineProperty2.default)({}, classes.button, component === 'button'), classes["underline".concat((0, _helpers.capitalize)(underline))], classNameProp),
+    classes: TypographyClasses,
+    component: component,
+    inline: !block
+  }, other), children);
+}
+
+ true ? Link.propTypes = {
+  /**
+   *  Controls whether the link is inline or not. When `block` is true the link is not inline
+   *  when `block` is false it is.
+   */
+  block: _propTypes.default.bool,
+
+  /**
+   * The content of the link.
+   */
+  children: _propTypes.default.node.isRequired,
+
+  /**
+   * Override or extend the styles applied to the component.
+   * See [CSS API](#css-api) below for more details.
+   */
+  classes: _propTypes.default.object.isRequired,
+
+  /**
+   * @ignore
+   */
+  className: _propTypes.default.string,
+
+  /**
+   * The color of the link.
+   */
+  color: _propTypes.default.oneOf(['error', 'inherit', 'primary', 'secondary', 'textPrimary', 'textSecondary']),
+
+  /**
+   * The component used for the root node.
+   * Either a string to use a DOM element or a component.
+   */
+  component: _utils.componentPropType,
+
+  /**
+   * `classes` property applied to the [`Typography`](/api/typography/) element.
+   */
+  TypographyClasses: _propTypes.default.object,
+
+  /**
+   *  Controls when the link should have an underline.
+   */
+  underline: _propTypes.default.oneOf(['none', 'hover', 'always']),
+
+  /**
+   * Applies the theme typography styles.
+   */
+  variant: _propTypes.default.string
+} : undefined;
+Link.defaultProps = {
+  block: false,
+  color: 'primary',
+  component: 'a',
+  underline: 'hover',
+  variant: 'inherit'
+};
+
+var _default = (0, _withStyles.default)(styles, {
+  name: 'MuiLink'
+})(Link);
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/Link/index.js":
+/*!******************************************************!*\
+  !*** ./node_modules/@material-ui/core/Link/index.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "default", {
+  enumerable: true,
+  get: function get() {
+    return _Link.default;
+  }
+});
+
+var _Link = _interopRequireDefault(__webpack_require__(/*! ./Link */ "./node_modules/@material-ui/core/Link/Link.js"));
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/core/List/List.js":
 /*!*****************************************************!*\
   !*** ./node_modules/@material-ui/core/List/List.js ***!
@@ -107584,6 +107783,219 @@ var styles = function styles(theme) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Forms/SingUp/_validation.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/Forms/SingUp/_validation.js ***!
+  \*************************************************************/
+/*! exports provided: SignupSchema */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupSchema", function() { return SignupSchema; });
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! yup */ "./node_modules/yup/lib/index.js");
+/* harmony import */ var yup__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(yup__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _constants_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../constants/index */ "./resources/js/constants/index.js");
+
+
+var SignupSchema = yup__WEBPACK_IMPORTED_MODULE_0___default.a.object().shape({
+  email: yup__WEBPACK_IMPORTED_MODULE_0___default.a.string().email("E-mail is not valid!").required("E-mail is required!"),
+  password1: yup__WEBPACK_IMPORTED_MODULE_0___default.a.string().min(_constants_index__WEBPACK_IMPORTED_MODULE_1__["MIN_PASSWORD_LENGTH"], "Password has to be longer than ".concat(_constants_index__WEBPACK_IMPORTED_MODULE_1__["MIN_PASSWORD_LENGTH"], " characters!")).required("Password is required!"),
+  password2: yup__WEBPACK_IMPORTED_MODULE_0___default.a.string().required("Password confirmation is required!").min(_constants_index__WEBPACK_IMPORTED_MODULE_1__["MIN_PASSWORD_LENGTH"], "Password has to be longer than ".concat(_constants_index__WEBPACK_IMPORTED_MODULE_1__["MIN_PASSWORD_LENGTH"], " characters!"))
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/Forms/SingUp/index.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/Forms/SingUp/index.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var formik__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! formik */ "./node_modules/formik/dist/formik.esm.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/Typography/index.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _FormElems_TextInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../FormElems/TextInput */ "./resources/js/components/FormElems/TextInput.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/Button/index.js");
+/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _material_ui_core_Link__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core/Link */ "./node_modules/@material-ui/core/Link/index.js");
+/* harmony import */ var _material_ui_core_Link__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Link__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _img_icons_iconFB_svg__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../../img/icons/iconFB.svg */ "./resources/img/icons/iconFB.svg");
+/* harmony import */ var _img_icons_iconFB_svg__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_img_icons_iconFB_svg__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _img_icons_iconGoogle_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../../img/icons/iconGoogle.png */ "./resources/img/icons/iconGoogle.png");
+/* harmony import */ var _img_icons_iconGoogle_png__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_img_icons_iconGoogle_png__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _validation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./_validation */ "./resources/js/components/Forms/SingUp/_validation.js");
+/* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./styles */ "./resources/js/components/Forms/SingUp/styles.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+var SignUp = function SignUp(props) {
+  var register = props.register,
+      classes = props.classes,
+      error = props.error;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_3__["Formik"], {
+    initialValues: {
+      email: "",
+      password1: "",
+      password2: ""
+    },
+    validationSchema: _validation__WEBPACK_IMPORTED_MODULE_10__["SignupSchema"],
+    onSubmit: function onSubmit(values) {
+      return console.log(values);
+    }
+  }, function () {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "form-block " + classes.root
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4___default.a, {
+      component: "h1",
+      variant: "h3",
+      gutterBottom: true,
+      color: "secondary",
+      align: "center"
+    }, "Sign up"), error, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_3__["Form"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_3__["Field"], {
+      type: "email",
+      name: "email",
+      label: "Email",
+      component: _FormElems_TextInput__WEBPACK_IMPORTED_MODULE_5__["default"],
+      classProp: classes.formInput
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_3__["Field"], {
+      type: "password",
+      name: "password1",
+      label: "Password",
+      component: _FormElems_TextInput__WEBPACK_IMPORTED_MODULE_5__["default"],
+      classProp: classes.formInput
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(formik__WEBPACK_IMPORTED_MODULE_3__["Field"], {
+      type: "password",
+      name: "password2",
+      label: "Confirm password",
+      component: _FormElems_TextInput__WEBPACK_IMPORTED_MODULE_5__["default"],
+      classProp: classes.formInput
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
+      variant: "contained",
+      color: "primary",
+      className: classes.submitButton,
+      type: "submit"
+    }, "Confirm")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
+      ariant: "contained",
+      href: "facebook",
+      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(classes.button, classes.homepageButton, classes.FBButtton)
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      className: classes.Icon,
+      src: _img_icons_iconFB_svg__WEBPACK_IMPORTED_MODULE_8___default.a,
+      alt: "facebook"
+    }), "Sign Up with FaceBook"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_6___default.a, {
+      ariant: "contained",
+      href: "facebook",
+      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(classes.homepageButton, classes.GoogleButtton)
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      className: classes.Icon,
+      src: _img_icons_iconGoogle_png__WEBPACK_IMPORTED_MODULE_9___default.a,
+      alt: "facebook"
+    }), "Sign Up with Google"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: classes.bottoLinks
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Link__WEBPACK_IMPORTED_MODULE_7___default.a, {
+      href: "/privacy",
+      className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(classes.link, classes.linkCustom)
+    }, "Privacy")));
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["withStyles"])(_styles__WEBPACK_IMPORTED_MODULE_11__["styles"])(SignUp));
+
+/***/ }),
+
+/***/ "./resources/js/components/Forms/SingUp/styles.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/Forms/SingUp/styles.js ***!
+  \********************************************************/
+/*! exports provided: styles */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "styles", function() { return styles; });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var styles = function styles(theme) {
+  return {
+    root: {
+      padding: "30px 30px 60px",
+      minWidth: "400px"
+    },
+    formInput: {
+      width: "100%",
+      margin: "0px"
+    },
+    submitButton: _defineProperty({
+      width: "100px",
+      margin: "35px auto 0",
+      display: "block"
+    }, "width", "50%"),
+    bottoLinks: {
+      position: "absolute",
+      left: "0",
+      bottom: "15px",
+      width: "100%",
+      textAlign: "center"
+    },
+    linkCustom: {
+      color: "rgba(0,0,0,0.7)",
+      margin: " 0 15px",
+      fontSize: "12px"
+    },
+    FBButtton: {
+      marginTop: "35px",
+      width: "100%",
+      background: "#4265a4",
+      color: "#fff",
+      position: "relative",
+      "&:hover": {
+        background: "#4265a4",
+        color: "#fff"
+      }
+    },
+    GoogleButtton: {
+      marginTop: "15px",
+      width: "100%",
+      background: "#e45f4f",
+      color: "#fff",
+      position: "relative",
+      "&:hover": {
+        background: "#e45f4f",
+        color: "#fff"
+      }
+    },
+    Icon: {
+      position: "absolute",
+      maxHeight: "100%",
+      width: "auto",
+      left: "0px",
+      top: "0px"
+    }
+  };
+};
+
+/***/ }),
+
 /***/ "./resources/js/components/Header/index.js":
 /*!*************************************************!*\
   !*** ./resources/js/components/Header/index.js ***!
@@ -107727,6 +108139,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles */ "./resources/js/components/Navigation/styles.js");
 /* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Modal */ "./resources/js/components/Modal/index.js");
 /* harmony import */ var _Forms_Login__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Forms/Login */ "./resources/js/components/Forms/Login/index.js");
+/* harmony import */ var _Forms_SingUp__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Forms/SingUp */ "./resources/js/components/Forms/SingUp/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -107746,6 +108159,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -107805,13 +108219,18 @@ function (_Component) {
         onClick: this.handleOpenModal
       }, "Login"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_3___default.a, {
         color: "inherit",
+        variant: "outlined",
         value: "signUpOpen",
-        variant: "outlined"
+        onClick: this.handleOpenModal
       }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Modal__WEBPACK_IMPORTED_MODULE_5__["default"], {
         open: loginOpen,
         handleClose: this.handleCloseModal,
         id: "loginOpen"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Forms_Login__WEBPACK_IMPORTED_MODULE_6__["default"], null)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Forms_Login__WEBPACK_IMPORTED_MODULE_6__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Modal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        open: signUpOpen,
+        handleClose: this.handleCloseModal,
+        id: "signUpOpen"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Forms_SingUp__WEBPACK_IMPORTED_MODULE_7__["default"], null)));
     }
   }]);
 

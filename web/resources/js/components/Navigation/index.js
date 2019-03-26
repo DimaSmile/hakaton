@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import { styles } from "./styles";
 import Modal from "../Modal";
 import Login from "../Forms/Login";
+import SignUp from "../Forms/SingUp";
 
 class Navigation extends Component {
     state = {
@@ -34,7 +35,12 @@ class Navigation extends Component {
                 >
                     Login
                 </Button>
-                <Button color="inherit" value={"signUpOpen"} variant="outlined">
+                <Button
+                    color="inherit"
+                    variant="outlined"
+                    value={"signUpOpen"}
+                    onClick={this.handleOpenModal}
+                >
                     Sign Up
                 </Button>
                 <Modal
@@ -43,6 +49,13 @@ class Navigation extends Component {
                     id={"loginOpen"}
                 >
                     <Login />
+                </Modal>
+                <Modal
+                    open={signUpOpen}
+                    handleClose={this.handleCloseModal}
+                    id={"signUpOpen"}
+                >
+                    <SignUp />
                 </Modal>
             </div>
         );

@@ -2,14 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
-
 import { Formik, Form, Field } from "formik";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import TextInput from "../../FormElems/TextInput";
-
 import { LoginSchema } from "./_validation";
 import IconFB from "../../../../img/icons/iconFB.svg";
 import iconGoogle from "../../../../img/icons/iconGoogle.png";
