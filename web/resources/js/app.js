@@ -16,10 +16,17 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./containers/App";
 import { BrowserRouter } from "react-router-dom";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { CustomTheme } from "./constants/theme";
+
+const theme = createMuiTheme(CustomTheme);
 
 ReactDOM.render(
     <BrowserRouter>
-        <App />
+        <MuiThemeProvider theme={theme}>
+            {" "}
+            <App />
+        </MuiThemeProvider>
     </BrowserRouter>,
     document.getElementById("root")
 );
