@@ -1,4 +1,4 @@
-version: "3.1"
+version: "3.2"
 
 services:
   php-apache:
@@ -11,25 +11,32 @@ services:
     volumes:
       - ./web:/var/www/html
     links:
-      - db
+      - mysql_db
 
-  db:
+  mysql_db:
     image: mariadb
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: test
     volumes:
       - ./docker/data:/var/lib/mysql
+    environment:
+        MYSQL_USER: root
+        MYSQL_PASSWORD : test123
+        MYSQL_ROOT_PASSWORD: test123
+        MYSQL_DATABASE: boilerplate_db
 
-  phpmyadmin:
+  boilerplate_sql_ui:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    links:
-      - db
+    container_name: boilerplate_sql_ui
+    depends_on:
+      - mysql_db
     environment:
       - PMA_ARBITRARY=1
     ports:
       - 3080:80
+    environment:
+      PMA_HOST: mysql_db
+      MYSQL_ROOT_PASSWORD: test123
+
 
   nodejs:
     image: node:latest
