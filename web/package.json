@@ -39,6 +39,8 @@
         "@material-ui/icons": "^3.0.2",
         "formik": "^1.5.1",
         "react-animated-slider": "^1.1.4",
+        "react-redux": "^6.0.1",
+        "react-redux": "^6.0.1",
         "yup": "^0.24.1"
     }
 }
