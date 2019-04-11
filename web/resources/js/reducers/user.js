@@ -1,18 +1,45 @@
-// import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "../constants";
-import { LOGIN_SUCCESS } from "../constants";
+import { authConstants as types } from "../constants/auth";
 
 const initialState = {
-    is_authenticated: false
+    isAuth: false,
+    error: null,
+    user: null,
+    isLoading: false
 };
 
-export default (state = initialState, action) => {
+export function user(state = initialState, action) {
     switch (action.type) {
-        case LOGIN_SUCCESS:
+        case types.LOGIN_REQUEST_LOADING:
             return {
                 ...state,
-                is_authenticated: true
+                isLoading: action.isLoading
+            };
+        case types.LOGIN_FAILURE:
+            return {
+                ...state,
+                error: action.error
+            };
+        case types.LOGIN_SUCCESS:
+            return {
+                ...state,
+                user: action.data
+            };
+        case types.REGISTER_REQUEST_LOADING:
+            return {
+                ...state,
+                isLoading: action.isLoading
+            };
+        case types.REGISTER_FAILURE:
+            return {
+                ...state,
+                error: action.error
+            };
+        case types.REGISTER_SUCCESS:
+            return {
+                ...state,
+                user: action.user
             };
         default:
             return state;
     }
-};
+}

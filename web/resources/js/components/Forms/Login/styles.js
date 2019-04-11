@@ -1,7 +1,8 @@
 export const styles = theme => ({
     root: {
         padding: "30px",
-        minWidth: "400px"
+        minWidth: "400px",
+        borderRadius: "12px"
     },
     formInput: {
         width: "100%",

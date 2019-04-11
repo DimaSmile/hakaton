@@ -1,19 +1,28 @@
-import React from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as path from "../../../constants/routes";
+
+import { login } from "../../../actions/auth";
+
+import { styles } from "./styles";
+
 import { Formik, Form, Field } from "formik";
+import TextInput from "../../FormElems/TextInput";
+import { LoginSchema } from "./_validation";
+
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import TextInput from "../../FormElems/TextInput";
-import { LoginSchema } from "./_validation";
-import IconFB from "../../../../img/icons/iconFB.svg";
-import iconGoogle from "../../../../img/icons/iconGoogle.png";
-import { styles } from "./styles";
 
-class Login extends React.Component {
+// import IconFB from "../../../../img/icons/iconFB.svg";
+// import iconGoogle from "../../../../img/icons/iconGoogle.png";
+
+class LoginForm extends PureComponent {
     state = {
         rememberCheckbox: false
     };
@@ -23,17 +32,22 @@ class Login extends React.Component {
         });
     };
     render() {
-        const { login, classes } = this.props;
+        const { classes } = this.props;
         return (
             <Formik
                 initialValues={{
-                    username: "",
+                    email: "",
                     password: ""
                 }}
                 validationSchema={LoginSchema}
                 onSubmit={values => {
-                    values.rememberMe = this.state.rememberCheckbox;
-                    return console.log(values);
+                    // values.rememberMe = this.state.rememberCheckbox;
+                    // console.log(values);
+                    return this.props.login(
+                        "http://5826ed963900d612000138bd.mockapi.io/items",
+                        values.username,
+                        values.password
+                    );
                 }}
             >
                 {() => (
@@ -47,11 +61,19 @@ class Login extends React.Component {
                         >
                             Login
                         </Typography>
+                        <Typography
+                            variant="subtitle1"
+                            gutterBottom
+                            align="center"
+                        >
+                            <Link to={path.REGISTRATION}> or Register</Link>
+                        </Typography>
+
                         <Form>
                             <Field
                                 type="text"
-                                name="username"
-                                label="User Name"
+                                name="email"
+                                label="Email"
                                 component={TextInput}
                                 classProp={classes.formInput}
                             />
@@ -82,7 +104,7 @@ class Login extends React.Component {
                                 Submit
                             </Button>
                         </Form>
-                        <Button
+                        {/* <Button
                             ariant="contained"
                             href={"facebook"}
                             className={classNames(
@@ -112,7 +134,14 @@ class Login extends React.Component {
                                 alt="facebook"
                             />
                             Login with Google
-                        </Button>
+                        </Button> */}
+                        <Typography
+                            variant="subtitle1"
+                            gutterBottom
+                            align="center"
+                        >
+                            <Link to={path.REGISTRATION}>Forgot Password</Link>
+                        </Typography>
                     </div>
                 )}
             </Formik>
@@ -120,8 +149,25 @@ class Login extends React.Component {
     }
 }
 
-Login.propTypes = {
+LoginForm.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Login);
+const mapStateToProps = state => {
+    return {
+        user: state.user.user,
+        error: state.user.error
+    };
+};
+
+const mapDispatchToProps = dispatch => ({
+    login: bindActionCreators(login, dispatch),
+    dispatch
+});
+
+const connector = connect(
+    mapStateToProps,
+    mapDispatchToProps
+);
+
+export default connector(withStyles(styles)(LoginForm));

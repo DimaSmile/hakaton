@@ -8,13 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import SeatchBar from "../SearchBar";
 import Navigation from "../Navigation";
 
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import * as actions from "../../actions/Auth";
-
 const Header = props => {
     const { classes } = props;
-    console.log(props.login);
     return (
         <div className={classes.root}>
             <AppBar>
@@ -31,7 +26,6 @@ const Header = props => {
                         <SeatchBar />
                         <Navigation />
                     </Toolbar>
-                    <button onClick={props.login}>Login Action Example</button>
                 </div>
             </AppBar>
         </div>
@@ -50,21 +44,4 @@ Header.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-    auth: state
-});
-
-const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-        {
-            login: actions.loginAction
-        },
-        dispatch
-    );
-
-const connector = connect(
-    mapStateToProps,
-    mapDispatchToProps
-);
-
-export default connector(withStyles(styles)(Header));
+export default withStyles(styles)(Header);

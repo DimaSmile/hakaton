@@ -1,28 +1,37 @@
 import React from "react";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
+import * as path from "../../../constants/routes";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import { registration } from "../../../actions/Auth";
+
 import { Formik, Form, Field } from "formik";
-import Typography from "@material-ui/core/Typography";
-import TextInput from "../../FormElems/TextInput";
-import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
-import IconFB from "../../../../img/icons/iconFB.svg";
-import iconGoogle from "../../../../img/icons/iconGoogle.png";
 import { SignupSchema } from "./_validation";
+import TextInput from "../../FormElems/TextInput";
+
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+
+// import IconFB from "../../../../img/icons/iconFB.svg";
+// import iconGoogle from "../../../../img/icons/iconGoogle.png";
+
 import { styles } from "./styles";
 
 const SignUp = props => {
-    const { register, classes, error } = props;
-
+    const { registration, classes, error } = props;
     return (
         <Formik
             initialValues={{
                 email: "",
-                password1: "",
+                name: "",
+                password: "",
                 password2: ""
             }}
             validationSchema={SignupSchema}
-            onSubmit={values => console.log(values)}
+            onSubmit={values => registration(values)}
         >
             {() => (
                 <div className={"form-block " + classes.root}>
@@ -35,8 +44,18 @@ const SignUp = props => {
                     >
                         Sign up
                     </Typography>
+                    <Typography variant="subtitle1" gutterBottom align="center">
+                        <Link to={path.REGISTRATION}> or Login</Link>
+                    </Typography>
                     {error}
                     <Form>
+                        <Field
+                            type="text"
+                            name="name"
+                            label="Name"
+                            component={TextInput}
+                            classProp={classes.formInput}
+                        />
                         <Field
                             type="email"
                             name="email"
@@ -46,7 +65,7 @@ const SignUp = props => {
                         />
                         <Field
                             type="password"
-                            name="password1"
+                            name="password"
                             label="Password"
                             component={TextInput}
                             classProp={classes.formInput}
@@ -68,7 +87,15 @@ const SignUp = props => {
                             Confirm
                         </Button>
                     </Form>
-                    <Button
+                    <Typography
+                        className={classes.policy}
+                        variant="subtitle1"
+                        gutterBottom
+                        align="center"
+                    >
+                        <Link to={path.REGISTRATION}> or Policy</Link>
+                    </Typography>
+                    {/* <Button
                         ariant="contained"
                         href={"facebook"}
                         className={classNames(
@@ -98,22 +125,27 @@ const SignUp = props => {
                             alt="facebook"
                         />
                         Sign Up with Google
-                    </Button>
-                    <div className={classes.bottoLinks}>
-                        <Link
-                            href={"/privacy"}
-                            className={classNames(
-                                classes.link,
-                                classes.linkCustom
-                            )}
-                        >
-                            Privacy
-                        </Link>
-                    </div>
+                    </Button> */}
                 </div>
             )}
         </Formik>
     );
 };
 
-export default withStyles(styles)(SignUp);
+const mapStateToProps = state => {
+    return {
+        user: state
+    };
+};
+
+const mapDispatchToProps = dispatch => ({
+    registration: bindActionCreators(registration, dispatch),
+    dispatch
+});
+
+const connector = connect(
+    mapStateToProps,
+    mapDispatchToProps
+);
+
+export default connector(withStyles(styles)(SignUp));

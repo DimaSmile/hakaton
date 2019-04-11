@@ -1,6 +1,6 @@
 export const styles = theme => ({
     root: {
-        padding: "30px 30px 60px",
+        padding: "30px",
         minWidth: "400px"
     },
     formInput: {
@@ -12,18 +12,6 @@ export const styles = theme => ({
         margin: "35px auto 0",
         display: "block",
         width: "50%"
-    },
-    bottoLinks: {
-        position: "absolute",
-        left: "0",
-        bottom: "15px",
-        width: "100%",
-        textAlign: "center"
-    },
-    linkCustom: {
-        color: "rgba(0,0,0,0.7)",
-        margin: " 0 15px",
-        fontSize: "12px"
     },
     FBButtton: {
         marginTop: "35px",
@@ -53,5 +41,9 @@ export const styles = theme => ({
         width: "auto",
         left: "0px",
         top: "0px"
+    },
+    policy: {
+        position: "relative",
+        top: "20px"
     }
 });

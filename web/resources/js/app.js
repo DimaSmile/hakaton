@@ -14,17 +14,18 @@ require("./bootstrap");
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import configureStore from "./store/";
 import App from "./containers/App";
 import { BrowserRouter } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { CustomTheme } from "./constants/theme";
+import { Provider } from "react-redux";
+import configureStore from "./store/configureStore";
 
-const theme = createMuiTheme(CustomTheme);
+import "./styles/app.scss";
 
 const store = configureStore();
-export default store;
+
+const theme = createMuiTheme(CustomTheme);
 
 ReactDOM.render(
     <Provider store={store}>

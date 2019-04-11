@@ -2,9 +2,9 @@ import Yup from "yup";
 import { MIN_PASSWORD_LENGTH } from "../../../constants/index";
 
 export const LoginSchema = Yup.object().shape({
-    username: Yup.string()
+    email: Yup.string()
         .email("E-mail is not valid!")
-        .required("Name is required!"),
+        .required("Email is required!"),
     password: Yup.string()
         .min(
             MIN_PASSWORD_LENGTH,
