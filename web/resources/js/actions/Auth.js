@@ -62,6 +62,7 @@ export function registration(user) {
         authQueries
             .register(user)
             .then(response => {
+                console.log(response)
                 dispatch(registrationRequestLoading(false));
                 if (response.data.success) {
                     const data = {
@@ -75,10 +76,10 @@ export function registration(user) {
                     );
                     dispatch(lregistrationSuccess(data));
                 }
-                console.log(response.dta);
+                // console.log(response.data);
             })
             .catch(function(error) {
-                console.log(error)
+                // console.log(error)
                 dispatch(registrationFailure(error));
             });
     };

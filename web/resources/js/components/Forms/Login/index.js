@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as path from "../../../constants/routes";
 
-import { login } from "../../../actions/auth";
+import { login } from "../../../actions/Auth";
 
 import { styles } from "./styles";
 

@@ -46,9 +46,21 @@ class UserController extends Controller
     }
     public function register(Request $request)
     { 
+        //Define your validation rules here.
+        $rules = [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required'
+        ];
+        //Create a validator, unlike $this->validate(), this does not automatically redirect on failure, leaving the final control to you :)
+        $validated = \Illuminate\Support\Facades\Validator::make($request->all(), $rules);
 
-        // var_dump($request->all());exit;
-        // var_dump(json_decode($request->all()));exit;
+        //Check if the validation failed, return your custom formatted code here.
+        if($validated->fails())
+        {
+            return response()->json(['status' => 'error', 'messages' => 'The given data was invalid.', 'errors' => $validated->errors()]);
+        }
+
         if (!is_object($request->all())) {
             $payload = [
                 'password'=>\Hash::make($request['password']),
