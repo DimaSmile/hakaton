@@ -21,7 +21,7 @@ import Button from "@material-ui/core/Button";
 import { styles } from "./styles";
 
 const SignUp = props => {
-    const { registration, classes, error } = props;
+    const { registration, classes, errors } = props;
     return (
         <Formik
             initialValues={{
@@ -47,7 +47,16 @@ const SignUp = props => {
                     <Typography variant="subtitle1" gutterBottom align="center">
                         <Link to={path.LOGIN}> or Login</Link>
                     </Typography>
-                    {error}
+                    {errors
+                        ? errors.email.map((error, index) => (
+                              <p
+                                  style={{ color: "red", textAlign: "center" }}
+                                  key={index}
+                              >
+                                  {error}
+                              </p>
+                          ))
+                        : ""}
                     <Form>
                         <Field
                             type="text"
@@ -134,7 +143,7 @@ const SignUp = props => {
 
 const mapStateToProps = state => {
     return {
-        user: state
+        errors: state.user.registerError
     };
 };
 

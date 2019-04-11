@@ -13,3 +13,8 @@
 /docker/data/*
 /docker/php/php.ini
 .idea/
+docker-compose.yaml
+web/composer.lock
+web/package-lock.json
+web/yarn.lock
+web/public

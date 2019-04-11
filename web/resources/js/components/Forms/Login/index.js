@@ -32,7 +32,7 @@ class LoginForm extends PureComponent {
         });
     };
     render() {
-        const { login, classes } = this.props;
+        const { login, classes, error } = this.props;
         return (
             <Formik
                 initialValues={{
@@ -62,7 +62,13 @@ class LoginForm extends PureComponent {
                         >
                             <Link to={path.REGISTRATION}> or Register</Link>
                         </Typography>
-
+                        {error ? (
+                            <p style={{ color: "red", textAlign: "center" }}>
+                                {error}
+                            </p>
+                        ) : (
+                            ""
+                        )}
                         <Form>
                             <Field
                                 type="text"
@@ -150,7 +156,7 @@ LoginForm.propTypes = {
 const mapStateToProps = state => {
     return {
         user: state.user.user,
-        error: state.user.error
+        error: state.user.loginError
     };
 };
 

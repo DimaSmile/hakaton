@@ -2,7 +2,8 @@ import { authConstants as types } from "../constants/auth";
 
 const initialState = {
     isAuth: false,
-    error: null,
+    registerError: null,
+    loginError: null,
     user: null,
     isLoading: false
 };
@@ -17,7 +18,7 @@ export function user(state = initialState, action) {
         case types.LOGIN_FAILURE:
             return {
                 ...state,
-                error: action.error
+                loginError: "Invalid email or password"
             };
         case types.LOGIN_SUCCESS:
             return {
@@ -29,7 +30,7 @@ export function user(state = initialState, action) {
         case types.REGISTER_FAILURE:
             return {
                 ...state,
-                error: action.error
+                registerError: action.error
             };
         case types.REGISTER_SUCCESS:
             return {

@@ -21,11 +21,14 @@ export function registration(user) {
                         response.data.data.auth_token
                     );
                     dispatch(lregistrationSuccess(user));
+                } else {
+                    console.log(response.data.errors);
+                    dispatch(registrationFailure(response.data.errors));
                 }
             })
             .catch(function(error) {
                 dispatch(registrationRequestLoading(false));
-                dispatch(registrationFailure(error));
+                console.log(error);
             });
     };
     function registrationFailure(error) {
@@ -61,15 +64,16 @@ export function login(user) {
                     );
                     dispatch(loginSuccess(user));
                     history.push("/dashboard");
+                } else {
+                    dispatch(loginFailure());
                 }
             })
             .catch(function(error) {
                 dispatch(loginRequestLoading(false));
-                dispatch(registrationFailure(error));
             });
     };
-    function loginFailure(error) {
-        return { type: types.LOGIN_FAILURE, error };
+    function loginFailure() {
+        return { type: types.LOGIN_FAILURE };
     }
     function loginSuccess(user) {
         return { type: types.LOGIN_SUCCESS, user };
