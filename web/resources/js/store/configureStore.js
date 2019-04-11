@@ -8,7 +8,8 @@ export default initialState => {
         initialState,
         compose(
             applyMiddleware(thunk),
-            window.devToolsExtension ? window.devToolsExtension() : f => f
+            window.__REDUX_DEVTOOLS_EXTENSION__ &&
+                window.__REDUX_DEVTOOLS_EXTENSION__()
         )
     );
     return store;

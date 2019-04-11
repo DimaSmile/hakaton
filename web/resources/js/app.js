@@ -15,7 +15,9 @@ require("./bootstrap");
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./containers/App";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
+// import { BrowserRouter } from "react-router-dom";
+import { history } from "./helpers/history";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { CustomTheme } from "./constants/theme";
 import { Provider } from "react-redux";
@@ -29,12 +31,12 @@ const theme = createMuiTheme(CustomTheme);
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
+        <Router history={history}>
             <MuiThemeProvider theme={theme}>
                 {" "}
                 <App />
             </MuiThemeProvider>
-        </BrowserRouter>
+        </Router>
     </Provider>,
     document.getElementById("root")
 );

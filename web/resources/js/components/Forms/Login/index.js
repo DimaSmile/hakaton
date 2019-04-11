@@ -32,7 +32,7 @@ class LoginForm extends PureComponent {
         });
     };
     render() {
-        const { classes } = this.props;
+        const { login, classes } = this.props;
         return (
             <Formik
                 initialValues={{
@@ -41,13 +41,7 @@ class LoginForm extends PureComponent {
                 }}
                 validationSchema={LoginSchema}
                 onSubmit={values => {
-                    // values.rememberMe = this.state.rememberCheckbox;
-                    // console.log(values);
-                    return this.props.login(
-                        "http://5826ed963900d612000138bd.mockapi.io/items",
-                        values.username,
-                        values.password
-                    );
+                    login(values);
                 }}
             >
                 {() => (

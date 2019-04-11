@@ -45,7 +45,7 @@ const SignUp = props => {
                         Sign up
                     </Typography>
                     <Typography variant="subtitle1" gutterBottom align="center">
-                        <Link to={path.REGISTRATION}> or Login</Link>
+                        <Link to={path.LOGIN}> or Login</Link>
                     </Typography>
                     {error}
                     <Form>

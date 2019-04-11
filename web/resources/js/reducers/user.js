@@ -9,7 +9,7 @@ const initialState = {
 
 export function user(state = initialState, action) {
     switch (action.type) {
-        case types.LOGIN_REQUEST_LOADING:
+        case types.REQUEST_LOADING:
             return {
                 ...state,
                 isLoading: action.isLoading
@@ -22,12 +22,9 @@ export function user(state = initialState, action) {
         case types.LOGIN_SUCCESS:
             return {
                 ...state,
-                user: action.data
-            };
-        case types.REGISTER_REQUEST_LOADING:
-            return {
-                ...state,
-                isLoading: action.isLoading
+                user: action.user,
+                isAuth: true,
+                error: null
             };
         case types.REGISTER_FAILURE:
             return {
@@ -37,7 +34,9 @@ export function user(state = initialState, action) {
         case types.REGISTER_SUCCESS:
             return {
                 ...state,
-                user: action.user
+                user: action.user,
+                isAuth: true,
+                error: null
             };
         default:
             return state;

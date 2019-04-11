@@ -1,44 +1,45 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 
-import SeatchBar from "../SearchBar";
-import Navigation from "../Navigation";
+// import SeatchBar from "../SearchBar";
+// import Navigation from "../Navigation";
+
+import { styles } from "./style";
 
 const Header = props => {
     const { classes } = props;
     return (
-        <div className={classes.root}>
-            <AppBar>
-                <div className="wrapper">
-                    <Toolbar>
-                        <Typography
-                            className={classes.title}
-                            variant="h6"
-                            color="inherit"
-                            noWrap
-                        >
-                            Laravel React Boilerplate
-                        </Typography>
-                        <SeatchBar />
-                        <Navigation />
-                    </Toolbar>
-                </div>
-            </AppBar>
-        </div>
+        <AppBar
+            position="fixed"
+            className={classNames(classes.appBar, {
+                [classes.appBarShift]: props.open
+            })}
+        >
+            <Toolbar disableGutters={!props.open}>
+                <IconButton
+                    color="inherit"
+                    aria-label="Open drawer"
+                    onClick={props.handleDrawerOpen}
+                    className={classNames(classes.menuButton, {
+                        [classes.hide]: props.open
+                    })}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" color="inherit" noWrap>
+                    RockLab Calendar
+                </Typography>
+            </Toolbar>
+        </AppBar>
     );
 };
-
-const styles = theme => ({
-    root: {
-        "& header": {
-            background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
-        }
-    }
-});
 
 Header.propTypes = {
     classes: PropTypes.object.isRequired
