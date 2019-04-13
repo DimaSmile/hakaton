@@ -11,7 +11,7 @@ class PagesController extends Controller
 {
     private $validatedRules = [
         'dashboard' => [
-            'user_id' => 'required',
+            'token' => 'required',
         ]
     ];
 
@@ -22,11 +22,11 @@ class PagesController extends Controller
         
         if($validated->fails())
         {
-            return response()->json(['status' => 'error', 'messages' => 'The user_id is not faund.', 'errors' => $validated->errors()], 404);
+            return response()->json(['status' => 'error', 'messages' => 'The token is not faund.', 'errors' => $validated->errors()], 404);
         }
 
         $closestEvent = Event::where('start', '>', date("Y-m-d H:i:s"))->select('name', 'start')->orderBy('start', 'asc')->first();
-        $userData     = User::where('id', $request->user_id)->select('vacation_days','sick_days')->first();
+        $userData     = User::where('auth_token', $request->token)->select('vacation_days','sick_days')->first();
 
         $userData['event_name']       = $closestEvent->name;
         $userData['start_event_date'] = $closestEvent->start;
