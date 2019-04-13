@@ -23,7 +23,7 @@ class Layout extends React.Component {
     };
 
     render() {
-        const { classes, theme, children, user } = this.props;
+        const { classes, theme, children, user, logOut } = this.props;
         const { open } = this.state;
         return (
             <div className={classes.root}>
@@ -34,6 +34,7 @@ class Layout extends React.Component {
                     handleDrawerClose={this.handleDrawerClose}
                     theme={theme}
                     user={user}
+                    logOut={logOut}
                 />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />

@@ -39,6 +39,12 @@ export function user(state = initialState, action) {
                 isAuth: true,
                 error: null
             };
+        case types.LOGOUT:
+            return {
+                ...state,
+                user: null,
+                isAuth: false
+            };
         default:
             return state;
     }

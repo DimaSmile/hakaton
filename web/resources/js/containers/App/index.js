@@ -7,6 +7,7 @@ import Login from "../Login";
 import Registration from "../Registration";
 import Dashboard from "../Dashboard";
 import SimplePage1 from "../SimplePage1";
+import UserSettings from "../UserSettings";
 
 const App = props => (
     <Switch location={props.location}>
@@ -15,8 +16,17 @@ const App = props => (
         <Route exact path={path.REGISTRATION} component={Registration} />
         <Dashboard>
             <Switch>
-                <Route path={path.DASHBOARD} component={SimplePage1} />
-                <Route path={path.SIMPLE_PAGE_1} component={SimplePage1} />
+                <Route exact path={path.DASHBOARD} component={SimplePage1} />
+                <Route
+                    exact
+                    path={path.SIMPLE_PAGE_1}
+                    component={SimplePage1}
+                />
+                <Route
+                    exact
+                    path={path.USER_SETTINGS}
+                    component={UserSettings}
+                />
             </Switch>
         </Dashboard>
     </Switch>

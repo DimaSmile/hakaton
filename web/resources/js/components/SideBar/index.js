@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import * as path from "../../constants/routes";
 
 import Drawer from "@material-ui/core/Drawer";
 import Divider from "@material-ui/core/Divider";
@@ -12,10 +13,10 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
+import OutIcon from "@material-ui/icons/AssignmentReturn";
+import SettingsIcon from "@material-ui/icons/Settings";
 
 import UserAvatar from "../UserAvatar";
 
@@ -24,7 +25,7 @@ import DefaultAvatar from "../../images/defaultAvatar.png";
 import { styles } from "./style";
 
 const SideBar = props => {
-    const { classes, open, handleDrawerClose, theme, user } = props;
+    const { classes, open, handleDrawerClose, theme, user, logOut } = props;
     return (
         <Drawer
             variant="permanent"
@@ -76,14 +77,20 @@ const SideBar = props => {
             </List>
             <Divider />
             <List>
-                {["All mail", "Trash", "Spam"].map((text, index) => (
-                    <ListItem button key={text} className={classes.nav}>
+                <Link to={path.USER_SETTINGS}>
+                    <ListItem button className={classes.nav}>
                         <ListItemIcon>
-                            {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                            <SettingsIcon />
                         </ListItemIcon>
-                        <ListItemText primary={text} />
+                        <ListItemText primary={"Settings"} />
                     </ListItem>
-                ))}
+                </Link>
+                <ListItem button className={classes.nav} onClick={logOut}>
+                    <ListItemIcon>
+                        <OutIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Log out"} />
+                </ListItem>
             </List>
         </Drawer>
     );

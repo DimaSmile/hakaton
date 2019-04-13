@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as path from "../../constants/routes";
-import { verifyToken } from "../../actions/Auth";
+import { verifyToken, LogOut } from "../../actions/Auth";
 import { history } from "../../helpers/history";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -19,7 +19,14 @@ class Dashboard extends Component {
         }
     }
     render() {
-        return <Layout children={this.props.children} user={this.props.user} />;
+        const { LogOut } = this.props;
+        return (
+            <Layout
+                children={this.props.children}
+                user={this.props.user}
+                logOut={LogOut}
+            />
+        );
     }
 }
 
@@ -32,6 +39,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     verifyToken: bindActionCreators(verifyToken, dispatch),
+    LogOut: bindActionCreators(LogOut, dispatch),
     dispatch
 });
 

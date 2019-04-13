@@ -1,4 +1,5 @@
 import { authConstants as types } from "../constants/";
+import * as routes from "../constants/routes";
 import { authQueries } from "../queries/auth";
 import { history } from "../helpers/history";
 
@@ -21,6 +22,7 @@ export function registration(user) {
                         response.data.data.auth_token
                     );
                     dispatch(lregistrationSuccess(user));
+                    history.push(routes.DASHBOARD);
                 } else {
                     console.log(response.data.errors);
                     dispatch(registrationFailure(response.data.errors));
@@ -63,7 +65,7 @@ export function login(user) {
                         response.data.data.auth_token
                     );
                     dispatch(loginSuccess(user));
-                    history.push("/dashboard");
+                    history.push(routes.DASHBOARD);
                 } else {
                     dispatch(loginFailure());
                 }
@@ -118,5 +120,17 @@ export function verifyToken(token) {
             type: types.REQUEST_LOADING,
             isLoading: bool
         };
+    }
+}
+
+export function LogOut() {
+    console.log("1");
+    return dispatch => {
+        dispatch(logout());
+        window.localStorage.removeItem("auth_token");
+        history.push(routes.LOGIN);
+    };
+    function logout() {
+        return { type: types.LOGOUT };
     }
 }
