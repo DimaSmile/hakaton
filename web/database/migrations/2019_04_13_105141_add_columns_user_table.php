@@ -33,7 +33,7 @@ class AddColumnsUserTable extends Migration
         Schema::table('users', function($table) {
             $table->dropColumn('role_id');
             $table->dropColumn('image');
-            $table->dropColumn('birsday');
+            $table->dropColumn('birthday');
             $table->dropColumn('start_working');
             $table->dropColumn('vacation_days');
             $table->dropColumn('sick_days');

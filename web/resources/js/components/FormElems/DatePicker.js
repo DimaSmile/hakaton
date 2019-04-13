@@ -9,12 +9,13 @@ import { styles } from "./style";
 
 class DatePickerField extends React.Component {
     state = {
-        startDate: new Date()
+        dateVal: this.props.field.value
     };
     handleChange = date => {
         this.setState({
-            startDate: date
+            dateVal: date
         });
+        this.props.changeDate(this.props.field.name, date);
     };
     render() {
         const {
@@ -27,13 +28,12 @@ class DatePickerField extends React.Component {
             form: { touched, errors },
             ...props
         } = this.props;
-        console.log(this.props);
         return (
             <div>
                 <label className={classes.label}>{label}</label>
                 <div className={classes.root}>
                     <DatePicker
-                        selected={this.state.startDate}
+                        selected={this.state.dateVal}
                         onChange={this.handleChange}
                     />
                 </div>

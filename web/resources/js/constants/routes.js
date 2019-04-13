@@ -10,3 +10,5 @@ export const BIRTHDAYS = "/dashboard/birthdays";
 export const TEAM_BUILDING = "/dashboard/team_building";
 export const TEAM_CALENDAR = "/dashboard/team_calendar";
 export const USER_SETTINGS = "/dashboard/settings";
+
+export const LOADER = "/dashboard/loader";

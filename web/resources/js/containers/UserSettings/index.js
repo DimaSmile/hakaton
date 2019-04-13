@@ -6,17 +6,20 @@ import { bindActionCreators } from "redux";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import UserSettingsForm from "../../components/Forms/UserSettingsForm";
-import { login } from "../../actions/Auth";
+import { saveProfileInfo } from "../../actions/Profile";
 
 import { styles } from "./style";
 
 class UserSettings extends Component {
     render() {
-        const { classes, user } = this.props;
+        const { classes, user, saveProfileInfo } = this.props;
         return (
             <Card className={classes.card}>
                 <CardContent>
-                    <UserSettingsForm user={user} />
+                    <UserSettingsForm
+                        user={user}
+                        saveProfileInfo={saveProfileInfo}
+                    />
                 </CardContent>
             </Card>
         );
@@ -34,7 +37,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    login: bindActionCreators(login, dispatch),
+    saveProfileInfo: bindActionCreators(saveProfileInfo, dispatch),
     dispatch
 });
 

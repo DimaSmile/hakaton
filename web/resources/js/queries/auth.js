@@ -1,6 +1,4 @@
-import { authHeader } from "../helpers/auth-header";
 import { apiUrl } from "../constants/index";
-const api = '"http://some_api_here';
 
 export const authQueries = {
     login,
