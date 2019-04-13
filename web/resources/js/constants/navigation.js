@@ -1,11 +1,14 @@
 import React from "react";
 import * as route from "./routes";
 import DateRangeIcon from "@material-ui/icons/DateRange";
+import HomeIcon from "@material-ui/icons/Home";
 import UserIcon from "@material-ui/icons/People";
+import BirthdayIcon from "@material-ui/icons/Cake";
+
 
 export const navigationLinks = [
     {
-        icon: <UserIcon />,
+        icon: <HomeIcon />,
         name: "Home",
         route: route.DASHBOARD_HOME
     },
@@ -20,7 +23,7 @@ export const navigationLinks = [
         route: route.MY_VOCATION
     },
     {
-        icon: <DateRangeIcon />,
+        icon: <BirthdayIcon />,
         name: "Birthdays",
         route: route.BIRTHDAYS
     },
