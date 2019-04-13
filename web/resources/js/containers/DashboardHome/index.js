@@ -13,6 +13,10 @@ import {
     HorizontalGridLines
 } from "react-vis";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { dashboardAction } from "../../actions/Dashboard";
+
 import Event from "../../components/Event";
 import { styles } from "./style";
 
@@ -21,6 +25,10 @@ class DashboardHome extends Component {
         days_vacation: 5,
         days_sick_leave: 1
     };
+
+    componentDidMount() {
+        this.props.dashboardAction();
+    }
 
     render() {
         const { classes } = this.props;
@@ -111,4 +119,22 @@ DashboardHome.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(DashboardHome);
+const mapStateToProps = state => {
+    return {
+        users: state.dashboard.data,
+        error: state.dashboard.usersErrors
+    };
+};
+
+const mapDispatchToProps = dispatch => ({
+    dashboardAction: bindActionCreators(dashboardAction, dispatch),
+    dispatch
+});
+
+const connector = connect(
+    mapStateToProps,
+    mapDispatchToProps
+);
+
+
+export default connector(withStyles(styles)(DashboardHome));

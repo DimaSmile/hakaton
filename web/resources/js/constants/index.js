@@ -5,3 +5,4 @@ export * from "./validationForm";
 export * from "./apiUrl";
 export * from "./navigation";
 export * from "./usersList";
+export * from "./dashboard";

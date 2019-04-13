@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import User from "../../components/User";
 
 import { styles } from "./style";
 
@@ -11,13 +10,56 @@ class Team extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                    <Typography paragraph>
-                        TEAM
-                    </Typography>
-                </CardContent>
-            </Card>
+            <div>
+                <Typography className={classes.title} variant="h5">
+                    Managers
+                </Typography>
+                <User
+                    userName="Ivan Petrov"
+                    vocation="developer"
+                    image="../../images/defaultAvatar.png"
+                />
+                <Typography className={classes.title} variant="h5">
+                    Developers
+                </Typography>
+                <div className={classes.flex}>
+                    <User
+                        userName="Ivan Petrov"
+                        vocation="developer"
+                        image="../../images/defaultAvatar.png"
+                    />
+                    <User
+                        userName="Ivan Petrov"
+                        vocation="developer"
+                        image="../../images/defaultAvatar.png"
+                    />
+                    <User
+                        userName="Ivan Petrov"
+                        vocation="developer"
+                        image="../../images/defaultAvatar.png"
+                    />
+                    <User
+                        userName="Ivan Petrov"
+                        vocation="developer"
+                        image="../../images/defaultAvatar.png"
+                    />
+                    <User
+                        userName="Ivan Petrov"
+                        vocation="developer"
+                        image="../../images/defaultAvatar.png"
+                    />
+                    <User
+                        userName="Ivan Petrov"
+                        vocation="developer"
+                        image="../../images/defaultAvatar.png"
+                    />
+                    <User
+                        userName="Ivan Petrov"
+                        vocation="developer"
+                        image="../../images/defaultAvatar.png"
+                    />
+                </div>
+            </div>
         );
     }
 }
