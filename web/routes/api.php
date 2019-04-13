@@ -21,6 +21,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['jwt.auth','api-header']], function () {
   
     // all routes to protected resources are registered here  
+    Route::get('user/list', function(Request $request){
+
+        $user = App\User::where('auth_token', $request->token)->first();
+        //$user = App\User::where('birthday','!=', null) ->orderBy('birthday', 'asc')->get();
+
+        $response = ['success'=>true, 'data'=>$user];
+        return response()->json($response, 201);
+    });
+
     Route::get('users/list', function(Request $request){
 
         //$user = App\User::where('auth_token', $request->token)->first();
