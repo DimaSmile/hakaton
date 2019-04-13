@@ -14,18 +14,18 @@ import { usersListAction } from "../../actions/UsersList";
 import { styles } from "./style";
 
 class Birthdays extends Component {
-    componentDidMount() {
-        this.props.usersListAction();
-    }
+    // componentDidMount() {
+    //     this.props.usersListAction();
+    // }
     render() {
-        const { classes } = this.props;
+        const { classes, users } = this.props;
         console.log(this.props);
         return (
             <Grid container spacing={16}>
                 <Grid item xs={8}>
                     <Card className={classes.card}>
                         <CardContent className={classes.cardContent}>
-                            <CalendarDefault />
+                            <CalendarDefault birthdays={users} />
                         </CardContent>
                     </Card>
                 </Grid>
