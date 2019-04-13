@@ -11,9 +11,9 @@ export function saveProfileInfo(data) {
             .then(response => {
                 dispatch(RequestLoading(false));
                 if (response.data.success) {
-                    console.log(response);
+                    // console.log(response);
                 } else {
-                    console.log(response);
+                    // console.log(response);
                 }
             })
             .catch(function(error) {

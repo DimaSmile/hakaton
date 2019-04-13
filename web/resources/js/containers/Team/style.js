@@ -4,5 +4,13 @@ export const styles = theme => ({
     },
     cardContent: {
         borderRadius: 0
+    },
+    title:{
+        margin: 10,
+        marginTop: 20
+    },
+    flex:{
+        display: "flex",
+        flexWrap: "wrap",
     }
 });

@@ -28,13 +28,22 @@ class UserSettingsForm extends PureComponent {
     }
     handleShowImage = event => {
         this.setState({
-            image: URL.createObjectURL(event.target.files[0]),
-            imageData: event.target.files[0]
+            image: URL.createObjectURL(event.target.files[0])
         });
+        this.createImage(event.target.files[0]);
     };
     changeDate = (field, value) => {
         this[field] = value;
     };
+    createImage(file) {
+        let reader = new FileReader();
+        reader.onload = e => {
+            this.setState({
+                imageData: e.target.result
+            });
+        };
+        reader.readAsDataURL(file);
+    }
     render() {
         const { classes, user, saveProfileInfo } = this.props;
         const avatar = this.state.image ? this.state.image : DefaultAvatar;
@@ -42,6 +51,7 @@ class UserSettingsForm extends PureComponent {
             return (
                 <Formik
                     initialValues={{
+                        id: user.id,
                         userName: user.name,
                         password: "",
                         password2: "",
@@ -54,6 +64,8 @@ class UserSettingsForm extends PureComponent {
                         values.startDate = this.startDate;
                         values.avatar = this.state.imageData;
                         saveProfileInfo(values);
+                        console.log(values);
+                        console.log(this.state.imageData);
                     }}
                 >
                     {() => (
@@ -96,7 +108,7 @@ class UserSettingsForm extends PureComponent {
                                 <Field
                                     type="text"
                                     name="birthdayDate"
-                                    label="Birthday Date"
+                                    label="Birthday"
                                     component={DatePickerField}
                                     classProp={classes.formInput}
                                     changeDate={this.changeDate}

@@ -24,13 +24,11 @@ export function registration(user) {
                     dispatch(lregistrationSuccess(user));
                     history.push(routes.DASHBOARD);
                 } else {
-                    console.log(response.data.errors);
                     dispatch(registrationFailure(response.data.errors));
                 }
             })
             .catch(function(error) {
                 dispatch(registrationRequestLoading(false));
-                console.log(error);
             });
     };
     function registrationFailure(error) {
@@ -55,6 +53,7 @@ export function login(user) {
             .then(response => {
                 dispatch(loginRequestLoading(false));
                 if (response.data.success) {
+                    console.log(response.data.data);
                     const data = {
                         name: response.data.data.name,
                         email: response.data.data.email,
@@ -64,7 +63,7 @@ export function login(user) {
                         "auth_token",
                         response.data.data.auth_token
                     );
-                    dispatch(loginSuccess(user));
+                    dispatch(loginSuccess(data));
                     history.push(routes.DASHBOARD);
                 } else {
                     dispatch(loginFailure());

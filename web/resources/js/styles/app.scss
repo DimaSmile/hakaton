@@ -10,3 +10,29 @@ a {
         color: #000;
     }
 }
+
+.rbc-event {
+    background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+}
+
+.rbc-today,
+.rbc-selected-cell {
+    background-color: #ff8d5629;
+}
+
+.calendar_event {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    img {
+        width: 50%;
+        border-radius: 50%;
+        position: relative;
+    }
+    p {
+        font-size: 16px;
+        font-weight: bold;
+    }
+}

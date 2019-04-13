@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\User;
 use JWTAuth;
 // use App\Vacation;
@@ -39,8 +40,20 @@ class UserController extends Controller
             $token = self::getToken($request->email, $request->password);
             $user->auth_token = $token;
             $user->save();
-            // event(new CheckUser($user));
-            $response = ['success'=>true, 'data'=>['id'=>$user->id,'auth_token'=>$user->auth_token,'name'=>$user->name, 'email'=>$user->email]];           
+            $response = [
+                'success' => true,
+                'data'    =>
+                    [
+                        'id'            => $user->id,
+                        'auth_token'    => $user->auth_token,
+                        'name'          => $user->name,
+                        'email'         => $user->email,
+                        'image'         => $user->image,
+                        'birthday'      => $user->birthday,
+                        'start_working' => $user->start_working,
+                        'vacation_days' => $user->vacation_days
+                    ]
+            ];
         }
         else 
           $response = ['success'=>false, 'data'=>'Record doesnt exists'];
@@ -102,4 +115,89 @@ class UserController extends Controller
         
         return response()->json($response, 201);
     }
+
+
+    public function saveProfile(Request $request)
+    {
+        //Define your validation rules here.
+        $rules = [
+            'userName' => 'required',
+            'birthdayDate' => 'required',
+            'startDate' => 'required'
+        ];
+        //Create a validator, unlike $this->validate(), this does not automatically redirect on failure, leaving the final control to you :)
+        $validated = \Illuminate\Support\Facades\Validator::make($request->all(), $rules);
+
+        //Check if the validation failed, return your custom formatted code here.
+        if($validated->fails())
+        {
+            return response()->json(['status' => 'error', 'messages' => 'The given data was invalid.', 'errors' => $validated->errors()]);
+        }
+
+        $user = \App\User::find($request->id);
+        $date = Carbon::now();
+
+        if (!is_object($request->all())) {
+            $payload = [
+                'name'          => $request['userName'],
+                'birthday'      => Carbon::parse($request['birthdayDate'])->format('Y-m-d'),
+                'start_working' => Carbon::parse($request['startDate'])->format('Y-m-d'),
+                'vacation_days' => Carbon::parse($request['startDate'])->diffInMonths($date),
+
+            ];
+            if($request->get('avatar'))
+            {
+                $image = $request->get('avatar');
+                $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imagePath = \Image::make($request->get('avatar'))->save(public_path('images/').$name)->basename;
+                $payload['image'] = env('APP_URL'). '/images/'.$imagePath;
+            }
+            if($request['password']){
+                $payload['password'] = \Hash::make($request['password']);
+            }
+        } else {
+            $payload = [
+                'name'          => $request->userName,
+                'birthday'      => Carbon::parse($request->birthdayDate)->format('Y-m-d H:i:s'),
+                'start_working' => Carbon::parse($request->startDate)->format('Y-m-d H:i:s'),
+                'vacation_days' => Carbon::parse($request->startDate)->diffInMonths($date)
+            ];
+            if($request->get('avatar'))
+            {
+                $image = $request->get('avatar');
+                $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imagePath = \Image::make($request->get('avatar'))->save(public_path('images/').$name)->basename;
+                $payload['image'] = env('APP_URL'). '/images/'.$imagePath;
+            }
+            if($request->password){
+                $payload['password'] = \Hash::make($request->password);
+            }
+        }
+
+        $user->update($payload);
+        if ($user->save())
+        {
+            $response = [
+                'success'=>true,
+                'data'=>
+                    [
+                        'name'          => $user->name,
+                        'id'            => $user->id,
+                        'email'         => $request->email,
+                        'auth_token'    => $user->auth_token,
+                        'image'         => $user->image,
+                        'birthday'      => $user->birthday,
+                        'start_working' => $user->start_working,
+                        'vacation_days' => $user->vacation_days
+                    ]
+            ];
+        }
+        else {
+            $response = ['success'=>false, 'data'=>'Couldnt register user'];
+        }
+
+
+        return response()->json($response, 201);
+    }
+
 }

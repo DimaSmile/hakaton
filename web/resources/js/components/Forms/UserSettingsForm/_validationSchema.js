@@ -7,8 +7,7 @@ export const UserSettingsSchema = Yup.object().shape({
         .min(
             MIN_PASSWORD_LENGTH,
             `Password has to be longer than ${MIN_PASSWORD_LENGTH} characters!`
-        )
-        .required("Password is required!"),
+        ),
     password2: Yup.string().oneOf(
         [Yup.ref("password"), null],
         "Passwords must match"

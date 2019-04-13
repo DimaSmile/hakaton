@@ -17,6 +17,7 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import OutIcon from "@material-ui/icons/AssignmentReturn";
 import SettingsIcon from "@material-ui/icons/Settings";
+import SwitchOnline from "../SwitchOnline";
 
 import UserAvatar from "../UserAvatar";
 
@@ -65,6 +66,7 @@ const SideBar = props => {
                     {user && user.name ? user.name : ""}
                 </span>
             </Typography>
+            <SwitchOnline/>
             <List>
                 {navigationLinks.map((link, index) => (
                     <Link to={link.route} key={link.name}>
