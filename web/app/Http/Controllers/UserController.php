@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use JWTAuth;
+// use App\Vacation;
+use App\Events\CheckUser;
 use JWTAuthException;
 
 class UserController extends Controller
@@ -37,6 +39,7 @@ class UserController extends Controller
             $token = self::getToken($request->email, $request->password);
             $user->auth_token = $token;
             $user->save();
+            // event(new CheckUser($user));
             $response = ['success'=>true, 'data'=>['id'=>$user->id,'auth_token'=>$user->auth_token,'name'=>$user->name, 'email'=>$user->email]];           
         }
         else 
