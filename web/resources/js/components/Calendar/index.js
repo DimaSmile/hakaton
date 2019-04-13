@@ -36,7 +36,7 @@ class CalendarDefault extends Component {
         console.log(start, end);
     };
     render() {
-        const { classes } = this.props;
+        const { classes, birthdays } = this.props;
         return (
             <div className={classes.root}>
                 <Calendar
