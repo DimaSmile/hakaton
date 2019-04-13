@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import Calendar from "react-big-calendar";
 import moment from "moment";
 import PropTypes from "prop-types";
@@ -28,20 +28,38 @@ const myEventsList = [
     }
 ];
 
-const CalendarDefault = props => {
-    const { classes } = props;
-    return (
-        <div className={classes.root}>
-            <Calendar
-                localizer={localizer}
-                defaultDate={new Date()}
-                defaultView="month"
-                events={myEventsList}
-                style={{ height: "calc(100vh - 200px)" }}
-            />
-        </div>
-    );
-};
+class CalendarDefault extends Component {
+    selectDay = () => {
+        console.log("1ddsds");
+    };
+    handleSlotSelection = ({ start, end, action }) => {
+        console.log(start, end);
+    };
+    render() {
+        const { classes } = this.props;
+        return (
+            <div className={classes.root}>
+                <Calendar
+                    header={{
+                        left: "prev,next today",
+                        center: "title",
+                        right: ""
+                    }}
+                    localizer={localizer}
+                    eventClick={this.selectDay}
+                    defaultDate={new Date()}
+                    defaultView="month"
+                    selectable={true}
+                    onSelectSlot={this.handleSlotSelection}
+                    onSelectEvent={this.selectDay}
+                    views={["month"]}
+                    events={myEventsList}
+                    style={{ height: "calc(100vh - 200px)" }}
+                />
+            </div>
+        );
+    }
+}
 
 CalendarDefault.propTypes = {
     classes: PropTypes.object.isRequired
