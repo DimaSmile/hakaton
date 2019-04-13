@@ -29,6 +29,20 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
+    }
+
+    public function events()
+    {
+        return $this->hasMany('App\Event');
+    }
+
+    public function vacations()
+    {
+        return $this->belongsToMany('App\Vacation');
+    }
     /**
      * The attributes that should be cast to native types.
      *
