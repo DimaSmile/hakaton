@@ -20,33 +20,17 @@ export const styles = theme => ({
         float: "right",
         width: "50%"
     },
-    FBButtton: {
-        marginTop: "35px",
-        width: "100%",
-        background: "#4265a4",
-        color: "#fff",
-        position: "relative",
-        "&:hover": {
-            background: "#4265a4",
-            color: "#fff"
-        }
-    },
-    GoogleButtton: {
-        marginTop: "15px",
-        width: "100%",
-        background: "#e45f4f",
-        color: "#fff",
-        position: "relative",
-        "&:hover": {
-            background: "#e45f4f",
-            color: "#fff"
-        }
-    },
     Icon: {
         position: "absolute",
         maxHeight: "100%",
         width: "auto",
         left: "0px",
         top: "0px"
+    },
+    file: {
+        width: "56px",
+        height: "56px",
+        opacity: "0",
+        position: "absolute"
     }
 });

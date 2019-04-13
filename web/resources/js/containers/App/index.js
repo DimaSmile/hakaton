@@ -6,7 +6,12 @@ import * as path from "../../constants/routes";
 import Login from "../Login";
 import Registration from "../Registration";
 import Dashboard from "../Dashboard";
-import SimplePage1 from "../SimplePage1";
+import DashboardHome from "../DashboardHome";
+import Team from "../Team";
+import MyVocation from "../MyVocation";
+import Birthdays from "../Birthdays";
+import TeamBuilding from "../TeamBuilding";
+import TeamCalendar from "../TeamCalendar";
 import UserSettings from "../UserSettings";
 
 const App = props => (
@@ -15,13 +20,22 @@ const App = props => (
         <Route exact path={path.LOGIN} component={Login} />
         <Route exact path={path.REGISTRATION} component={Registration} />
         <Dashboard>
-            <Switch>
-                <Route exact path={path.DASHBOARD} component={SimplePage1} />
+            <Switch {...props}>
+                <Route path={path.DASHBOARD_HOME} component={DashboardHome} />
+                <Route exact path={path.TEAM} component={Team} />
+                <Route exact path={path.MY_VOCATION} component={MyVocation} />
+                <Route exact path={path.BIRTHDAYS} component={Birthdays} />
                 <Route
                     exact
-                    path={path.SIMPLE_PAGE_1}
-                    component={SimplePage1}
+                    path={path.TEAM_BUILDING}
+                    component={TeamBuilding}
                 />
+                <Route
+                    exact
+                    path={path.TEAM_CALENDAR}
+                    component={TeamCalendar}
+                />
+                <Route exact path={path.TEAM} component={Team} />
                 <Route
                     exact
                     path={path.USER_SETTINGS}

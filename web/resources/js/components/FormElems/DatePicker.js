@@ -1,12 +1,13 @@
-import React, { Component, Fragment } from "react";
-import DatePicker from "react-datepicker";
+import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
+import Typography from "@material-ui/core/Typography";
 import { styles } from "./style";
 
-class DatePickerField extends Component {
+class DatePickerField extends React.Component {
     state = {
         startDate: new Date()
     };
@@ -16,9 +17,19 @@ class DatePickerField extends Component {
         });
     };
     render() {
-        const { classes, label } = this.props;
+        const {
+            classes,
+            label,
+            type,
+            classProp,
+            variant,
+            field,
+            form: { touched, errors },
+            ...props
+        } = this.props;
+        console.log(this.props);
         return (
-            <Fragment>
+            <div>
                 <label className={classes.label}>{label}</label>
                 <div className={classes.root}>
                     <DatePicker
@@ -26,7 +37,16 @@ class DatePickerField extends Component {
                         onChange={this.handleChange}
                     />
                 </div>
-            </Fragment>
+                {touched[field.name] && errors[field.name] && (
+                    <Typography
+                        variant="subtitle1"
+                        gutterBottom
+                        color={"error"}
+                    >
+                        {errors[field.name]}
+                    </Typography>
+                )}
+            </div>
         );
     }
 }

@@ -6,14 +6,14 @@ import { styles } from "./style";
 
 import { Formik, Form, Field } from "formik";
 import TextInput from "../../FormElems/TextInput";
-// import { LoginSchema } from "./_validation";
+import { UserSettingsSchema } from "./_validationSchema";
 
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Fab from "@material-ui/core/Fab";
 import Checkbox from "@material-ui/core/Checkbox";
-import EditIcon from "@material-ui/icons/edit";
+import EditIcon from "@material-ui/icons/Edit";
 import DatePickerField from "../../FormElems/DatePicker";
 
 import UserAvatar from "../../UserAvatar";
@@ -21,39 +21,47 @@ import DefaultAvatar from "../../../images/defaultAvatar.png";
 
 class UserSettingsForm extends PureComponent {
     state = {
-        rememberCheckbox: false
+        image: null
     };
-    handleCheckboxChange = () => {
+    handleShowImage = event => {
         this.setState({
-            rememberCheckbox: !this.state.rememberCheckbox
+            image: URL.createObjectURL(event.target.files[0])
         });
     };
     render() {
         const { classes, user } = this.props;
-        console.log(user);
+        const avatar = this.state.image ? this.state.image : DefaultAvatar;
+        console.log(this.state);
         return (
             <Formik
                 enableReinitialize={true}
                 initialValues={{
                     userName: user ? user.name : "Loading...",
                     password: "",
-                    password2: ""
+                    password2: "",
+                    startDate: new Date(),
+                    birthdayDate: new Date()
                 }}
-                // validationSchema={LoginSchema}
-                // onSubmit={values => {
-                //     login(values);
-                // }}
+                validationSchema={UserSettingsSchema}
+                onSubmit={values => {
+                    console.log(values);
+                }}
             >
                 {() => (
                     <div className={"form-block " + classes.root}>
                         <Form>
-                            <UserAvatar image={DefaultAvatar} />
+                            <UserAvatar image={avatar} />
                             <Fab
                                 color="secondary"
                                 aria-label="Add"
                                 className={classes.fab}
                             >
                                 <EditIcon />
+                                <input
+                                    type="file"
+                                    onChange={this.handleShowImage}
+                                    className={classes.file}
+                                />
                             </Fab>
                             <Field
                                 type="text"
@@ -76,8 +84,15 @@ class UserSettingsForm extends PureComponent {
                                 component={TextInput}
                                 classProp={classes.formInput}
                             />
-                            <DatePickerField label={"Birthday day"} />
-                            <DatePickerField label={"Start working"} />
+                            <Field
+                                type="text"
+                                name="birthdayDate"
+                                label="Birthday Date"
+                                component={DatePickerField}
+                                classProp={classes.formInput}
+                            />
+                            {/* <DatePickerField label={"Birthday day"} />
+                            <DatePickerField label={"Start working"} /> */}
                             <Button
                                 variant="contained"
                                 color="primary"
