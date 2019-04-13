@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,10 +32,15 @@ Route::group(['middleware' => ['jwt.auth','api-header']], function () {
 
     Route::get('users/list', function(Request $request){
 
-        //$user = App\User::where('auth_token', $request->token)->first();
-        $user = App\User::where('birthday','!=', null) ->orderBy('birthday', 'asc')->get();
+        $users = App\User::where('birthday','!=', null)->get();
+        $new_users = [];
+        foreach ($users as $user) {
+            $new_users[] = '2019-' . Carbon::parse($user->birthday)->format('m-d');
+            $new_users[] = '2020-' . Carbon::parse($user->birthday)->format('m-d');
+        }
+        asort($new_users);
 
-        $response = ['success'=>true, 'data'=>$user];
+        $response = ['success' => true, 'data' => $new_users];
         return response()->json($response, 201);
     });
 
