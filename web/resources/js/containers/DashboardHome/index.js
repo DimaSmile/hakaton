@@ -13,9 +13,7 @@ class DashboardHome extends Component {
         return (
             <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
-                    <Typography paragraph>
-                        DashboardHome dfgdfgsdfgsdf
-                    </Typography>
+                    <Typography paragraph>Dashboard</Typography>
                 </CardContent>
             </Card>
         );

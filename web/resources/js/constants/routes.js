@@ -1,6 +1,8 @@
 export const HOME = "/";
 export const LOGIN = "/login";
 export const REGISTRATION = "/registration";
+
+export const DASHBOARD = "/dashboard/home";
 export const DASHBOARD_HOME = "/dashboard/home";
 export const TEAM = "/dashboard/team";
 export const MY_VOCATION = "/dashboard/my_vocation";

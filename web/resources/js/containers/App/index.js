@@ -20,12 +20,8 @@ const App = props => (
         <Route exact path={path.LOGIN} component={Login} />
         <Route exact path={path.REGISTRATION} component={Registration} />
         <Dashboard>
-            <Switch>
-                <Route
-                    exact
-                    path={path.DASHBOARD_HOME}
-                    component={DashboardHome}
-                />
+            <Switch {...props}>
+                <Route path={path.DASHBOARD_HOME} component={DashboardHome} />
                 <Route exact path={path.TEAM} component={Team} />
                 <Route exact path={path.MY_VOCATION} component={MyVocation} />
                 <Route exact path={path.BIRTHDAYS} component={Birthdays} />

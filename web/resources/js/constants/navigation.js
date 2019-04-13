@@ -7,7 +7,7 @@ export const navigationLinks = [
     {
         icon: <UserIcon />,
         name: "Home",
-        route: route.DASHBOARD
+        route: route.DASHBOARD_HOME
     },
     {
         icon: <UserIcon />,
