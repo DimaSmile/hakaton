@@ -124,7 +124,6 @@ export function verifyToken(token) {
 }
 
 export function LogOut() {
-    console.log("1");
     return dispatch => {
         dispatch(logout());
         window.localStorage.removeItem("auth_token");

@@ -17,8 +17,9 @@ export const styles = theme => ({
     },
     submitButton: {
         minWidth: "100px",
-        float: "right",
-        width: "50%"
+        width: "50%",
+        left: "50%",
+        transform: "translateX(-50%)"
     },
     Icon: {
         position: "absolute",
