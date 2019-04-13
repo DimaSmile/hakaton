@@ -1,22 +1,37 @@
 import React from "react";
 import * as route from "./routes";
 import DateRangeIcon from "@material-ui/icons/DateRange";
-import UserIcon from "@material-ui/icons/people";
+import UserIcon from "@material-ui/icons/People";
 
 export const navigationLinks = [
     {
         icon: <UserIcon />,
-        name: "Simple Page 1",
-        route: route.SIMPLE_PAGE_1
+        name: "Home",
+        route: route.DASHBOARD
+    },
+    {
+        icon: <UserIcon />,
+        name: "Team",
+        route: route.TEAM
     },
     {
         icon: <DateRangeIcon />,
-        name: "Simple Page 2",
-        route: route.SIMPLE_PAGE_2
+        name: "My Vocation",
+        route: route.MY_VOCATION
     },
     {
         icon: <DateRangeIcon />,
-        name: "Simple Page 3",
-        route: route.SIMPLE_PAGE_3
+        name: "Birthdays",
+        route: route.BIRTHDAYS
+    },
+    {
+        icon: <DateRangeIcon />,
+        name: "Team Building",
+        route: route.TEAM_BUILDING
+    },
+    {
+        icon: <DateRangeIcon />,
+        name: "Team Calendar",
+        route: route.TEAM_CALENDAR
     }
 ];

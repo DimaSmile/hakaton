@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Fab from "@material-ui/core/Fab";
 import Checkbox from "@material-ui/core/Checkbox";
-import EditIcon from "@material-ui/icons/edit";
+import EditIcon from "@material-ui/icons/Edit";
 import DatePickerField from "../../FormElems/DatePicker";
 
 import UserAvatar from "../../UserAvatar";
