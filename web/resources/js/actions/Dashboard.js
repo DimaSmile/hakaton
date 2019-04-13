@@ -9,8 +9,8 @@ export function dashboardAction(data) {
             .then(response => {
                 dispatch(RequestLoading(false));
                 if (response.data.success) {
-                    console.log("123456");
-                    dispatch(dashboardFSuccess(response.data));
+                    const data = response.data.data;
+                    dispatch(dashboardFSuccess(response.data.data));
                 }
             })
             .catch(function(error) {
@@ -19,10 +19,10 @@ export function dashboardAction(data) {
             });
     };
     function dashboardFailure(error) {
-        return { type: types.DASHBOARD_REGISTER_FAILURE, error };
+        return { type: types.DASHBOARD_FAILURE, error };
     }
-    function dashboardFSuccess(users) {
-        return { type: types.DASHBOARD_REGISTER_SUCCESS, users };
+    function dashboardFSuccess(data) {
+        return { type: types.DASHBOARD_SUCCESS, data };
     }
     function RequestLoading(bool) {
         return {

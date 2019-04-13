@@ -14,9 +14,9 @@ import { usersListAction } from "../../actions/UsersList";
 import { styles } from "./style";
 
 class Birthdays extends Component {
-    // componentDidMount() {
-    //     this.props.usersListAction();
-    // }
+    componentDidMount() {
+        this.props.usersListAction();
+    }
     render() {
         const { classes, users } = this.props;
         console.log(this.props);

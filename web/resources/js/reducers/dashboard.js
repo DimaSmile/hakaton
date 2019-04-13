@@ -13,12 +13,13 @@ export function dashboard(state = initialState, action) {
                 ...state,
                 dataLoading: action.isLoading
             };
-        case types.DASHBOARD_REGISTER_FAILURE:
+        case types.DASHBOARD_FAILURE:
             return {
                 ...state,
                 dataError: action.errors
             };
-        case types.DASHBOARD_REGISTER_SUCCESS:
+        case types.DASHBOARD_SUCCESS:
+            console.log(action.data);
             return {
                 ...state,
                 dashboardData: action.data

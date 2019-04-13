@@ -14,16 +14,16 @@ export function usersList(state = initialState, action) {
                 ...state,
                 usersIsLoading: action.isLoading
             };
-        // case types.USERSLIST_FAILURE:
-        //     return {
-        //         ...state,
-        //         usersErrors: action.errors
-        //     };
-        // case types.USERSLIST_SUCCESS:
-        //     return {
-        //         ...state,
-        //         users: action.users
-        //     };
+        case types.USERSLIST_FAILURE:
+            return {
+                ...state,
+                usersErrors: action.errors
+            };
+        case types.USERSLIST_SUCCESS:
+            return {
+                ...state,
+                users: action.users
+            };
 
         default:
             return state;
