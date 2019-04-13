@@ -10,3 +10,21 @@ a {
         color: #000;
     }
 }
+
+.rbc-toolbar {
+    .rbc-btn-group:last-child {
+        display: none;
+    }
+}
+
+.rbc-event {
+    background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+}
+
+.calendar_event {
+    width: 100%;
+    img {
+        width: 50%;
+        border-radius: 50%;
+    }
+}

@@ -96,7 +96,7 @@ class UserSettingsForm extends PureComponent {
                                 <Field
                                     type="text"
                                     name="birthdayDate"
-                                    label="Birthday Date"
+                                    label="Birthday"
                                     component={DatePickerField}
                                     classProp={classes.formInput}
                                     changeDate={this.changeDate}

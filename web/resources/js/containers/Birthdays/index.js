@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import CalendarDefault from "../../components/Calendar";
 
 import { styles } from "./style";
 
@@ -13,9 +14,8 @@ class Birthdays extends Component {
         return (
             <Card className={classes.card}>
                 <CardContent className={classes.cardContent}>
-                    <Typography paragraph>
-                        BIRTHDAYS
-                    </Typography>
+                    <Typography paragraph>BIRTHDAYS</Typography>
+                    <CalendarDefault />
                 </CardContent>
             </Card>
         );
