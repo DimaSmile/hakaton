@@ -16,7 +16,7 @@ class AddColumnsUserTable extends Migration
         Schema::table('users', function($table) {
             $table->integer('role_id')->unsigned()->default(3);
             $table->string('image')->nullable();
-            $table->date('birsday')->nullable();
+            $table->date('birthday')->nullable();
             $table->date('start_working')->nullable();
             $table->integer('vacation_days')->nullable();
             $table->integer('sick_days')->nullable();

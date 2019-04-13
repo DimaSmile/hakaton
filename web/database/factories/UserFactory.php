@@ -30,7 +30,7 @@ $factory->define(User::class, function (Faker $faker) {
         'password' => \Hash::make(111111),
         'remember_token' => Str::random(10),
         'auth_token' => '',
-        'birsday' => $faker->dateTimeBetween('-30 years', '-15 years')->format('Y-m-d'),
+        'birthday' => $faker->dateTimeBetween('-30 years', '-15 years')->format('Y-m-d'),
         'start_working' => $start_working[0],
         'vacation_days' => floor($vacation_days),
         'sick_days' => 5
@@ -50,7 +50,7 @@ $factory->defineAs(User::class, 'admin', function (Faker $faker) {
         'remember_token' => Str::random(10),
         'auth_token' => '',
         'role_id' => 1,
-        'birsday' => $faker->dateTimeBetween('-50 years', '-40 years')->format('Y-m-d'),
+        'birthday' => $faker->dateTimeBetween('-50 years', '-40 years')->format('Y-m-d'),
         'start_working' => $start_working[0],
         'vacation_days' => floor($vacation_days),
         'sick_days' => 5
