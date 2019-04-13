@@ -38,13 +38,18 @@ Route::group(['middleware' => ['jwt.auth','api-header']], function () {
         $response = ['success'=>true, 'data'=>$user];
         return response()->json($response, 201);
     });
+
+    Route::post('get-dashboad-info', 'PagesController@dashboard');
 });
 Route::group(['middleware' => 'api-header'], function () {
-  
+    
     // The registration and login requests doesn't come with tokens 
     // as users at that point have not been authenticated yet
     // Therefore the jwtMiddleware will be exclusive of them
     Route::post('user/login', 'UserController@login');
     Route::post('user/register', 'UserController@register');
     Route::post('user/save-profile', 'UserController@saveProfile');
+    //Route::get('get-dashboad-info', 'DashBoardController@index');
+    
 });
+
