@@ -38,7 +38,20 @@ class UserController extends Controller
             $token = self::getToken($request->email, $request->password);
             $user->auth_token = $token;
             $user->save();
-            $response = ['success'=>true, 'data'=>['id'=>$user->id,'auth_token'=>$user->auth_token,'name'=>$user->name, 'email'=>$user->email]];           
+            $response = [
+                'success' => true,
+                'data'    =>
+                    [
+                        'id'            => $user->id,
+                        'auth_token'    => $user->auth_token,
+                        'name'          => $user->name,
+                        'email'         => $user->email,
+                        'image'         => $user->image,
+                        'birthday'      => $user->birthday,
+                        'start_working' => $user->start_working,
+                        'vacation_days' => $user->vacation_days
+                    ]
+            ];
         }
         else 
           $response = ['success'=>false, 'data'=>'Record doesnt exists'];
