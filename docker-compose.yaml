@@ -11,9 +11,9 @@ services:
     volumes:
       - ./web:/var/www/html
     links:
-      - mysql_db
+      - hakaton_db
 
-  mysql_db:
+  hakaton_db:
     image: mariadb
     restart: always
     volumes:
@@ -22,19 +22,19 @@ services:
         MYSQL_USER: root
         MYSQL_PASSWORD : test123
         MYSQL_ROOT_PASSWORD: test123
-        MYSQL_DATABASE: boilerplate_db
+        MYSQL_DATABASE: hakaton_db
 
   boilerplate_sql_ui:
     image: phpmyadmin/phpmyadmin
     container_name: boilerplate_sql_ui
     depends_on:
-      - mysql_db
+      - hakaton_db
     environment:
       - PMA_ARBITRARY=1
     ports:
       - 3080:80
     environment:
-      PMA_HOST: mysql_db
+      PMA_HOST: hakaton_db
       MYSQL_ROOT_PASSWORD: test123
 
 
