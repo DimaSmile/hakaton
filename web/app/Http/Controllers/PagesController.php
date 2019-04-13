@@ -30,7 +30,7 @@ class PagesController extends Controller
 
         $userData['event_name']       = $closestEvent->name;
         $userData['start_event_date'] = $closestEvent->start;
-        
+
         return ['success'=>true, 'data'=> $userData];
     }
 
