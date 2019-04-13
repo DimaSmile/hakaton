@@ -31,7 +31,7 @@ class DashboardHome extends Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, data } = this.props;
 
         const DATA = [
             { x0: 0, x: 1, y: 40 },
@@ -42,6 +42,11 @@ class DashboardHome extends Component {
             { x0: 5, x: 6, y: 30 },
             { x0: 6, x: 7, y: 10 }
         ];
+        console.log(222222, data);
+        const vacation_days = data ? data.vacation_days : "";
+        const sick_days = data ? data.sick_days : "";
+        const start_event_date = data ? data.start_event_date : "";
+        const event_name = data ? data.event_name : "";
 
         return (
             <div>
@@ -49,11 +54,10 @@ class DashboardHome extends Component {
                     <Card className={classes.card}>
                         <CardContent className={classes.cardContent}>
                             <Typography className={classes.title} variant="h2">
-                                {this.state.days_vacation}
+                                {vacation_days ? vacation_days : 0}
                             </Typography>
                             <Typography variant="h3" className={classes.title}>
-                                {this.state.days_vacation == 1 ||
-                                this.state.days_vacation == -1
+                                {vacation_days == 1 || vacation_days == -1
                                     ? "day"
                                     : "days"}
                             </Typography>
@@ -65,11 +69,10 @@ class DashboardHome extends Component {
                     <Card className={classes.card}>
                         <CardContent className={classes.cardContent}>
                             <Typography variant="h2" className={classes.title}>
-                                {this.state.days_sick_leave}
+                                {sick_days ? sick_days : 0}
                             </Typography>
                             <Typography variant="h3" className={classes.title}>
-                                {this.state.days_sick_leave == 1 ||
-                                this.state.days_sick_leave == -1
+                                {sick_days == 1 || sick_days == -1
                                     ? "day"
                                     : "days"}
                             </Typography>
@@ -92,11 +95,10 @@ class DashboardHome extends Component {
                             height={400}
                             className={classes.graf}
                             yDomain={[0, 100]}
-                            
                         >
                             <VerticalGridLines />
                             <HorizontalGridLines />
-                            
+
                             <YAxis />
                             <VerticalRectSeries
                                 data={DATA}
@@ -107,7 +109,10 @@ class DashboardHome extends Component {
                         </XYPlot>
                     </Card>
                     <div className={classes.event}>
-                        <Event />
+                        <Event
+                            start_event_date={start_event_date}
+                            event_name={event_name}
+                        />
                     </div>
                 </div>
             </div>
@@ -120,8 +125,9 @@ DashboardHome.propTypes = {
 };
 
 const mapStateToProps = state => {
+    console.log(111111, state);
     return {
-        users: state.dashboard.data,
+        data: state.dashboard.dashboardData,
         error: state.dashboard.usersErrors
     };
 };
@@ -135,6 +141,5 @@ const connector = connect(
     mapStateToProps,
     mapDispatchToProps
 );
-
 
 export default connector(withStyles(styles)(DashboardHome));

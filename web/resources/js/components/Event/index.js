@@ -14,7 +14,7 @@ class Event extends Component {
         data: '01.04.19'
     }
     render() {
-        const { classes } = this.props;
+        const { classes, event_name, start_event_date } = this.props;
         return (
             <Card>
                 <CardContent>
@@ -24,10 +24,10 @@ class Event extends Component {
                     {this.state.image ? <img src={this.state.image} className={classes.image}/> : ''}
                          
                     <Typography className={classes.title_event} variant="h3">
-                        {this.state.event}
+                        {event_name}
                     </Typography>
                     <Typography className={classes.title_event} variant="h4">
-                        {this.state.data}
+                        {start_event_date}
                     </Typography>
                 </CardContent>
             </Card>
