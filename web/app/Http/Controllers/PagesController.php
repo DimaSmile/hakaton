@@ -22,7 +22,7 @@ class PagesController extends Controller
         
         if($validated->fails())
         {
-            return response()->json(['status' => 'error', 'messages' => 'The token is not faund.', 'errors' => $validated->errors()], 404);
+            return ['success'=>false, 'data'=>'Token is not found'];
         }
 
         $closestEvent = Event::where('start', '>', date("Y-m-d H:i:s"))->select('name', 'start')->orderBy('start', 'asc')->first();
@@ -30,8 +30,8 @@ class PagesController extends Controller
 
         $userData['event_name']       = $closestEvent->name;
         $userData['start_event_date'] = $closestEvent->start;
-
-        return response()->json($userData, 201);
+        
+        return ['success'=>true, 'data'=> $userData];
     }
 
     private function dd($data) {
