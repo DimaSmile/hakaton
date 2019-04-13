@@ -4,3 +4,4 @@ export * from "./theme";
 export * from "./validationForm";
 export * from "./apiUrl";
 export * from "./navigation";
+export * from "./usersList";
