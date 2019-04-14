@@ -45,7 +45,8 @@ $factory->define(User::class, function (Faker $faker) {
         'vacation_days' => floor($vacation_days),
         'sick_days' => 5,
         'position' => $positions[$faker->numberBetween(0, 2)],
-        'image' => $images[$faker->numberBetween(0, 2)]
+        'image' => $images[$faker->numberBetween(0, 2)],
+        'role_id' => $faker->numberBetween(2, 3),
     ];
 });
 
