@@ -47,7 +47,7 @@ class PagesController extends Controller
             return response()->json($response, 201);
         }
 
-        $response = ['success'=>true, 'data'=>User::select('name', 'position', 'image', 'start_working')->get()];
+        $response = ['success'=>true, 'data'=>User::select('name', 'position', 'image', 'start_working', 'birthday')->get()];
 
         return response()->json($response, 201);
     }
