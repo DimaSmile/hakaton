@@ -177,6 +177,21 @@ class PagesController extends Controller
         return response()->json($response, 201);
     }
 
+    public function getUnapprovedVacation(Request $request) {
+        $validated    = Validator::make($request->all(), $this->validatedRules['vacation']);
+
+        if($validated->fails())
+        {
+            $response = ['success'=>false, 'data'=>['messages' => 'The given data was invalid.', 'errors' => $validated->errors()]];
+
+            return response()->json($response, 201);
+        }
+
+        $response = ['success'=>true, 'data' => Vacation::where('approved', 0)];
+
+        return response()->json($response, 201);
+    }
+
     private function dd($data) {
         echo "<pre>";
         var_dump($data);
