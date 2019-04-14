@@ -53,12 +53,11 @@ export function login(user) {
             .then(response => {
                 dispatch(loginRequestLoading(false));
                 if (response.data.success) {
-                    console.log(response.data.data);
+                    console.log("login", response.data);
                     const data = {
-                        name: response.data.data.name,
-                        email: response.data.data.email,
-                        id: response.data.data.id
+                        ...response.data.data
                     };
+                    delete data["auth_token"];
                     localStorage.setItem(
                         "auth_token",
                         response.data.data.auth_token
@@ -95,12 +94,11 @@ export function verifyToken(token) {
             .then(response => {
                 dispatch(verifyRequestLoading(false));
                 if (response.data.success) {
-                    const user = {
-                        name: response.data.data.name,
-                        email: response.data.data.email,
-                        id: response.data.data.id
+                    const data = {
+                        ...response.data.data
                     };
-                    dispatch(verifySuccess(user));
+                    delete data["auth_token"];
+                    dispatch(verifySuccess(data));
                 }
             })
             .catch(error => {

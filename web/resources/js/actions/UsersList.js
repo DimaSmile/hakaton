@@ -7,7 +7,6 @@ export function usersListAction() {
         userList()
             .then(response => {
                 dispatch(RequestLoading(false));
-                console.log(response);
                 if (response.data.success) {
                     dispatch(userListFSuccess(response.data.data));
                 } else {

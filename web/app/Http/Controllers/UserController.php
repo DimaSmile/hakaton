@@ -181,7 +181,7 @@ class UserController extends Controller
                     [
                         'name'          => $user->name,
                         'id'            => $user->id,
-                        'email'         => $request->email,
+                        'email'         => $user->email,
                         'auth_token'    => $user->auth_token,
                         'image'         => $user->image,
                         'birthday'      => $user->birthday,

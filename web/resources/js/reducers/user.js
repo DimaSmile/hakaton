@@ -1,4 +1,4 @@
-import { authConstants as types } from "../constants/auth";
+import * as types from "../constants/";
 
 const initialState = {
     isAuth: false,
@@ -10,36 +10,42 @@ const initialState = {
 
 export function user(state = initialState, action) {
     switch (action.type) {
-        case types.REQUEST_LOADING:
+        case types.authConstants.REQUEST_LOADING:
             return {
                 ...state,
                 isLoading: action.isLoading
             };
-        case types.LOGIN_FAILURE:
+        case types.authConstants.LOGIN_FAILURE:
             return {
                 ...state,
                 loginError: "Invalid email or password"
             };
-        case types.LOGIN_SUCCESS:
+        case types.authConstants.LOGIN_SUCCESS:
+            console.log(action.user);
             return {
                 ...state,
                 user: action.user,
                 isAuth: true,
                 error: null
             };
-        case types.REGISTER_FAILURE:
+        case types.authConstants.REGISTER_FAILURE:
             return {
                 ...state,
                 registerError: action.error
             };
-        case types.REGISTER_SUCCESS:
+        case types.authConstants.REGISTER_SUCCESS:
             return {
                 ...state,
                 user: action.user,
                 isAuth: true,
                 error: null
             };
-        case types.LOGOUT:
+        case types.profSettingsConstants.PROFILE_SETTINGS_SUCCESS:
+            return {
+                ...state,
+                user: action.data
+            };
+        case types.authConstants.LOGOUT:
             return {
                 ...state,
                 user: null,
