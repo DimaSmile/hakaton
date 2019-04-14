@@ -92,7 +92,7 @@ class PagesController extends Controller
     }
 
     public function getUserActivites($user_id) {
-        $userActivites = UserActivites::where('user_id', 12)->where('start', '>', Carbon::now()->subDays(7))->get()->toArray();
+        $userActivites = UserActivites::where('user_id', $user_id)->where('start', '>', Carbon::now()->subDays(7))->get()->toArray();
 
         $res = [];
         foreach ($userActivites as $key=>$date) {
