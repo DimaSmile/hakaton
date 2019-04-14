@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
 import { styles } from "./style";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { ButtonActiveAction } from "../../actions/ButtonActive";
 
 class SwitchOnline extends Component {
     state = {
@@ -11,10 +14,14 @@ class SwitchOnline extends Component {
 
     handleChange = name => event => {
         this.setState({ [name]: event.target.checked });
+        const id =
+            this.props.user && this.props.user.id ? this.props.user.id : null;
+        const status = this.state.checkedB;
+        this.props.ButtonActiveAction(id, status);
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, data } = this.props;
         return (
             <div className={classes.root}>
                 <Switch
@@ -39,4 +46,21 @@ SwitchOnline.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SwitchOnline);
+const mapStateToProps = state => {
+    return {
+        user: state.user.user
+        // error: state.user.usersErrors
+    };
+};
+
+const mapDispatchToProps = dispatch => ({
+    ButtonActiveAction: bindActionCreators(ButtonActiveAction, dispatch),
+    dispatch
+});
+
+const connector = connect(
+    mapStateToProps,
+    mapDispatchToProps
+);
+
+export default connector(withStyles(styles)(SwitchOnline));

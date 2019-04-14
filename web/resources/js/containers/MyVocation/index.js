@@ -104,8 +104,9 @@ class MyVocation extends PureComponent {
                 <Modal
                     open={showConfirmation}
                     handleClose={this.closeConfirmation}
+                    
                 >
-                    <Card>
+                    <Card className={classes.modal}>
                         <CardContent>
                             <Formik
                                 enableReinitialize={true}
