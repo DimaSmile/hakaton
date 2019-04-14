@@ -13,10 +13,11 @@ import { styles } from "./style";
 class Team extends Component {
     componentDidMount() {
         // this.props.usersListAction();
-        // Echo.channel('user1')
-        // .listen('CheckUser', (e) => {
-        //     console.log(55544444455)
-        // });
+        Echo.channel('channel')
+        .listen('UserOnline', (e) => {
+            console.log(55544444455)
+            console.log(e)
+        });
 
     // if (userId != 'null') {
     //     Echo.join('Online')
@@ -30,11 +31,23 @@ class Team extends Component {
     //             this.onlineUsers = this.onlineUsers.filter((u) => {u != user});
     //         });
     // }
-        Echo.join('counter')
-            .here(users => this.count = users.length)
-            .joining(user => this.count++)
-            .leaving(user => this.count--);
-        this.props.userInfoAction();
+        // Echo.join('channel')
+        //     .here( e => console.log(1111111))
+        // // this.props.userInfoAction();
+        // Echo.join('dashboard')
+        //     // .joining((user) => {
+        //     //     axios.put('/api/user/'+ user.id +'/online?api_token=' + user.api_token, {});
+        //     // })
+        //     // .leaving((user) => {
+        //     //     axios.put('/api/user/'+ user.id +'/offline?api_token=' + user.api_token, {});
+        //     // })
+        //     .listen('UserOnline', (e) => {
+        //         console.log(88888888888888);
+        //         this.friend = e.user;
+        //     })
+        //     .listen('UserOffline', (e) => {
+        //         this.friend = e.user;
+        //     });
     }
 
     render() {

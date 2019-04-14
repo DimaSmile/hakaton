@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use JWTAuth;
+use App\Events\UserOnline;
+use App\Events\UserOffline;
 // use App\Vacation;
 use App\Events\CheckUser;
 use JWTAuthException;
@@ -39,7 +41,9 @@ class UserController extends Controller
         {
             $token = self::getToken($request->email, $request->password);
             $user->auth_token = $token;
+            $user->is_active = true;
             $user->save();
+            event(new UserOnline($user));
             $response = [
                 'success' => true,
                 'data'    =>
