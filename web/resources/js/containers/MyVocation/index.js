@@ -7,15 +7,13 @@ import CardContent from "@material-ui/core/CardContent";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Grid from "@material-ui/core/Grid";
-import { dashboardAction } from "../../actions/Dashboard";
+import { sendVocationAction } from "../../actions/vocation";
 import { styles } from "./style";
 import CalendarWithSelect from "../../components/CalendarWithSelect";
 import Modal from "../../components/Modal";
 import Button from "@material-ui/core/Button";
 import DatePickerField from "../../components/FormElems/DatePicker";
 import { Formik, Form, Field } from "formik";
-// import TextInput from "../../FormElems/TextInput";
-// import { UserSettingsSchema } from "./_validationSchema";
 import Close from "@material-ui/icons/Close";
 
 class MyVocation extends PureComponent {
@@ -41,9 +39,6 @@ class MyVocation extends PureComponent {
             endDate: end
         });
     };
-    componentDidMount() {
-        this.props.dashboardAction();
-    }
     closeErrorModal = () => {
         this.setState({
             showError: false
@@ -55,7 +50,7 @@ class MyVocation extends PureComponent {
         });
     };
     render() {
-        const { classes, data, user } = this.props;
+        const { classes, data, user, sendVocationAction } = this.props;
         const { showError, showConfirmation } = this.state;
         const startWorking =
             user && user.start_working ? user.start_working : false;
@@ -124,7 +119,7 @@ class MyVocation extends PureComponent {
                                         : ""
                                 }}
                                 onSubmit={values => {
-                                    console.log(values);
+                                    sendVocationAction(values);
                                 }}
                             >
                                 {() => (
@@ -181,7 +176,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    dashboardAction: bindActionCreators(dashboardAction, dispatch),
+    sendVocationAction: bindActionCreators(sendVocationAction, dispatch),
     dispatch
 });
 
