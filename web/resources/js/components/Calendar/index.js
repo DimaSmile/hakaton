@@ -30,10 +30,10 @@ const myEventsList = [
 
 class CalendarDefault extends Component {
     selectDay = () => {
-        console.log("1ddsds");
+        // console.log("1ddsds");
     };
     handleSlotSelection = ({ start, end, action }) => {
-        console.log(start, end);
+        // console.log(start, end);
     };
     render() {
         const { classes, birthdays } = this.props;

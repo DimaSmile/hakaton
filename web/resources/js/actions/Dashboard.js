@@ -2,7 +2,6 @@ import { dashboardConstants as types } from "../constants/";
 import { dashboard } from "../queries/dashboard";
 
 export function dashboardAction(data) {
-    console.log("1111");
     return dispatch => {
         dispatch(RequestLoading(true));
         dashboard(data)

@@ -6,7 +6,6 @@ const initialState = {
 };
 
 export function dashboard(state = initialState, action) {
-    console.log(action.type);
     switch (action.type) {
         case types.DASHBOARD_REQUEST_LOADING:
             return {
@@ -19,7 +18,6 @@ export function dashboard(state = initialState, action) {
                 dataError: action.errors
             };
         case types.DASHBOARD_SUCCESS:
-            console.log(action.data);
             return {
                 ...state,
                 dashboardData: action.data

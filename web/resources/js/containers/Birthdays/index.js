@@ -19,7 +19,6 @@ class Birthdays extends Component {
     }
     render() {
         const { classes, users } = this.props;
-        console.log(this.props);
         return (
             <Grid container spacing={16}>
                 <Grid item xs={8}>
