@@ -17,13 +17,17 @@ class PagesController extends Controller
             'token'         => 'required',
             'user_id'       => 'required',
             'button_status' => 'required',
-        ]
+        ],
+        'team' => [
+            'token' => 'required',
+        ],
     ];
 
-    public function dashboard(Request $request) {
+    public function dashboard(Request $request)
+    {
         $validated    = Validator::make($request->all(), $this->validatedRules['dashboard']);
         $result       = [];
-        
+
         if($validated->fails())
         {
             $response = ['success'=>false, 'data'=>'Token is not found'];
@@ -107,6 +111,21 @@ class PagesController extends Controller
             }
         }
         return $response;
+    }
+
+    public function team(Request $request) {
+        $validated    = Validator::make($request->all(), $this->validatedRules['team']);
+
+        if($validated->fails())
+        {
+            $response = ['success'=>false, 'data'=>['messages' => 'The given data was invalid.', 'errors' => $validated->errors()]];
+
+            return response()->json($response, 201);
+        }
+
+        $response = ['success'=>true, 'data'=>User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get()];
+
+        return response()->json($response, 201);
     }
 
     private function dd($data) {

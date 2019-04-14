@@ -32,7 +32,6 @@ class DashboardHome extends Component {
 
     render() {
         const { classes, data } = this.props;
-
         const DATA = [
             { x0: 0, x: 1, y: 40 },
             { x0: 1, x: 2, y: 20 },
@@ -42,12 +41,16 @@ class DashboardHome extends Component {
             { x0: 5, x: 6, y: 30 },
             { x0: 6, x: 7, y: 10 }
         ];
-        console.log(222222, data);
         const vacation_days = data ? data.vacation_days : "";
         const sick_days = data ? data.sick_days : "";
         const start_event_date = data ? data.start_event_date : "";
         const event_name = data ? data.event_name : "";
-
+        const nextEvent = data
+            ? {
+                  user_name: data.event_name,
+                  current_birthday: data.start_event_date
+              }
+            : null;
         return (
             <div>
                 <div className={classes.flex}>
@@ -109,10 +112,7 @@ class DashboardHome extends Component {
                         </XYPlot>
                     </Card>
                     <div className={classes.event}>
-                        <Event
-                            start_event_date={start_event_date}
-                            event_name={event_name}
-                        />
+                        <Event nextEvent={nextEvent} />
                     </div>
                 </div>
             </div>
@@ -125,7 +125,6 @@ DashboardHome.propTypes = {
 };
 
 const mapStateToProps = state => {
-    console.log(111111, state);
     return {
         data: state.dashboard.dashboardData,
         error: state.dashboard.usersErrors

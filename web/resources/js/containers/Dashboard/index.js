@@ -19,12 +19,17 @@ class Dashboard extends Component {
         }
     }
     render() {
+        const avatar =
+            this.props.user && this.props.user.image
+                ? this.props.user.image
+                : false;
         const { LogOut } = this.props;
         return (
             <Layout
                 children={this.props.children}
                 user={this.props.user}
                 logOut={LogOut}
+                avatar={avatar}
             />
         );
     }

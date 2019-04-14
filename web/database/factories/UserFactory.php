@@ -22,6 +22,16 @@ $factory->define(User::class, function (Faker $faker) {
     $start_working = $faker->dateTimeBetween('-2 years', '-1 years')->format('Y-m-d');
     $start_working = (array)($start_working);
     $vacation_days = Carbon::parse($start_working[0])->diffInMonths(date("Y-m-d"));
+    $positions = [
+        0 => 'Project Manager',
+        1 => 'Php Developer',
+        2 => 'Front-end Developer'
+    ];
+    $images = [
+        0 => null,
+        1 => 'https://blogcdn1.secureserver.net/wp-content/uploads/2014/06/create-a-gravatar-beard.png',
+        2 => 'https://ichef.bbci.co.uk/news/660/cpsprodpb/FD27/production/_101970846_aubreyblanche.jpg'
+    ];
 
     return [
         'name' => $faker->name,
@@ -35,6 +45,9 @@ $factory->define(User::class, function (Faker $faker) {
         'vacation_days' => floor($vacation_days),
         'sick_days' => 5,
         'tracker_status' => $faker->numberBetween(0, 1),
+        'position' => $positions[$faker->numberBetween(0, 2)],
+        'image' => $images[$faker->numberBetween(0, 2)],
+        'role_id' => $faker->numberBetween(2, 3),
     ];
 });
 
@@ -56,5 +69,6 @@ $factory->defineAs(User::class, 'admin', function (Faker $faker) {
         'vacation_days' => floor($vacation_days),
         'sick_days' => 5,
         'tracker_status' => $faker->numberBetween(0, 1),
+        'position' => 'Admin'
     ];
 });
