@@ -12,6 +12,7 @@ import { styles } from "./style";
 
 class Team extends Component {
     componentDidMount() {
+        this.props.userInfoAction();
         Pusher.logToConsole = true;
         // Add API Key & cluster here to make the connection
         var pusher = new Pusher('22228b2d68f08b618c6d', {
