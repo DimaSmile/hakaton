@@ -22,6 +22,11 @@ $factory->define(User::class, function (Faker $faker) {
     $start_working = $faker->dateTimeBetween('-2 years', '-1 years')->format('Y-m-d');
     $start_working = (array)($start_working);
     $vacation_days = Carbon::parse($start_working[0])->diffInMonths(date("Y-m-d"));
+    $positions = [
+        0 => 'Project Manager',
+        1 => 'Php Developer',
+        2 => 'Front-end Developer'
+    ];
 
     return [
         'name' => $faker->name,
@@ -33,7 +38,8 @@ $factory->define(User::class, function (Faker $faker) {
         'birthday' => $faker->dateTimeBetween('-30 years', '-15 years')->format('Y-m-d'),
         'start_working' => $start_working[0],
         'vacation_days' => floor($vacation_days),
-        'sick_days' => 5
+        'sick_days' => 5,
+        'position' => $positions[$faker->numberBetween(0, 2)]
     ];
 });
 
@@ -53,6 +59,7 @@ $factory->defineAs(User::class, 'admin', function (Faker $faker) {
         'birthday' => $faker->dateTimeBetween('-50 years', '-40 years')->format('Y-m-d'),
         'start_working' => $start_working[0],
         'vacation_days' => floor($vacation_days),
-        'sick_days' => 5
+        'sick_days' => 5,
+        'position' => 'Admin'
     ];
 });
