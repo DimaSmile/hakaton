@@ -19,6 +19,7 @@ class AddColumnsUserTable extends Migration
             $table->date('birthday')->nullable();
             $table->date('start_working')->nullable();
             $table->integer('vacation_days')->nullable();
+            $table->boolean('tracker_status')->default(false);
             $table->integer('sick_days')->default(5);
             $table->string('position')->nullable();
         });
@@ -38,6 +39,7 @@ class AddColumnsUserTable extends Migration
             $table->dropColumn('start_working');
             $table->dropColumn('vacation_days');
             $table->dropColumn('sick_days');
+            $table->dropColumn('tracker_status');
             $table->dropColumn('position');
         });
     }
