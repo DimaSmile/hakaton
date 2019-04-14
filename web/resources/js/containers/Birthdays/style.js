@@ -3,7 +3,7 @@ export const styles = theme => ({
         display: "flex"
     },
     card: {
-        boxShadow: "1px 10px 5px #e1dbdb"
+        boxShadow: "1px 10px 10px #e1dbdb"
     },
     cardContent: {
         borderRadius: 0

@@ -19,20 +19,22 @@ class Birthdays extends Component {
     }
     render() {
         const { classes, users } = this.props;
+        let nextEvent = users ? users.closest_birthday : null;
         return (
             <Grid container spacing={16}>
                 <Grid item xs={8}>
                     <Card className={classes.card}>
                         <CardContent className={classes.cardContent}>
-                            <CalendarDefault birthdays={users} />
+                            <CalendarDefault
+                                birthdays={users}
+                                nextEvent={nextEvent}
+                            />
                         </CardContent>
                     </Card>
                 </Grid>
                 <Grid item xs={4}>
                     <Card className={classes.card}>
-                        <CardContent className={classes.cardContent}>
-                            <Event />
-                        </CardContent>
+                        <Event nextEvent={nextEvent} />
                     </Card>
                 </Grid>
             </Grid>

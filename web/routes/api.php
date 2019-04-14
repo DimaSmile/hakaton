@@ -33,14 +33,34 @@ Route::group(['middleware' => ['jwt.auth','api-header']], function () {
     Route::get('users/list', function(Request $request){
 
         $users = App\User::where('birthday','!=', null)->get();
-        $new_users = [];
+        $usersData = [];
         foreach ($users as $user) {
-            $new_users[] = '2019-' . Carbon::parse($user->birthday)->format('m-d');
-            $new_users[] = '2020-' . Carbon::parse($user->birthday)->format('m-d');
-        }
-        asort($new_users);
+            $userData = [
+                'current_birthday'     => '2019-' . Carbon::parse($user->birthday)->format('m-d'),
+                'user_name'         => $user->name,
+                'avatar'            => $user->image
+            ];
+            $usersData[] = (object)$userData;
 
-        $response = ['success' => true, 'data' => $new_users];
+            $userData = [
+                'current_birthday'     => '2020-' . Carbon::parse($user->birthday)->format('m-d'),
+                'user_name'         => $user->name,
+                'avatar'            => $user->image
+            ];
+            $usersData[] = (object)$userData;
+        }
+
+        asort($usersData);
+        $closestBirthdayUser = App\User::where('birthday', '>=', Carbon::now()->format('m-d'))->orderBy('birthday', 'asc')->first();
+
+        $closestUserData = [
+            'current_birthday'  => '2019-' . Carbon::parse($closestBirthdayUser->birthday)->format('m-d'),
+            'user_name'         => $closestBirthdayUser->name,
+            'avatar'            => $closestBirthdayUser->image
+        ];
+        $usersData['closest_birthday'] = (object)$closestUserData;
+
+        $response = ['success' => true, 'data' => $usersData];
         return response()->json($response, 201);
     });
 

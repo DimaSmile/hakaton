@@ -53,7 +53,6 @@ export function login(user) {
             .then(response => {
                 dispatch(loginRequestLoading(false));
                 if (response.data.success) {
-                    console.log("login", response.data);
                     const data = {
                         ...response.data.data
                     };

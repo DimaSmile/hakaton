@@ -21,7 +21,6 @@ export function user(state = initialState, action) {
                 loginError: "Invalid email or password"
             };
         case types.authConstants.LOGIN_SUCCESS:
-            console.log(action.user);
             return {
                 ...state,
                 user: action.user,

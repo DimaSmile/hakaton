@@ -15,6 +15,7 @@ import DatePickerField from "../../FormElems/DatePicker";
 
 import UserAvatar from "../../UserAvatar";
 import DefaultAvatar from "../../../images/defaultAvatar.png";
+import Loader from "../../Loader";
 
 class UserSettingsForm extends PureComponent {
     constructor(props) {
@@ -50,7 +51,7 @@ class UserSettingsForm extends PureComponent {
         if (this.state.image) {
             avatar = this.state.image;
         } else {
-            if (user.image) {
+            if (user && user.image) {
                 avatar = user.image;
             } else {
                 avatar = DefaultAvatar;
@@ -134,14 +135,19 @@ class UserSettingsForm extends PureComponent {
                                     classProp={classes.formInput}
                                     changeDate={this.changeDate}
                                 />
-                                <Field
-                                    type="text"
-                                    name="startDate"
-                                    label="Start Working Date"
-                                    component={DatePickerField}
-                                    classProp={classes.formInput}
-                                    changeDate={this.changeDate}
-                                />
+                                {user.start_working ? (
+                                    ""
+                                ) : (
+                                    <Field
+                                        type="text"
+                                        name="startDate"
+                                        label="Start Working Date"
+                                        component={DatePickerField}
+                                        classProp={classes.formInput}
+                                        changeDate={this.changeDate}
+                                    />
+                                )}
+
                                 <Button
                                     variant="contained"
                                     color="primary"
@@ -156,7 +162,7 @@ class UserSettingsForm extends PureComponent {
                 </Formik>
             );
         } else {
-            return <div>Loading</div>;
+            return <Loader />;
         }
     }
 }
