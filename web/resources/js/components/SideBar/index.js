@@ -4,8 +4,8 @@ import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import * as path from "../../constants/routes";
-
 import Drawer from "@material-ui/core/Drawer";
+import DateRangeIcon from "@material-ui/icons/DateRange";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -36,6 +36,7 @@ const SideBar = props => {
         avatar
     } = props;
     const userImage = avatar ? avatar : DefaultAvatar;
+    const status = user && user.role_id ? user.role_id : null;
     return (
         <Drawer
             variant="permanent"
@@ -85,6 +86,18 @@ const SideBar = props => {
                         </ListItem>
                     </Link>
                 ))}
+                {status && status !== 3 ? (
+                    <Link to={path.TEAM_CALENDAR}>
+                        <ListItem button className={classes.nav}>
+                            <ListItemIcon>
+                                <DateRangeIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={"Team Calendar"} />
+                        </ListItem>
+                    </Link>
+                ) : (
+                    ""
+                )}
             </List>
             <Divider />
             <List>

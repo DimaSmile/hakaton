@@ -5,7 +5,6 @@ import HomeIcon from "@material-ui/icons/Home";
 import UserIcon from "@material-ui/icons/People";
 import BirthdayIcon from "@material-ui/icons/Cake";
 
-
 export const navigationLinks = [
     {
         icon: <HomeIcon />,
@@ -19,7 +18,7 @@ export const navigationLinks = [
     },
     {
         icon: <DateRangeIcon />,
-        name: "My Vocation",
+        name: "My Vacation",
         route: route.MY_VOCATION
     },
     {
@@ -31,10 +30,5 @@ export const navigationLinks = [
         icon: <DateRangeIcon />,
         name: "Team Building",
         route: route.TEAM_BUILDING
-    },
-    {
-        icon: <DateRangeIcon />,
-        name: "Team Calendar",
-        route: route.TEAM_CALENDAR
     }
 ];
