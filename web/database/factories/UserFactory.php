@@ -33,7 +33,8 @@ $factory->define(User::class, function (Faker $faker) {
         'birthday' => $faker->dateTimeBetween('-30 years', '-15 years')->format('Y-m-d'),
         'start_working' => $start_working[0],
         'vacation_days' => floor($vacation_days),
-        'sick_days' => 5
+        'sick_days' => 5,
+        'tracker_status' => $faker->numberBetween(0, 1),
     ];
 });
 
@@ -53,6 +54,7 @@ $factory->defineAs(User::class, 'admin', function (Faker $faker) {
         'birthday' => $faker->dateTimeBetween('-50 years', '-40 years')->format('Y-m-d'),
         'start_working' => $start_working[0],
         'vacation_days' => floor($vacation_days),
-        'sick_days' => 5
+        'sick_days' => 5,
+        'tracker_status' => $faker->numberBetween(0, 1),
     ];
 });
