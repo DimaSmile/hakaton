@@ -16,6 +16,7 @@ import DatePickerField from "../../components/FormElems/DatePicker";
 import { Formik, Form, Field } from "formik";
 // import TextInput from "../../FormElems/TextInput";
 // import { UserSettingsSchema } from "./_validationSchema";
+import Close from "@material-ui/icons/Close";
 
 class MyVocation extends PureComponent {
     state = {
@@ -93,7 +94,14 @@ class MyVocation extends PureComponent {
                 </Grid>
                 <Modal open={showError} handleClose={this.closeErrorModal}>
                     <Card>
+                        <Close
+                            onClick={this.closeErrorModal}
+                            className={classes.close}
+                        />
                         <CardContent>
+                            <Typography variant="h5" className={classes.error}>
+                                Error
+                            </Typography>
                             <div>{this.state.errorText}</div>
                         </CardContent>
                     </Card>

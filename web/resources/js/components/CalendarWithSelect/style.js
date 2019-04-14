@@ -1,3 +1,5 @@
 export const styles = theme => ({
-    root: {}
+    title: {
+        marginBottom: 20
+    }
 });
