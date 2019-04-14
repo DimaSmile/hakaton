@@ -111,10 +111,10 @@ class MyVocation extends PureComponent {
                                 enableReinitialize={true}
                                 initialValues={{
                                     id: user && user.id ? user.id : "",
-                                    startDate: this.state.startDate
+                                    start: this.state.startDate
                                         ? this.state.startDate
                                         : "",
-                                    endDate: this.state.endDate
+                                    end: this.state.endDate
                                         ? this.state.endDate
                                         : ""
                                 }}
@@ -129,7 +129,7 @@ class MyVocation extends PureComponent {
                                         <Form>
                                             <Field
                                                 type="text"
-                                                name="startDate"
+                                                name="start"
                                                 label="Start Vocation"
                                                 component={DatePickerField}
                                                 classProp={classes.formInput}
@@ -137,7 +137,7 @@ class MyVocation extends PureComponent {
                                             />
                                             <Field
                                                 type="text"
-                                                name="endDate"
+                                                name="end"
                                                 label="End Vocation"
                                                 component={DatePickerField}
                                                 classProp={classes.formInput}

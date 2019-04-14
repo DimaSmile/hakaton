@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
-use App\{User, Event, UserActivites};
+use App\{User, Event, UserActivites ,Vacation};
+
 
 class PagesController extends Controller
 {
@@ -19,6 +20,9 @@ class PagesController extends Controller
             'button_status' => 'required',
         ],
         'team' => [
+            'token' => 'required',
+        ],
+        'vacation' => [
             'token' => 'required',
         ],
     ];
@@ -123,6 +127,50 @@ class PagesController extends Controller
         }
 
         $response = ['success'=>true, 'data'=>User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get()];
+
+        return response()->json($response, 201);
+    }
+
+    public function teamCalendar(Request $request) {
+        $validated    = Validator::make($request->all(), $this->validatedRules['team']);
+
+        if($validated->fails())
+        {
+            $response = ['success'=>false, 'data'=>['messages' => 'The given data was invalid.', 'errors' => $validated->errors()]];
+
+            return response()->json($response, 201);
+        }
+
+        $response = [
+            'success'       => true,
+            'user_data'     => User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get(),
+            'vacation_data' => Vacation::select('user_id','start','end'),
+            'team_data'     => Event::select('name','start','end','description', 'user_id'),
+        ];
+
+        return response()->json($response, 201);
+    }
+
+    public function setVacation(Request $request) {
+        $validated    = Validator::make($request->all(), $this->validatedRules['vacation']);
+
+        if($validated->fails())
+        {
+            $response = ['success'=>false, 'data'=>['messages' => 'The given data was invalid.', 'errors' => $validated->errors()]];
+
+            return response()->json($response, 201);
+        }
+        $payload = [
+            'user_id'   => $request->id,
+            'start'     => Carbon::parse($request->start)->format('Y-m-d H:i:s'),
+            'end'       => Carbon::parse($request->end)->format('Y-m-d H:i:s'),
+        ];
+
+        $vacation = new Vacation($payload);
+
+        $vacation->save();
+
+        $response = ['success'=>true, 'data'=>['start' => $vacation->start, 'end' => $vacation->end, 'user_id' => $vacation->user_id]];
 
         return response()->json($response, 201);
     }
