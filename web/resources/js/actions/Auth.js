@@ -2,6 +2,7 @@ import { authConstants as types } from "../constants/";
 import * as routes from "../constants/routes";
 import { authQueries } from "../queries/auth";
 import { history } from "../helpers/history";
+import Echo from "laravel-echo";
 
 export function registration(user) {
     return dispatch => {
@@ -120,6 +121,26 @@ export function verifyToken(token) {
 }
 
 export function LogOut() {
+    // console.log(1231232134)
+    // Echo.channel('channel')
+    // .listen('UserOnline', (e) => {
+    //     axios.post("http://localhost:8080/api/user/logout", user);
+    //     console.log(55544444455)
+    //     console.log(e)
+    // });
+    // axios.post("http://localhost:8080/api/user/logout", {
+    //     token: window.localStorage.getItem("auth_token"), 
+    //     // user: user
+    // });
+    // Echo.leave('channel')
+        // .leaving((user) => {
+        //     console.log(user)
+        // })
+    // Echo.join('channel')
+    //     .leaving((user) => {
+    //     // axios.put('/api/user/'+ user.id +'/offline?api_token=' + user.api_token, {});
+
+    // })
     return dispatch => {
         dispatch(logout());
         window.localStorage.removeItem("auth_token");

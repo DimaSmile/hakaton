@@ -12,44 +12,24 @@ import { styles } from "./style";
 
 class Team extends Component {
     componentDidMount() {
-        // this.props.usersListAction();
-        Echo.channel('channel')
-        .listen('UserOnline', (e) => {
-            console.log(55544444455)
-            console.log(e)
+        Pusher.logToConsole = true;
+        // Add API Key & cluster here to make the connection
+        var pusher = new Pusher('22228b2d68f08b618c6d', {
+            cluster: 'eu',
+            forceTLS: true
         });
 
-    // if (userId != 'null') {
-    //     Echo.join('Online')
-    //         .here((users) => {
-    //             this.onlineUsers = users;
-    //         })
-    //         .joining((user) => {
-    //             this.onlineUsers.push(user);
-    //         })
-    //         .leaving((user) => {
-    //             this.onlineUsers = this.onlineUsers.filter((u) => {u != user});
-    //         });
-    // }
-        // Echo.join('channel')
-        //     .here( e => console.log(1111111))
-        // // this.props.userInfoAction();
-        // Echo.join('dashboard')
-        //     // .joining((user) => {
-        //     //     axios.put('/api/user/'+ user.id +'/online?api_token=' + user.api_token, {});
-        //     // })
-        //     // .leaving((user) => {
-        //     //     axios.put('/api/user/'+ user.id +'/offline?api_token=' + user.api_token, {});
-        //     // })
-        //     .listen('UserOnline', (e) => {
-        //         console.log(88888888888888);
-        //         this.friend = e.user;
-        //     })
-        //     .listen('UserOffline', (e) => {
-        //         this.friend = e.user;
-        //     });
+        var channel = pusher.subscribe('dashboard');
+        channel.bind('my_event',
+        function(data) {
+            console.log(data);
+        });
+        // check if the user is subscribed to the above channel
+        channel.bind('pusher:subscription_succeeded', function(members) {
+            fetch('http://localhost:8080/api/isOnline/?token=' + window.localStorage.getItem("auth_token")+'&is_login=1');
+            console.log('successfully subscribed!');
+        });
     }
-
     render() {
         const { classes, users } = this.props;
         if (users) {

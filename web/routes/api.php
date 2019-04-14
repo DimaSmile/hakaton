@@ -83,8 +83,11 @@ Route::group(['middleware' => 'api-header'], function () {
     // Therefore the jwtMiddleware will be exclusive of them
     Route::post('user/login', 'UserController@login');
     Route::post('user/register', 'UserController@register');
+    Route::post('user/logout', 'UserController@logout');
     Route::post('user/save-profile', 'UserController@saveProfile');
     //Route::get('get-dashboad-info', 'DashBoardController@index');
 
 });
+Route::get('isOnline', 'UserController@isOnline');
+
 

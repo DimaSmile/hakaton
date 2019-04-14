@@ -15,6 +15,6 @@
 //     return (int) $user->id === (int) $id;
 // });
 
-Broadcast::channel('dashboard', function ($user) {
+Broadcast::channel('channel', function ($user) {
     return $user;
 });

@@ -41,9 +41,9 @@ class UserController extends Controller
         {
             $token = self::getToken($request->email, $request->password);
             $user->auth_token = $token;
-            $user->is_active = true;
             $user->save();
-            event(new UserOnline($user));
+            // event(new UserOnline($user));
+            // broadcast(new UserOnline($user))->toOthers();
             $response = [
                 'success' => true,
                 'data'    =>
@@ -202,6 +202,45 @@ class UserController extends Controller
 
 
         return response()->json($response, 201);
+    }
+
+    // public function isLogin() {
+
+    // }
+
+    public function isOnline(Request $request){
+        
+        if (is_object($request->all())) {
+            $token = $request->token;
+        } else {
+            $token = $request['token'];
+            $is_login = (boolean) $request['is_login'];
+        }
+        
+        
+        $user = \App\User::where('auth_token', $token);
+        $userId = \App\User::where('auth_token', $token)->select('id')->first();
+        $payload = [
+            'is_active'=> $is_login,
+        ];
+        $user->update($payload);
+        
+        $options = array(
+            'cluster' => 'eu',
+            'useTLS' => true
+          );
+          $pusher = new \Pusher\Pusher(
+            '22228b2d68f08b618c6d',
+            '2046ac874e96b7d7b674',
+            '761548',
+            $options
+          );
+        
+        if($pusher->trigger('dashboard', 'my_event', $userId->id)) {
+            // echo $user;
+        } else {
+            // echo 'error';
+        }
     }
 
 }
