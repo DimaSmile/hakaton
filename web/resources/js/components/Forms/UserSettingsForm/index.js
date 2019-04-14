@@ -15,10 +15,11 @@ import DatePickerField from "../../FormElems/DatePicker";
 
 import UserAvatar from "../../UserAvatar";
 import DefaultAvatar from "../../../images/defaultAvatar.png";
+import Loader from "../../Loader";
 
 class UserSettingsForm extends PureComponent {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             image: null,
             imageData: null
@@ -46,8 +47,23 @@ class UserSettingsForm extends PureComponent {
     }
     render() {
         const { classes, user, saveProfileInfo } = this.props;
-        const avatar = this.state.image ? this.state.image : DefaultAvatar;
+        let avatar;
+        if (this.state.image) {
+            avatar = this.state.image;
+        } else {
+            if (user && user.image) {
+                avatar = user.image;
+            } else {
+                avatar = DefaultAvatar;
+            }
+        }
         if (user) {
+            if (user.birthday) {
+                this.birthdayDate = new Date(user.birthday);
+            }
+            if (user.start_working) {
+                this.startDate = new Date(user.start_working);
+            }
             return (
                 <Formik
                     initialValues={{
@@ -55,6 +71,7 @@ class UserSettingsForm extends PureComponent {
                         userName: user.name,
                         password: "",
                         password2: "",
+                        position: "",
                         birthdayDate: this.birthdayDate,
                         startDate: this.startDate
                     }}
@@ -64,8 +81,6 @@ class UserSettingsForm extends PureComponent {
                         values.startDate = this.startDate;
                         values.avatar = this.state.imageData;
                         saveProfileInfo(values);
-                        console.log(values);
-                        console.log(this.state.imageData);
                     }}
                 >
                     {() => (
@@ -92,6 +107,13 @@ class UserSettingsForm extends PureComponent {
                                     classProp={classes.formInput}
                                 />
                                 <Field
+                                    type="text"
+                                    name="position"
+                                    label="Your position"
+                                    component={TextInput}
+                                    classProp={classes.formInput}
+                                />
+                                <Field
                                     type="password"
                                     name="password"
                                     label="New Password"
@@ -113,14 +135,19 @@ class UserSettingsForm extends PureComponent {
                                     classProp={classes.formInput}
                                     changeDate={this.changeDate}
                                 />
-                                <Field
-                                    type="text"
-                                    name="startDate"
-                                    label="Start Working Date"
-                                    component={DatePickerField}
-                                    classProp={classes.formInput}
-                                    changeDate={this.changeDate}
-                                />
+                                {user.start_working ? (
+                                    ""
+                                ) : (
+                                    <Field
+                                        type="text"
+                                        name="startDate"
+                                        label="Start Working Date"
+                                        component={DatePickerField}
+                                        classProp={classes.formInput}
+                                        changeDate={this.changeDate}
+                                    />
+                                )}
+
                                 <Button
                                     variant="contained"
                                     color="primary"
@@ -135,7 +162,7 @@ class UserSettingsForm extends PureComponent {
                 </Formik>
             );
         } else {
-            return <div>Loading</div>;
+            return <Loader />;
         }
     }
 }

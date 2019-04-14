@@ -1,26 +1,26 @@
-import { dashboardConstants as types } from "../constants";
+import { userInfoConstants as types } from "../constants";
 const initialState = {
-    dashboardData: null,
+    userInfoData: null,
     dataError: null,
     dataLoading: false
 };
 
-export function dashboard(state = initialState, action) {
+export function userInfo(state = initialState, action) {
     switch (action.type) {
-        case types.DASHBOARD_REQUEST_LOADING:
+        case types.USERINFO_REQUEST_LOADING:
             return {
                 ...state,
                 dataLoading: action.isLoading
             };
-        case types.DASHBOARD_FAILURE:
+        case types.USERINFO_FAILURE:
             return {
                 ...state,
                 dataError: action.errors
             };
-        case types.DASHBOARD_SUCCESS:
+        case types.USERINFO_SUCCESS:
             return {
                 ...state,
-                dashboardData: action.data
+                userInfoData: action.data
             };
 
         default:

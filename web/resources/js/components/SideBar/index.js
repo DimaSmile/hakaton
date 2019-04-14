@@ -26,7 +26,16 @@ import DefaultAvatar from "../../images/defaultAvatar.png";
 import { styles } from "./style";
 
 const SideBar = props => {
-    const { classes, open, handleDrawerClose, theme, user, logOut } = props;
+    const {
+        classes,
+        open,
+        handleDrawerClose,
+        theme,
+        user,
+        logOut,
+        avatar
+    } = props;
+    const userImage = avatar ? avatar : DefaultAvatar;
     return (
         <Drawer
             variant="permanent"
@@ -55,7 +64,7 @@ const SideBar = props => {
                 </IconButton>
             </div>
             <Divider />
-            <UserAvatar image={DefaultAvatar} />
+            <UserAvatar image={userImage} />
             <Typography
                 variant="h4"
                 gutterBottom
@@ -66,7 +75,7 @@ const SideBar = props => {
                     {user && user.name ? user.name : ""}
                 </span>
             </Typography>
-            <SwitchOnline/>
+            <SwitchOnline />
             <List>
                 {navigationLinks.map((link, index) => (
                     <Link to={link.route} key={link.name}>

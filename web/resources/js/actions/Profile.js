@@ -1,4 +1,4 @@
-import { authConstants as types } from "../constants/";
+import { profSettingsConstants as types } from "../constants/";
 import * as routes from "../constants/routes";
 import { saveProfile } from "../queries/profileInfo";
 import { history } from "../helpers/history";
@@ -11,9 +11,9 @@ export function saveProfileInfo(data) {
             .then(response => {
                 dispatch(RequestLoading(false));
                 if (response.data.success) {
-                    // console.log(response);
+                    dispatch(saveProfileInfoSuccess(response.data.data));
                 } else {
-                    // console.log(response);
+                    dispatch(saveProfileInfoFailure(response.data.errors));
                 }
             })
             .catch(function(error) {
@@ -21,15 +21,15 @@ export function saveProfileInfo(data) {
                 console.log(error);
             });
     };
-    function saveProfileInfoFailure(error) {
-        return { type: types.REGISTER_FAILURE, error };
+    function saveProfileInfoFailure(errors) {
+        return { type: types.PROFILE_SETTINGS_FAILURE, errors };
     }
-    function saveProfileInfoSuccess(user) {
-        return { type: types.REGISTER_SUCCESS, user };
+    function saveProfileInfoSuccess(data) {
+        return { type: types.PROFILE_SETTINGS_SUCCESS, data };
     }
     function RequestLoading(bool) {
         return {
-            type: types.REQUEST_LOADING,
+            type: types.PROFILE_SETTINGS_LOADING,
             isLoading: bool
         };
     }

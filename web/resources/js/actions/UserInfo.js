@@ -1,32 +1,31 @@
-import { usersListConstants as types } from "../constants/";
-import { userList } from "../queries/usersList";
+import { userInfoConstants as types } from "../constants/";
+import { userInfo } from "../queries/userInfo";
 
-export function usersListAction() {
+export function userInfoAction() {
     return dispatch => {
         dispatch(RequestLoading(true));
-        userList()
+        userInfo()
             .then(response => {
                 dispatch(RequestLoading(false));
                 if (response.data.success) {
-                    dispatch(userListFSuccess(response.data.data));
+                    dispatch(userListSuccess(response.data.data));
                 } else {
                     dispatch(userListFailure(response.data.errors));
                 }
             })
             .catch(function(error) {
                 dispatch(RequestLoading(false));
-                console.log(error);
             });
     };
     function userListFailure(error) {
-        return { type: types.USERSLIST_FAILURE, error };
+        return { type: types.USERINFO_FAILURE, error };
     }
-    function userListFSuccess(users) {
-        return { type: types.USERSLIST_SUCCESS, users };
+    function userListSuccess(data) {
+        return { type: types.USERINFO_SUCCESS, data };
     }
     function RequestLoading(bool) {
         return {
-            type: types.USERLIST_REQUEST_LOADING,
+            type: types.USERINFO_REQUEST_LOADING,
             isLoading: bool
         };
     }
