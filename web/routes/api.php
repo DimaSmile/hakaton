@@ -77,6 +77,7 @@ Route::group(['middleware' => ['jwt.auth','api-header']], function () {
     Route::post('get-team-info', 'PagesController@team');
     Route::post('get-team-calendar-info', 'PagesController@teamCalendar');
     Route::post('set-vacation', 'PagesController@setVacation');
+    Route::post('get-unapproved-vacation', 'PagesController@getUnapprovedVacation');
 });
 Route::group(['middleware' => 'api-header'], function () {
 
