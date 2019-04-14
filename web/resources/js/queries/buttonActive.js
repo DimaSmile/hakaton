@@ -7,6 +7,5 @@ export function buttonActive(id, status) {
         id: id,
         status: status
     };
-    console.log(data);
     return axios.post(apiUrl.BUTTONACTIVE, data);
 }

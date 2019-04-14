@@ -86,10 +86,10 @@ class TeamCalendar extends Component {
     componentDidMount() {
         this.props.teamCalendarAction();
     }
+
     handleChange = (event, value) => {
         this.setState({ value });
     };
-
     render() {
         const { classes, dataUser, dataEvents } = this.props;
         const { value, user } = this.state;
