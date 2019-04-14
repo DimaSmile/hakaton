@@ -5,6 +5,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Vacation::class, function (Faker $faker) {
     return [
+        'user_id'  => $faker->numberBetween(1, 10),
         'start'    => $faker->dateTimeBetween('-30 days', '+30 days'),
         'end'      => $faker->dateTimeBetween('+30 days', '+60 days'),
         'approved' => $faker->numberBetween(0, 1),

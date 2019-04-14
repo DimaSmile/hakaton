@@ -15,6 +15,7 @@ class CreateVacationsTable extends Migration
     {
         Schema::create('vacations', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id');
             $table->dateTime('start')->nullable();
             $table->dateTime('end')->nullable();
             $table->boolean('approved')->default(false);

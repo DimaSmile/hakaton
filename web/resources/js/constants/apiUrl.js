@@ -5,5 +5,7 @@ export const apiUrl = {
     PROFILE_DATA: "http://localhost:8080/api/user/save-profile",
     USERS: "http://localhost:8080/api/users/list?token=",
     DASHBOARD: "http://localhost:8080/api/get-dashboad-info",
-    USERINFO: "http://localhost:8080/api/get-team-info"
+    USERINFO: "http://localhost:8080/api/get-team-info",
+    sendVocation: "http://localhost:8080/api/set-vacation",
+    BUTTONACTIVE: "http://localhost:8080/api/get-track-info"
 };

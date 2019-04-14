@@ -14,8 +14,6 @@ import TeamBuilding from "../TeamBuilding";
 import TeamCalendar from "../TeamCalendar";
 import UserSettings from "../UserSettings";
 
-import Loader from '../../components/Loader';
-
 const App = props => (
     <Switch location={props.location}>
         <Route exact path={path.HOME} component={Dashboard} />
@@ -27,7 +25,6 @@ const App = props => (
                 <Route exact path={path.TEAM} component={Team} />
                 <Route exact path={path.MY_VOCATION} component={MyVocation} />
                 <Route exact path={path.BIRTHDAYS} component={Birthdays} />
-                <Route exact path={path.LOADER} component={Loader} />
                 <Route
                     exact
                     path={path.TEAM_BUILDING}

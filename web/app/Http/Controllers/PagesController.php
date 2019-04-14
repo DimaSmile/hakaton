@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
-use App\{User, Event, UserActivites};
+use App\{User, Event, UserActivites ,Vacation};
+
 
 class PagesController extends Controller
 {
@@ -15,19 +16,23 @@ class PagesController extends Controller
         ],
         'trackTime' => [
             'token'         => 'required',
-            'user_id'       => 'required',
-            'button_status' => 'required',
+            'id'       => 'required',
+            'status' => 'required',
         ],
         'team' => [
+            'token' => 'required',
+        ],
+        'vacation' => [
             'token' => 'required',
         ],
     ];
 
     public function dashboard(Request $request)
     {
+
         $validated    = Validator::make($request->all(), $this->validatedRules['dashboard']);
         $result       = [];
-
+        //var_dump($request->all());exit;
         if($validated->fails())
         {
             $response = ['success'=>false, 'data'=>'Token is not found'];
@@ -42,7 +47,7 @@ class PagesController extends Controller
         $userData['graphics_info']      = $this->getUserActivites($userData->id);
         
         $response = ['success'=>true, 'data'=> $userData];
-        
+
 
         return response()->json($response, 201);
     }
@@ -50,25 +55,25 @@ class PagesController extends Controller
     public function trackTime(Request $request) {
         $validated    = Validator::make($request->all(), $this->validatedRules['trackTime']);
         $result       = [];
-        
+       // var_dump($request->all());exit;
         if($validated->fails())
         {
             $response = ['success'=>false, 'data'=>'Token is not found'];
             return response()->json($response, 201);
         }
 
-        if ($request->button_status) 
+        if ($request->status) 
         {
             $date = date("Y-m-d H:i:s");
             //$this->dd($date);exit;
             $payload = [
-                'user_id' => $request->user_id,
+                'user_id' => $request->id,
                 'start' => $date
             ];
             $tracker = new UserActivites($payload);
             $tracker->save();
 
-            $startTracker = User::find($request->user_id);
+            $startTracker = User::find($request->id);
             $startTracker->update(['tracker_status' => 1]);
             $startTracker->save();
             // $this->dd($startTracker->tracker_status);
@@ -77,13 +82,14 @@ class PagesController extends Controller
         {
             $date = date("Y-m-d H:i:s");
             $trackStatus = UserActivites::where([
-                     ['user_id', '=', $request->user_id],
+                     ['user_id', '=', $request->id],
                      ['end', '=',  null]
                      ])->first();
+
             $trackStatus->end = $date;
             $trackStatus->save();
 
-            $endTracker = User::find($request->user_id);
+            $endTracker = User::find($request->id);
             $endTracker->update(['tracker_status' => 0]);
             $endTracker->save();
 
@@ -123,6 +129,65 @@ class PagesController extends Controller
         }
 
         $response = ['success'=>true, 'data'=>User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get()];
+
+        return response()->json($response, 201);
+    }
+
+    public function teamCalendar(Request $request) {
+        $validated    = Validator::make($request->all(), $this->validatedRules['team']);
+
+        if($validated->fails())
+        {
+            $response = ['success'=>false, 'data'=>['messages' => 'The given data was invalid.', 'errors' => $validated->errors()]];
+
+            return response()->json($response, 201);
+        }
+
+        $response = [
+            'success'       => true,
+            'user_data'     => User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get(),
+            'vacation_data' => Vacation::select('user_id','start','end'),
+            'team_data'     => Event::select('name','start','end','description', 'user_id'),
+        ];
+
+        return response()->json($response, 201);
+    }
+
+    public function setVacation(Request $request) {
+        $validated    = Validator::make($request->all(), $this->validatedRules['vacation']);
+
+        if($validated->fails())
+        {
+            $response = ['success'=>false, 'data'=>['messages' => 'The given data was invalid.', 'errors' => $validated->errors()]];
+
+            return response()->json($response, 201);
+        }
+        $payload = [
+            'user_id'   => $request->id,
+            'start'     => Carbon::parse($request->start)->format('Y-m-d H:i:s'),
+            'end'       => Carbon::parse($request->end)->format('Y-m-d H:i:s'),
+        ];
+
+        $vacation = new Vacation($payload);
+
+        $vacation->save();
+
+        $response = ['success'=>true, 'data'=>['start' => $vacation->start, 'end' => $vacation->end, 'user_id' => $vacation->user_id]];
+
+        return response()->json($response, 201);
+    }
+
+    public function getUnapprovedVacation(Request $request) {
+        $validated    = Validator::make($request->all(), $this->validatedRules['vacation']);
+
+        if($validated->fails())
+        {
+            $response = ['success'=>false, 'data'=>['messages' => 'The given data was invalid.', 'errors' => $validated->errors()]];
+
+            return response()->json($response, 201);
+        }
+
+        $response = ['success'=>true, 'data' => Vacation::where('approved', 0)];
 
         return response()->json($response, 201);
     }

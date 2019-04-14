@@ -8,6 +8,10 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import AddEvent from "../../components/AddEvent";
+import { connect } from "react-redux";
+import Loader from "../../components/Loader";
+import { history } from "../../helpers/history";
+import * as path from "../../constants/routes";
 
 import { styles } from "./style";
 
@@ -53,108 +57,121 @@ class TeamCalendar extends Component {
             }
         ]
     };
-
     handleChange = (event, value) => {
         this.setState({ value });
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes, dataUser } = this.props;
         const { value, user } = this.state;
-        return (
-            <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                    <AppBar
-                        position="static"
-                        color="default"
-                        className={classes.bar}
-                    >
-                        <Tabs
-                            value={value}
-                            onChange={this.handleChange}
-                            indicatorColor="primary"
-                            textColor="primary"
-                            scrollButtons="auto"
+        console.log(dataUser);
+        if (dataUser && dataUser.role_id) {
+            if (dataUser.role_id === 3) {
+                history.push(path.DASHBOARD_HOME);
+            }
+            return (
+                <Card className={classes.card}>
+                    <CardContent className={classes.cardContent}>
+                        <AppBar
+                            position="static"
+                            color="default"
+                            className={classes.bar}
                         >
-                            <Tab label="All" />
-                            <Tab label="Vocations" />
-                            <Tab label="Birthdays" />
-                            <Tab label="Team Building" />
-                        </Tabs>
-                    </AppBar>
-                    {value === 0 && (
-                        <TabContainer>
-                        <div className={classes.container} >
-                            {user.map((item, index) => {
-                                return (
-                                    <AddEvent
-                                        key={index}
-                                        name={item.name}
-                                        description={item.description}
-                                        date={item.date}
-                                    />
-                                );
-                            })}
-                            </div>
-                        </TabContainer>
-                    )}
-                    {value === 1 && (
-                        <TabContainer >
-                             <div className={classes.container} >
-                            {user.map((item, index) => {
-                                if (item.category == "vocation") {
-                                    return (
-                                        <AddEvent
-                                            key={index}
-                                            name={item.name}
-                                            description={item.description}
-                                            date={item.date}
-                                        />
-                                    );
-                                }
-                            })}
-                            </div>
-                        </TabContainer>
-                    )}
-                    {value === 2 && (
-                        <TabContainer>
-                            <div className={classes.container} >
-                            {user.map((item, index) => {
-                                if (item.category == "birthdays") {
-                                    return (
-                                        <AddEvent
-                                            key={index}
-                                            name={item.name}
-                                            description={item.description}
-                                            date={item.date}
-                                        />
-                                    );
-                                }
-                            })}
-                            </div>
-                        </TabContainer>
-                    )}
-                    {value === 3 && (
-                        <TabContainer>
-                             <div className={classes.container} >
-                            {user.map((item, index) => {
-                                if (item.category == "team_building") {
-                                    return (
-                                        <AddEvent
-                                            key={index}
-                                            name={item.name}
-                                            description={item.description}
-                                            date={item.date}
-                                        />
-                                    );
-                                }
-                            })}
-                            </div>
-                        </TabContainer>
-                    )}
-                </CardContent>
-            </Card>
-        );
+                            <Tabs
+                                value={value}
+                                onChange={this.handleChange}
+                                indicatorColor="primary"
+                                textColor="primary"
+                                scrollButtons="auto"
+                            >
+                                <Tab label="All" />
+                                <Tab label="Vocations" />
+                                <Tab label="Birthdays" />
+                                <Tab label="Team Building" />
+                            </Tabs>
+                        </AppBar>
+                        {value === 0 && (
+                            <TabContainer>
+                                <div className={classes.container}>
+                                    {user.map((item, index) => {
+                                        return (
+                                            <AddEvent
+                                                key={index}
+                                                name={item.name}
+                                                description={item.description}
+                                                date={item.date}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                            </TabContainer>
+                        )}
+                        {value === 1 && (
+                            <TabContainer>
+                                <div className={classes.container}>
+                                    {user.map((item, index) => {
+                                        if (item.category == "vocation") {
+                                            return (
+                                                <AddEvent
+                                                    key={index}
+                                                    name={item.name}
+                                                    description={
+                                                        item.description
+                                                    }
+                                                    date={item.date}
+                                                />
+                                            );
+                                        }
+                                    })}
+                                </div>
+                            </TabContainer>
+                        )}
+                        {value === 2 && (
+                            <TabContainer>
+                                <div className={classes.container}>
+                                    {user.map((item, index) => {
+                                        if (item.category == "birthdays") {
+                                            return (
+                                                <AddEvent
+                                                    key={index}
+                                                    name={item.name}
+                                                    description={
+                                                        item.description
+                                                    }
+                                                    date={item.date}
+                                                />
+                                            );
+                                        }
+                                    })}
+                                </div>
+                            </TabContainer>
+                        )}
+                        {value === 3 && (
+                            <TabContainer>
+                                <div className={classes.container}>
+                                    {user.map((item, index) => {
+                                        if (item.category == "team_building") {
+                                            return (
+                                                <AddEvent
+                                                    key={index}
+                                                    name={item.name}
+                                                    description={
+                                                        item.description
+                                                    }
+                                                    date={item.date}
+                                                />
+                                            );
+                                        }
+                                    })}
+                                </div>
+                            </TabContainer>
+                        )}
+                    </CardContent>
+                </Card>
+            );
+        } else {
+            return <Loader />;
+        }
     }
 }
 
@@ -162,4 +179,15 @@ TeamCalendar.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TeamCalendar);
+const mapStateToProps = state => {
+    return {
+        dataUser: state.user.user
+    };
+};
+
+const connector = connect(
+    mapStateToProps,
+    null
+);
+
+export default connector(withStyles(styles)(TeamCalendar));
