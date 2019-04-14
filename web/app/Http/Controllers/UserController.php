@@ -161,6 +161,9 @@ class UserController extends Controller
             if($request['password']){
                 $payload['password'] = \Hash::make($request['password']);
             }
+            if($request['position']){
+                $payload['position'] = $request['position'];
+            }
         } else {
             $payload = [
                 'name'          => $request->userName,
@@ -177,6 +180,9 @@ class UserController extends Controller
             }
             if($request->password){
                 $payload['password'] = \Hash::make($request->password);
+            }
+            if($request->position){
+                $payload['position'] = $request->position;
             }
         }
 

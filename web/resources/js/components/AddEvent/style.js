@@ -1,6 +1,6 @@
 export const styles = theme => ({
     card: {
-        width: "25%",
+        width: "200px",
         margin: 10,
         cursor: "pointer"
     },

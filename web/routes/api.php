@@ -79,6 +79,7 @@ Route::group(['middleware' => ['jwt.auth','api-header']], function () {
     Route::post('set-vacation', 'PagesController@setVacation');
     Route::post('get-track-info', 'PagesController@trackTime');
     Route::post('get-unapproved-vacation', 'PagesController@getUnapprovedVacation');
+    Route::post('get-vacations', 'PagesController@getVacations');
 });
 Route::group(['middleware' => 'api-header'], function () {
 

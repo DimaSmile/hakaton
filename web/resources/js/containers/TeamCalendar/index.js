@@ -93,12 +93,13 @@ class TeamCalendar extends Component {
     render() {
         const { classes, dataUser, dataEvents } = this.props;
         const { value, user } = this.state;
+        console.log(dataEvents);
         if (dataUser && dataUser.role_id && dataEvents) {
             if (dataUser.role_id === 3) {
                 history.push(path.DASHBOARD_HOME);
             }
             const data = [];
-            dataEvents.user_data.forEach(item => {
+            dataEvents.forEach(item => {
                 let itemData = {};
                 itemData.category = 'birthdays';
                 itemData.name = item.name;
@@ -107,21 +108,21 @@ class TeamCalendar extends Component {
                 data.push(itemData)
             });
 
-            dataEvents.team_data.forEach(item => {
+            dataEvents.forEach(item => {
                 let itemData = {};
                 itemData.category = 'team_building';
                 // itemData.name = item.name;
                 itemData.description = 'date of event';
-                itemData.date = item.start + '-' + item.end;
+                itemData.date = item.event_start + '-' + item.event_end;
                 data.push(itemData)
             });
 
-            dataEvents.vacation_data.forEach(item => {
+            dataEvents.forEach(item => {
                 let itemData = {};
                 itemData.category = 'vocation';
                 // itemData.name = item.name;
                 itemData.description = 'period of vacation';
-                itemData.date = item.start + '-' + item.end;
+                itemData.date = item.vacation_start + '-' + item.vacation_end;
                 data.push(itemData)
             });
 

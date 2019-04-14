@@ -25,6 +25,10 @@ class PagesController extends Controller
         'vacation' => [
             'token' => 'required',
         ],
+        'get_vacation' => [
+            'token' => 'required',
+            'id' => 'required',
+        ],
     ];
 
     public function dashboard(Request $request)
@@ -138,13 +142,36 @@ class PagesController extends Controller
             return response()->json($response, 201);
         }
 
+        $usersData = User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get();
+        $responseData = [];
+        foreach ($usersData as $userData) {
+            $userVacation = Vacation::where('user_id',$userData->id)->first();
+            $userEvent = Event::where('user_id',$userData->id)->first();
+            $responseData[] = [
+                'name'              => $userData->name,
+                'position'          => $userData->position,
+                'image'             => $userData->image,
+                'start_working'     => $userData->start_working,
+                'birthday'          => $userData->birthday,
+                'role_id'           => $userData->role_id,
+                'event_name'        => is_object($userEvent) ? $userEvent->name : '',
+                'event_start'       => is_object($userEvent) ? $userEvent->start : '',
+                'event_end'         => is_object($userEvent) ? $userEvent->end : '',
+                'event_description' => is_object($userEvent) ? $userEvent->description : "",
+                'vacation_start'    => is_object($userVacation) ? $userVacation->start : '',
+                'vacation_end'      => is_object($userVacation) ? $userVacation->end : '',
+            ];
+
+        }
+
         $response = [
             'success' => true,
-            'data'    => [
-                'user_data'     => User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get(),
-                'vacation_data' => Vacation::get(),
-                'team_data'     => Vacation::get()
-            ],
+//            'data'    => [
+//                'user_data'     => User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get(),
+//                'vacation_data' => Vacation::get(),
+//                'team_data'     => Event::get()
+//            ],
+            'data'   => $responseData
         ];
 
         return response()->json($response, 201);
@@ -170,6 +197,31 @@ class PagesController extends Controller
         $vacation->save();
 
         $response = ['success'=>true, 'data'=>['start' => $vacation->start, 'end' => $vacation->end, 'user_id' => $vacation->user_id]];
+
+        return response()->json($response, 201);
+    }
+
+    public function getVacations(Request $request) {
+        $validated    = Validator::make($request->all(), $this->validatedRules['get_vacation']);
+
+        if($validated->fails())
+        {
+            $response = ['success'=>false, 'data'=>['messages' => 'The given data was invalid.', 'errors' => $validated->errors()]];
+
+            return response()->json($response, 201);
+        }
+
+
+        $vacations = Vacation::where('approved',1)->get();
+        $userVacation = Vacation::where('user_id',$request->id)->first();
+
+        $response = [
+            'success'   => true,
+            'data'      => [
+                'vacations'    => $vacations,
+                'userVacation' => $userVacation
+            ]
+        ];
 
         return response()->json($response, 201);
     }
