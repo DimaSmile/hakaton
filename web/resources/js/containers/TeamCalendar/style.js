@@ -4,5 +4,11 @@ export const styles = theme => ({
     },
     cardContent: {
         borderRadius: 0
+    },
+    bar: {
+        height: "auto",
+    },
+    container: {
+        display: "flex",
     }
 });
