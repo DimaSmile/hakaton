@@ -12,6 +12,8 @@ import { connect } from "react-redux";
 import Loader from "../../components/Loader";
 import { history } from "../../helpers/history";
 import * as path from "../../constants/routes";
+import { teamCalendarAction } from "../../actions/TeamCalendar";
+import { bindActionCreators } from "redux";
 
 import { styles } from "./style";
 
@@ -32,7 +34,7 @@ class TeamCalendar extends Component {
         value: 0,
         user: [
             {
-                name: "Alex",
+                name: "Alex rgkdfiogdfi",
                 category: "vocation",
                 description: "ddddddddddddddddddddddddddd",
                 date: "01.05.2048"
@@ -57,6 +59,9 @@ class TeamCalendar extends Component {
             }
         ]
     };
+    componentDidMount() {
+        this.props.teamCalendarAction();
+    }
     handleChange = (event, value) => {
         this.setState({ value });
     };
@@ -64,7 +69,6 @@ class TeamCalendar extends Component {
     render() {
         const { classes, dataUser } = this.props;
         const { value, user } = this.state;
-        console.log(dataUser);
         if (dataUser && dataUser.role_id) {
             if (dataUser.role_id === 3) {
                 history.push(path.DASHBOARD_HOME);
@@ -181,13 +185,19 @@ TeamCalendar.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        dataUser: state.user.user
+        dataUser: state.user.user,
+        dataEvents: state.teamCalendar.teamCalendarData
     };
 };
 
+const mapDispatchToProps = dispatch => ({
+    teamCalendarAction: bindActionCreators(teamCalendarAction, dispatch),
+    dispatch
+});
+
 const connector = connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 );
 
 export default connector(withStyles(styles)(TeamCalendar));

@@ -6,7 +6,7 @@ import { userSettings } from "./profileSettings";
 import { userInfo } from "./userInfo";
 import { vocation } from "./vocation";
 import { buttonActive } from "./buttonActive";
-
+import { teamCalendar } from "./teamCalendar";
 
 export default combineReducers({
     user,
@@ -15,5 +15,6 @@ export default combineReducers({
     userSettings,
     userInfo,
     vocation,
-    buttonActive
+    buttonActive,
+    teamCalendar
 });

@@ -10,3 +10,4 @@ export * from "./profileSettings";
 export * from "./userInfo";
 export * from "./vocation";
 export * from "./buttonActive";
+export * from "./teamCalendar";

@@ -2,7 +2,6 @@ import { vocationonstants as types } from "../constants/vocation";
 import { sendVocation } from "../queries/vocation";
 
 export function sendVocationAction(data) {
-    console.log("1");
     return dispatch => {
         dispatch(sendVocationLoading(true));
         sendVocation(data)
