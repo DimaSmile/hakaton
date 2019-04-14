@@ -11,17 +11,33 @@ import { dashboardAction } from "../../actions/Dashboard";
 import { styles } from "./style";
 import CalendarWithSelect from "../../components/CalendarWithSelect";
 import Modal from "../../components/Modal";
+import Button from "@material-ui/core/Button";
+import DatePickerField from "../../components/FormElems/DatePicker";
+import { Formik, Form, Field } from "formik";
+// import TextInput from "../../FormElems/TextInput";
+// import { UserSettingsSchema } from "./_validationSchema";
 
 class MyVocation extends PureComponent {
     state = {
         showError: false,
-        errorText: ""
+        showConfirmation: false,
+        errorText: "",
+        startDate: null,
+        endDate: null
     };
     handleShowError = error => {
         console.log("1");
         this.setState({
             showError: true,
             errorText: error
+        });
+    };
+    handleshowConfirmation = (start, end) => {
+        console.log("1");
+        this.setState({
+            showConfirmation: true,
+            startDate: start,
+            endDate: end
         });
     };
     componentDidMount() {
@@ -32,9 +48,14 @@ class MyVocation extends PureComponent {
             showError: false
         });
     };
+    closeConfirmation = () => {
+        this.setState({
+            showConfirmation: false
+        });
+    };
     render() {
         const { classes, data, user } = this.props;
-        const { showError } = this.state;
+        const { showError, showConfirmation } = this.state;
         const startWorking =
             user && user.start_working ? user.start_working : false;
         const vacation_days = data ? data.vacation_days : "";
@@ -46,6 +67,9 @@ class MyVocation extends PureComponent {
                             <CalendarWithSelect
                                 startWorking={startWorking}
                                 handleShowError={this.handleShowError}
+                                handleshowConfirmation={
+                                    this.handleshowConfirmation
+                                }
                             />
                         </CardContent>
                     </Card>
@@ -71,6 +95,63 @@ class MyVocation extends PureComponent {
                     <Card>
                         <CardContent>
                             <div>{this.state.errorText}</div>
+                        </CardContent>
+                    </Card>
+                </Modal>
+                <Modal
+                    open={showConfirmation}
+                    handleClose={this.closeConfirmation}
+                >
+                    <Card>
+                        <CardContent>
+                            <Formik
+                                enableReinitialize={true}
+                                initialValues={{
+                                    id: user && user.id ? user.id : "",
+                                    startDate: this.state.startDate
+                                        ? this.state.startDate
+                                        : "",
+                                    endDate: this.state.endDate
+                                        ? this.state.endDate
+                                        : ""
+                                }}
+                                onSubmit={values => {
+                                    console.log(values);
+                                }}
+                            >
+                                {() => (
+                                    <div
+                                        className={"form-block " + classes.root}
+                                    >
+                                        <Form>
+                                            <Field
+                                                type="text"
+                                                name="startDate"
+                                                label="Start Vocation"
+                                                component={DatePickerField}
+                                                classProp={classes.formInput}
+                                                disabled={true}
+                                            />
+                                            <Field
+                                                type="text"
+                                                name="endDate"
+                                                label="End Vocation"
+                                                component={DatePickerField}
+                                                classProp={classes.formInput}
+                                                disabled={true}
+                                            />
+                                            <Button
+                                                variant="contained"
+                                                color="primary"
+                                                className={classes.submitButton}
+                                                type="submit"
+                                            >
+                                                Submit
+                                            </Button>
+                                        </Form>
+                                    </div>
+                                )}
+                            </Formik>
                         </CardContent>
                     </Card>
                 </Modal>

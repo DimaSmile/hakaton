@@ -42,6 +42,8 @@ class CalendarWithSelect extends Component {
                 "Not evaliable date! You can select from " +
                 formatDate(this.startDate);
             this.props.handleShowError(message);
+        } else {
+            this.props.handleshowConfirmation(start, end);
         }
     };
     render() {
