@@ -7,8 +7,15 @@ export const styles = theme => ({
             borderBottom: "2px solid #000",
             paddingBottom: "0px"
         },
+        "& .react-datepicker-wrapper":{
+            width: "100%"
+        },
+        "& .react-datepicker__input-container": {
+            width: "100%"
+        },
         "& .react-datepicker__input-container input": {
-            border: "none"
+            border: "none",
+            width: "100%"
         },
         "& .react-datepicker__header": {
             background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"

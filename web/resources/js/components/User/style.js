@@ -1,10 +1,9 @@
 export const styles = theme => ({
     root: {
-        width: "18%",
+        width: "20%",
         display: "flex",
     },
     card: {
-        // width: "18%",
         textAlign: "center",
         margin: 10,
         position: "relative",

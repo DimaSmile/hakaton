@@ -17,7 +17,7 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import OutIcon from "@material-ui/icons/AssignmentReturn";
 import SettingsIcon from "@material-ui/icons/Settings";
-import SwitchOnline from "../SwitchOnline";
+import SwitchOnline from "../../containers/SwitchOnline";
 
 import UserAvatar from "../UserAvatar";
 

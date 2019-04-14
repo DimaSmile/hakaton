@@ -31,4 +31,14 @@ export const styles = theme => ({
         cursor: "pointer",
         color: theme.palette.primary.dark,
     },
+    modal: {
+        width: 300,
+    },
+    formInput: {
+        width: "100%",
+    },
+    submitButton: {
+        marginBottom: 20,
+        float: "right",
+    }
 });
