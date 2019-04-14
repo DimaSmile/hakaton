@@ -27,6 +27,11 @@ $factory->define(User::class, function (Faker $faker) {
         1 => 'Php Developer',
         2 => 'Front-end Developer'
     ];
+    $images = [
+        0 => null,
+        1 => 'https://blogcdn1.secureserver.net/wp-content/uploads/2014/06/create-a-gravatar-beard.png',
+        2 => 'https://ichef.bbci.co.uk/news/660/cpsprodpb/FD27/production/_101970846_aubreyblanche.jpg'
+    ];
 
     return [
         'name' => $faker->name,
@@ -39,7 +44,8 @@ $factory->define(User::class, function (Faker $faker) {
         'start_working' => $start_working[0],
         'vacation_days' => floor($vacation_days),
         'sick_days' => 5,
-        'position' => $positions[$faker->numberBetween(0, 2)]
+        'position' => $positions[$faker->numberBetween(0, 2)],
+        'image' => $images[$faker->numberBetween(0, 2)]
     ];
 });
 
