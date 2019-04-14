@@ -49,7 +49,9 @@ class UserController extends Controller
                         'image'         => $user->image,
                         'birthday'      => $user->birthday,
                         'start_working' => $user->start_working,
-                        'vacation_days' => $user->vacation_days
+                        'vacation_days' => $user->vacation_days,
+                        'tracker_status'=> $user->tracker_status,
+                        'role_id'       => $user->role_id
                     ]
             ];
         }

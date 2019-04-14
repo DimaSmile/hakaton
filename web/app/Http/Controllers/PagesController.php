@@ -16,8 +16,8 @@ class PagesController extends Controller
         ],
         'trackTime' => [
             'token'         => 'required',
-            'user_id'       => 'required',
-            'button_status' => 'required',
+            'id'       => 'required',
+            'status' => 'required',
         ],
         'team' => [
             'token' => 'required',
@@ -29,9 +29,10 @@ class PagesController extends Controller
 
     public function dashboard(Request $request)
     {
+
         $validated    = Validator::make($request->all(), $this->validatedRules['dashboard']);
         $result       = [];
-
+        //var_dump($request->all());exit;
         if($validated->fails())
         {
             $response = ['success'=>false, 'data'=>'Token is not found'];
@@ -46,7 +47,7 @@ class PagesController extends Controller
         $userData['graphics_info']      = $this->getUserActivites($userData->id);
         
         $response = ['success'=>true, 'data'=> $userData];
-        
+
 
         return response()->json($response, 201);
     }
@@ -54,25 +55,25 @@ class PagesController extends Controller
     public function trackTime(Request $request) {
         $validated    = Validator::make($request->all(), $this->validatedRules['trackTime']);
         $result       = [];
-        
+       // var_dump($request->all());exit;
         if($validated->fails())
         {
             $response = ['success'=>false, 'data'=>'Token is not found'];
             return response()->json($response, 201);
         }
 
-        if ($request->button_status) 
+        if ($request->status) 
         {
             $date = date("Y-m-d H:i:s");
             //$this->dd($date);exit;
             $payload = [
-                'user_id' => $request->user_id,
+                'user_id' => $request->id,
                 'start' => $date
             ];
             $tracker = new UserActivites($payload);
             $tracker->save();
 
-            $startTracker = User::find($request->user_id);
+            $startTracker = User::find($request->id);
             $startTracker->update(['tracker_status' => 1]);
             $startTracker->save();
             // $this->dd($startTracker->tracker_status);
@@ -81,13 +82,14 @@ class PagesController extends Controller
         {
             $date = date("Y-m-d H:i:s");
             $trackStatus = UserActivites::where([
-                     ['user_id', '=', $request->user_id],
+                     ['user_id', '=', $request->id],
                      ['end', '=',  null]
                      ])->first();
+
             $trackStatus->end = $date;
             $trackStatus->save();
 
-            $endTracker = User::find($request->user_id);
+            $endTracker = User::find($request->id);
             $endTracker->update(['tracker_status' => 0]);
             $endTracker->save();
 
