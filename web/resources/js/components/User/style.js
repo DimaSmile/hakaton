@@ -46,9 +46,10 @@ export const styles = theme => ({
     },
     close: {
         position: "absolute",
-        top: 0,
-        right: 0,
-        cursor: "pointer"
+        top: 5,
+        right: 5,
+        cursor: "pointer",
+        color: theme.palette.primary.dark,
     },
     formInput: {
         width: "100%",

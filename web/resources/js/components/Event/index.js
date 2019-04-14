@@ -15,7 +15,7 @@ class Event extends Component {
         const { classes, nextEvent } = this.props;
         if (nextEvent) {
             return (
-                <div className={classes.nextEvent}>
+                <Card className={classes.nextEvent}>
                     <Typography className={classes.next_event} variant="h5">
                         Next Event
                     </Typography>
@@ -31,7 +31,7 @@ class Event extends Component {
                     <Typography className={classes.title_event} variant="h4">
                         {nextEvent.current_birthday}
                     </Typography>
-                </div>
+                </Card>
             );
         } else {
             return <Loader />;

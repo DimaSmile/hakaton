@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         factory(App\User::class, 'admin', 1)->create();
         factory(App\Event::class, 10)->create();
         factory(App\Vacation::class, 10)->create();
+        factory(App\UserActivites::class, 10)->create();
+        
 
         for ($i = 1; $i <= 10; $i++ ) {
             DB::table('user_vacation')->insert([

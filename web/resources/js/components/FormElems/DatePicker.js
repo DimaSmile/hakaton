@@ -25,6 +25,7 @@ class DatePickerField extends React.Component {
             classProp,
             variant,
             field,
+            disabled,
             form: { touched, errors },
             ...props
         } = this.props;
@@ -33,6 +34,7 @@ class DatePickerField extends React.Component {
                 <label className={classes.label}>{label}</label>
                 <div className={classes.root}>
                     <DatePicker
+                        disabled={disabled}
                         selected={this.state.dateVal}
                         onChange={this.handleChange}
                     />
