@@ -56,6 +56,30 @@ class TeamCalendar extends Component {
                 category: "team_building",
                 description: "ddddddddddddddddddddddddddd",
                 date: "01.05.2048"
+            },
+            {
+                name: "Alex rgkdfiogdfi",
+                category: "vocation",
+                description: "ddddddddddddddddddddddddddd",
+                date: "01.05.2048"
+            },
+            {
+                name: "Jim",
+                category: "birthdays",
+                description: "ddddddddddddddddddddddddddd",
+                date: "01.05.2048"
+            },
+            {
+                name: "Pam",
+                category: "team_building",
+                description: "ddddddddddddddddddddddddddd",
+                date: "01.05.2048"
+            },
+            {
+                name: "Pam",
+                category: "team_building",
+                description: "ddddddddddddddddddddddddddd",
+                date: "01.05.2048"
             }
         ]
     };
@@ -67,12 +91,40 @@ class TeamCalendar extends Component {
     };
 
     render() {
-        const { classes, dataUser } = this.props;
+        const { classes, dataUser, dataEvents } = this.props;
         const { value, user } = this.state;
-        if (dataUser && dataUser.role_id) {
+        if (dataUser && dataUser.role_id && dataEvents) {
             if (dataUser.role_id === 3) {
                 history.push(path.DASHBOARD_HOME);
             }
+            const data = [];
+            dataEvents.user_data.forEach(item => {
+                let itemData = {};
+                itemData.category = 'birthdays';
+                itemData.name = item.name;
+                itemData.description = 'birthday';
+                itemData.date = item.birthday;
+                data.push(itemData)
+            });
+
+            dataEvents.team_data.forEach(item => {
+                let itemData = {};
+                itemData.category = 'team_building';
+                // itemData.name = item.name;
+                itemData.description = 'date of event';
+                itemData.date = item.start + '-' + item.end;
+                data.push(itemData)
+            });
+
+            dataEvents.vacation_data.forEach(item => {
+                let itemData = {};
+                itemData.category = 'vocation';
+                // itemData.name = item.name;
+                itemData.description = 'period of vacation';
+                itemData.date = item.start + '-' + item.end;
+                data.push(itemData)
+            });
+
             return (
                 <Card className={classes.card}>
                     <CardContent className={classes.cardContent}>
@@ -97,7 +149,7 @@ class TeamCalendar extends Component {
                         {value === 0 && (
                             <TabContainer>
                                 <div className={classes.container}>
-                                    {user.map((item, index) => {
+                                    {data.map((item, index) => {
                                         return (
                                             <AddEvent
                                                 key={index}
@@ -113,7 +165,7 @@ class TeamCalendar extends Component {
                         {value === 1 && (
                             <TabContainer>
                                 <div className={classes.container}>
-                                    {user.map((item, index) => {
+                                    {data.map((item, index) => {
                                         if (item.category == "vocation") {
                                             return (
                                                 <AddEvent
@@ -133,7 +185,7 @@ class TeamCalendar extends Component {
                         {value === 2 && (
                             <TabContainer>
                                 <div className={classes.container}>
-                                    {user.map((item, index) => {
+                                    {data.map((item, index) => {
                                         if (item.category == "birthdays") {
                                             return (
                                                 <AddEvent
@@ -153,7 +205,7 @@ class TeamCalendar extends Component {
                         {value === 3 && (
                             <TabContainer>
                                 <div className={classes.container}>
-                                    {user.map((item, index) => {
+                                    {data.map((item, index) => {
                                         if (item.category == "team_building") {
                                             return (
                                                 <AddEvent

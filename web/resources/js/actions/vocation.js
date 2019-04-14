@@ -1,5 +1,7 @@
 import { vocationonstants as types } from "../constants/vocation";
 import { sendVocation } from "../queries/vocation";
+import { history } from "../helpers/history";
+import * as path  from "../constants/routes";
 
 export function sendVocationAction(data) {
     return dispatch => {
@@ -9,6 +11,7 @@ export function sendVocationAction(data) {
                 dispatch(sendVocationLoading(false));
                 if (response.data.success) {
                     dispatch(usendVocationFSuccess(true));
+                    history.push(path.DASHBOARD_HOME)
                 } else {
                     dispatch(sendVocationFailure(response.data.errors));
                 }

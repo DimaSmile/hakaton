@@ -13,7 +13,7 @@ export function registration(user) {
             .then(response => {
                 dispatch(registrationRequestLoading(false));
                 if (response.data.success) {
-                    const yser = {
+                    const user = {
                         name: response.data.data.name,
                         email: response.data.data.email,
                         id: response.data.data.id

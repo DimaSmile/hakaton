@@ -32,7 +32,6 @@ class PagesController extends Controller
 
         $validated    = Validator::make($request->all(), $this->validatedRules['dashboard']);
         $result       = [];
-        //var_dump($request->all());exit;
         if($validated->fails())
         {
             $response = ['success'=>false, 'data'=>'Token is not found'];
@@ -55,7 +54,6 @@ class PagesController extends Controller
     public function trackTime(Request $request) {
         $validated    = Validator::make($request->all(), $this->validatedRules['trackTime']);
         $result       = [];
-       // var_dump($request->all());exit;
         if($validated->fails())
         {
             $response = ['success'=>false, 'data'=>'Token is not found'];
@@ -65,7 +63,6 @@ class PagesController extends Controller
         if ($request->status) 
         {
             $date = date("Y-m-d H:i:s");
-            //$this->dd($date);exit;
             $payload = [
                 'user_id' => $request->id,
                 'start' => $date
@@ -76,7 +73,6 @@ class PagesController extends Controller
             $startTracker = User::find($request->id);
             $startTracker->update(['tracker_status' => 1]);
             $startTracker->save();
-            // $this->dd($startTracker->tracker_status);
         }
         else
         {
@@ -94,7 +90,6 @@ class PagesController extends Controller
             $endTracker->save();
 
         }
-        // $this->dd($trackStatus);
     }
 
     public function getUserActivites($user_id) {
@@ -144,10 +139,12 @@ class PagesController extends Controller
         }
 
         $response = [
-            'success'       => true,
-            'user_data'     => User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get(),
-            'vacation_data' => Vacation::select('user_id','start','end'),
-            'team_data'     => Event::select('name','start','end','description', 'user_id'),
+            'success' => true,
+            'data'    => [
+                'user_data'     => User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get(),
+                'vacation_data' => Vacation::get(),
+                'team_data'     => Vacation::get()
+            ],
         ];
 
         return response()->json($response, 201);
