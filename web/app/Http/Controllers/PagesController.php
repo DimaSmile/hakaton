@@ -35,7 +35,7 @@ class PagesController extends Controller
         }
 
         $closestEvent = Event::where('start', '>', date("Y-m-d H:i:s"))->select('name', 'start')->orderBy('start', 'asc')->first();
-        $userData     = User::where('auth_token', $request->token)->select('vacation_days','sick_days')->first();
+        $userData     = User::where('auth_token', $request->token)->select('vacation_days','sick_days', 'id')->first();
 
         $userData['event_name']         = $closestEvent->name;
         $userData['start_event_date']   = $closestEvent->start;
@@ -93,7 +93,6 @@ class PagesController extends Controller
 
     public function getUserActivites($user_id) {
         $userActivites = UserActivites::where('user_id', $user_id)->where('start', '>', Carbon::now()->subDays(7))->get()->toArray();
-
         $res = [];
         foreach ($userActivites as $key=>$date) {
             $res[date("Y-m-d" , strtotime($date['start']))][] = [
