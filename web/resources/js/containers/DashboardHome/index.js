@@ -32,15 +32,13 @@ class DashboardHome extends Component {
 
     render() {
         const { classes, data } = this.props;
-        const DATA = [
-            { x0: 0, x: 1, y: 40 },
-            { x0: 1, x: 2, y: 20 },
-            { x0: 2, x: 3, y: 80 },
-            { x0: 3, x: 4, y: 60 },
-            { x0: 4, x: 5, y: 50 },
-            { x0: 5, x: 6, y: 30 },
-            { x0: 6, x: 7, y: 10 }
-        ];
+        let datagraf = [];
+        this.props.data && this.props.data.graphics_info
+            ? Object.values(data.graphics_info).map((item, index, array) => {
+                  let sindex = index + 1;
+                  datagraf.push({ x0: index, x: sindex, y: item });
+              })
+            : null;
         const vacation_days = data ? data.vacation_days : "";
         const sick_days = data ? data.sick_days : "";
         const start_event_date = data ? data.start_event_date : "";
@@ -97,14 +95,14 @@ class DashboardHome extends Component {
                             width={800}
                             height={400}
                             className={classes.graf}
-                            yDomain={[0, 100]}
+                            yDomain={[0, 12]}
                         >
                             <VerticalGridLines />
                             <HorizontalGridLines />
 
                             <YAxis />
                             <VerticalRectSeries
-                                data={DATA}
+                                data={datagraf}
                                 stroke="white"
                                 colorType="literal"
                                 className={classes.rect}

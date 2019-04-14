@@ -8,20 +8,29 @@ import { bindActionCreators } from "redux";
 import { ButtonActiveAction } from "../../actions/ButtonActive";
 
 class SwitchOnline extends Component {
-    state = {
-        checkedB: true
-    };
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            checkedB: false
+        };
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.user.tracker_status) {
+            this.setState({
+                checkedB: !!nextProps.user.tracker_status
+            });
+        }
+    }
     handleChange = name => event => {
-        this.setState({ [name]: event.target.checked });
         const id =
             this.props.user && this.props.user.id ? this.props.user.id : null;
-        const status = this.state.checkedB;
-        this.props.ButtonActiveAction(id, status);
+        this.setState(
+            { [name]: event.target.checked },
+            this.props.ButtonActiveAction(id, event.target.checked)
+        );
     };
-
     render() {
-        const { classes, data } = this.props;
+        const { classes } = this.props;
         return (
             <div className={classes.root}>
                 <Switch
@@ -49,7 +58,6 @@ SwitchOnline.propTypes = {
 const mapStateToProps = state => {
     return {
         user: state.user.user
-        // error: state.user.usersErrors
     };
 };
 
