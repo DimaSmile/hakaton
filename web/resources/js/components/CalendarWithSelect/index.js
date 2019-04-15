@@ -6,6 +6,8 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import Loader from "../Loader";
+import { Link } from "react-router-dom";
+import * as path from "../../constants/routes";
 import Avatar from "../../images/defaultAvatar.png";
 
 import { styles } from "./style";
@@ -49,6 +51,7 @@ class CalendarWithSelect extends Component {
     render() {
         const { classes, startWorking, vocation } = this.props;
         let startDate;
+        console.log("111111111111111", startWorking, vocation);
         if (startWorking && vocation) {
             var D = new Date(startWorking);
             D.setMonth(D.getMonth() + 6);
@@ -90,7 +93,16 @@ class CalendarWithSelect extends Component {
                 </div>
             );
         } else {
-            return <Loader />;
+            if (!startWorking) {
+                return (
+                    <div>
+                        Please enter start working date in your settings{" "}
+                        <Link to={path.USER_SETTINGS}>Settings</Link>
+                    </div>
+                );
+            } else {
+                return <Loader />;
+            }
         }
     }
 }
