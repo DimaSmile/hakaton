@@ -25,8 +25,12 @@ class MyVocation extends PureComponent {
         endDate: null
     };
     componentDidMount() {
-        if (this.user && this.user.id && this.vocation === null) {
-            this.props.getAllVacation(this.user.id);
+        if (
+            this.props.user &&
+            this.props.user.id &&
+            this.props.vocation === null
+        ) {
+            this.props.getAllVacation(this.props.user.id);
         }
     }
     componentWillReceiveProps(nextProps) {

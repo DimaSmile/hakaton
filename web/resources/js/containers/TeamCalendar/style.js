@@ -6,9 +6,10 @@ export const styles = theme => ({
         borderRadius: 0
     },
     bar: {
-        height: "auto",
+        height: "auto"
     },
     container: {
         display: "flex",
+        flexWrap: "wrap"
     }
 });

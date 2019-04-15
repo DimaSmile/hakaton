@@ -137,7 +137,15 @@ class UserSettingsForm extends PureComponent {
                                     changeDate={this.changeDate}
                                 />
                                 {user.start_working ? (
-                                    ""
+                                    <Field
+                                        type="text"
+                                        name="startDate"
+                                        label="Start Working Date"
+                                        component={DatePickerField}
+                                        classProp={classes.formInput}
+                                        changeDate={this.changeDate}
+                                        disabled={true}
+                                    />
                                 ) : (
                                     <Field
                                         type="text"

@@ -8,40 +8,41 @@ import CardContent from "@material-ui/core/CardContent";
 import Close from "@material-ui/icons/Close";
 import Modal from "@material-ui/core/Modal";
 import CalendarDefault from "../Calendar";
-import Avatar from '@material-ui/core/Avatar';
+import Avatar from "@material-ui/core/Avatar";
 import DefaultAvatar from "../../images/defaultAvatar.png";
-
 
 import { styles } from "./style";
 
 class AddEvent extends Component {
     state = {
-        open: false,
-      };
-    
-      handleOpen = () => {
+        open: false
+    };
+
+    handleOpen = () => {
         this.setState({ open: true });
-      };
-    
-      handleClose = () => {
+    };
+
+    handleClose = () => {
         this.setState({ open: false });
-      };
+    };
 
     render() {
-        const { classes, name, description, date , avatar} = this.props;
+        const { classes, name, description, date, avatar } = this.props;
         return (
             <div className={classes.card}>
                 <Card onClick={this.handleOpen}>
-                    <CardHeader
-                         avatar={
-                             <Avatar
-                                 aria-label="Recipe"
-                                 className={classes.avatar}
-                                 src={avatar ? avatar : DefaultAvatar}
-                             />
-                         }
-                        title={name}
-                    />
+                    <div className={classes.header}>
+                        <CardHeader
+                            avatar={
+                                <Avatar
+                                    aria-label="Recipe"
+                                    className={classes.avatar}
+                                    src={avatar ? avatar : DefaultAvatar}
+                                />
+                            }
+                            title={name}
+                        />
+                    </div>
                     <CardContent>
                         <Typography className={classes.title} paragraph>
                             {description}
@@ -70,7 +71,7 @@ class AddEvent extends Component {
                                 {date}
                             </Typography>
                             <CalendarDefault
-                            className={classes.calendar}
+                                className={classes.calendar}
                                 // birthdays={users}
                                 // nextEvent={nextEvent}
                             />
