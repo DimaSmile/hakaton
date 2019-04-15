@@ -32,56 +32,6 @@ TabContainer.propTypes = {
 class TeamCalendar extends Component {
     state = {
         value: 0,
-        user: [
-            {
-                name: "Alex rgkdfiogdfi",
-                category: "vocation",
-                description: "ddddddddddddddddddddddddddd",
-                date: "01.05.2048"
-            },
-            {
-                name: "Jim",
-                category: "birthdays",
-                description: "ddddddddddddddddddddddddddd",
-                date: "01.05.2048"
-            },
-            {
-                name: "Pam",
-                category: "team_building",
-                description: "ddddddddddddddddddddddddddd",
-                date: "01.05.2048"
-            },
-            {
-                name: "Pam",
-                category: "team_building",
-                description: "ddddddddddddddddddddddddddd",
-                date: "01.05.2048"
-            },
-            {
-                name: "Alex rgkdfiogdfi",
-                category: "vocation",
-                description: "ddddddddddddddddddddddddddd",
-                date: "01.05.2048"
-            },
-            {
-                name: "Jim",
-                category: "birthdays",
-                description: "ddddddddddddddddddddddddddd",
-                date: "01.05.2048"
-            },
-            {
-                name: "Pam",
-                category: "team_building",
-                description: "ddddddddddddddddddddddddddd",
-                date: "01.05.2048"
-            },
-            {
-                name: "Pam",
-                category: "team_building",
-                description: "ddddddddddddddddddddddddddd",
-                date: "01.05.2048"
-            }
-        ]
     };
     componentDidMount() {
         this.props.teamCalendarAction();
@@ -109,21 +59,28 @@ class TeamCalendar extends Component {
             });
 
             dataEvents.forEach(item => {
-                let itemData = {};
-                itemData.category = 'team_building';
-                // itemData.name = item.name;
-                itemData.description = 'date of event';
-                itemData.date = item.event_start + '-' + item.event_end;
-                data.push(itemData)
+                if(item.event_start) {
+
+                    let itemData = {};
+                    itemData.category = 'team_building';
+                    itemData.name = item.name;
+
+                    itemData.description = <p>{item.event_name}  <br/> {item.event_description}</p>
+                    itemData.date = item.event_start + '-' + item.event_end;
+                    data.push(itemData)
+                }
             });
 
             dataEvents.forEach(item => {
-                let itemData = {};
-                itemData.category = 'vocation';
-                // itemData.name = item.name;
-                itemData.description = 'period of vacation';
-                itemData.date = item.vacation_start + '-' + item.vacation_end;
-                data.push(itemData)
+                if(item.vacation_start){
+                    let itemData = {};
+                    itemData.category = 'vocation';
+                    itemData.name = item.name;
+                    itemData.description = 'period of vacation';
+                    itemData.date = item.vacation_start + '-' + item.vacation_end;
+                    itemData.avatar = item.image;
+                    data.push(itemData)
+                }
             });
 
             return (
@@ -157,6 +114,7 @@ class TeamCalendar extends Component {
                                                 name={item.name}
                                                 description={item.description}
                                                 date={item.date}
+                                                avatar={item.avatar}
                                             />
                                         );
                                     })}
@@ -176,6 +134,7 @@ class TeamCalendar extends Component {
                                                         item.description
                                                     }
                                                     date={item.date}
+                                                    avatar={item.avatar}
                                                 />
                                             );
                                         }
@@ -196,6 +155,7 @@ class TeamCalendar extends Component {
                                                         item.description
                                                     }
                                                     date={item.date}
+                                                    avatar={item.avatar}
                                                 />
                                             );
                                         }
@@ -216,6 +176,7 @@ class TeamCalendar extends Component {
                                                         item.description
                                                     }
                                                     date={item.date}
+                                                    avatar={item.avatar}
                                                 />
                                             );
                                         }

@@ -8,6 +8,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Close from "@material-ui/icons/Close";
 import Modal from "@material-ui/core/Modal";
 import CalendarDefault from "../Calendar";
+import Avatar from '@material-ui/core/Avatar';
+import DefaultAvatar from "../../images/defaultAvatar.png";
 
 
 import { styles } from "./style";
@@ -26,19 +28,18 @@ class AddEvent extends Component {
       };
 
     render() {
-        const { classes, name, description, date } = this.props;
+        const { classes, name, description, date , avatar} = this.props;
         return (
             <div className={classes.card}>
                 <Card onClick={this.handleOpen}>
                     <CardHeader
-                        // avatar={
-                        //     <Avatar
-                        //         aria-label="Recipe"
-                        //         className={classes.avatar}
-                        //     >
-                        //         R
-                        //     </Avatar>
-                        // }
+                         avatar={
+                             <Avatar
+                                 aria-label="Recipe"
+                                 className={classes.avatar}
+                                 src={avatar ? avatar : DefaultAvatar}
+                             />
+                         }
                         title={name}
                     />
                     <CardContent>

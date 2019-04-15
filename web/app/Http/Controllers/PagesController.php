@@ -142,7 +142,7 @@ class PagesController extends Controller
             return response()->json($response, 201);
         }
 
-        $usersData = User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get();
+        $usersData = User::select('id','name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get();
         $responseData = [];
         foreach ($usersData as $userData) {
             $userVacation = Vacation::where('user_id',$userData->id)->first();
