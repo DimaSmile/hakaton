@@ -35,6 +35,15 @@ function formatDate(date) {
     return month + " " + yy;
 }
 
+const UserVacation = props => {
+    return (
+        <div className={"vacation"}>
+            <img src={props.image ? props.image : Avatar} />
+            <p>{props.name}</p>
+        </div>
+    );
+};
+
 class CalendarWithSelect extends Component {
     handleSlotSelection = ({ start, end, action }) => {
         let startAvaliable = this.startDate.getMonth();
@@ -65,7 +74,9 @@ class CalendarWithSelect extends Component {
                 return {
                     start: new Date(item.start),
                     end: new Date(item.end),
-                    title: item.id
+                    title: (
+                        <UserVacation imagee={item.avatar} name={item.name} />
+                    )
                 };
             });
             console.log(usersVacations);
@@ -93,7 +104,7 @@ class CalendarWithSelect extends Component {
                 </div>
             );
         } else {
-            if (!startWorking) {
+            if (!startWorking && vocation) {
                 return (
                     <div>
                         Please enter start working date in your settings{" "}

@@ -208,14 +208,18 @@ class PagesController extends Controller
 
         $vacations = Vacation::where('approved',1)->get();
         $userVacation = Vacation::where('user_id',$request->id)->first();
-        $currentUser = User::where('id',$userVacation->user_id)->first();
-        $userVacationData = [
-            'user_id' => $currentUser->id,
-            'name'    => $currentUser->name,
-            'avatar'  => $currentUser->image,
-            'start'   => $userVacation->start,
-            'end'     => $userVacation->end,
-        ];
+        $userVacationData = [];
+        if (is_object($userVacation)) {
+            $currentUser = User::where('id',$userVacation->user_id)->first();
+            $userVacationData = [
+                'user_id' => $currentUser->id,
+                'name'    => $currentUser->name,
+                'avatar'  => $currentUser->image,
+                'start'   => $userVacation->start,
+                'end'     => $userVacation->end,
+            ];
+        }
+    
         $responseData = [];
         foreach ($vacations as $vacation){
             $user = User::where('id',$vacation->user_id)->first();
@@ -232,7 +236,7 @@ class PagesController extends Controller
             'success'   => true,
             'data'      => [
                 'vacations'    => $responseData,
-                'userVacation' => $userVacationData
+                'userVacation' => $userVacationData ? $userVacationData : ''
             ]
         ];
 

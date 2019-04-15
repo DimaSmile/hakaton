@@ -64,6 +64,7 @@ class UserSettingsForm extends PureComponent {
             if (user.start_working) {
                 this.startDate = new Date(user.start_working);
             }
+            const position = user.position ? user.position : "";
             return (
                 <Formik
                     initialValues={{
@@ -71,7 +72,7 @@ class UserSettingsForm extends PureComponent {
                         userName: user.name,
                         password: "",
                         password2: "",
-                        position: "",
+                        position: position,
                         birthdayDate: this.birthdayDate,
                         startDate: this.startDate
                     }}
