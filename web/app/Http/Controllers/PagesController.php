@@ -211,15 +211,33 @@ class PagesController extends Controller
             return response()->json($response, 201);
         }
 
-
         $vacations = Vacation::where('approved',1)->get();
         $userVacation = Vacation::where('user_id',$request->id)->first();
+        $currentUser = User::where('id',$userVacation->user_id)->first();
+        $userVacationData = [
+            'user_id' => $currentUser->id,
+            'name'    => $currentUser->name,
+            'avatar'  => $currentUser->image,
+            'start'   => $userVacation->start,
+            'end'     => $userVacation->end,
+        ];
+        $responseData = [];
+        foreach ($vacations as $vacation){
+            $user = User::where('id',$vacation->user_id)->first();
+            $responseData[] = [
+                'user_id' => $user->id,
+                'name'    => $user->name,
+                'avatar'  => $user->image,
+                'start'   => $vacation->start,
+                'end'     => $vacation->end,
+            ];
+        }
 
         $response = [
             'success'   => true,
             'data'      => [
-                'vacations'    => $vacations,
-                'userVacation' => $userVacation
+                'vacations'    => $responseData,
+                'userVacation' => $userVacationData
             ]
         ];
 
