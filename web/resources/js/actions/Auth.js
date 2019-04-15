@@ -12,12 +12,14 @@ export function registration(user) {
             .register(user)
             .then(response => {
                 dispatch(registrationRequestLoading(false));
+                console.log(response);
                 if (response.data.success) {
                     const user = {
                         name: response.data.data.name,
                         email: response.data.data.email,
                         id: response.data.data.id
                     };
+                    console.log(user);
                     localStorage.setItem(
                         "auth_token",
                         response.data.data.auth_token
@@ -129,13 +131,13 @@ export function LogOut() {
     //     console.log(e)
     // });
     // axios.post("http://localhost:8080/api/user/logout", {
-    //     token: window.localStorage.getItem("auth_token"), 
+    //     token: window.localStorage.getItem("auth_token"),
     //     // user: user
     // });
     // Echo.leave('channel')
-        // .leaving((user) => {
-        //     console.log(user)
-        // })
+    // .leaving((user) => {
+    //     console.log(user)
+    // })
     // Echo.join('channel')
     //     .leaving((user) => {
     //     // axios.put('/api/user/'+ user.id +'/offline?api_token=' + user.api_token, {});

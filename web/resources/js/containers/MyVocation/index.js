@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Grid from "@material-ui/core/Grid";
-import { sendVocationAction } from "../../actions/vocation";
+import { sendVocationAction, getAllVacation } from "../../actions/vocation";
 import { styles } from "./style";
 import CalendarWithSelect from "../../components/CalendarWithSelect";
 import Modal from "../../components/Modal";
@@ -24,15 +24,22 @@ class MyVocation extends PureComponent {
         startDate: null,
         endDate: null
     };
+    componentWillReceiveProps(nextProps) {
+        if (
+            nextProps.user &&
+            nextProps.user.id &&
+            nextProps.vocation === null
+        ) {
+            this.props.getAllVacation(nextProps.user.id);
+        }
+    }
     handleShowError = error => {
-        console.log("1");
         this.setState({
             showError: true,
             errorText: error
         });
     };
     handleshowConfirmation = (start, end) => {
-        console.log("1");
         this.setState({
             showConfirmation: true,
             startDate: start,
@@ -50,7 +57,13 @@ class MyVocation extends PureComponent {
         });
     };
     render() {
-        const { classes, data, user, sendVocationAction } = this.props;
+        const {
+            classes,
+            data,
+            user,
+            sendVocationAction,
+            vocation
+        } = this.props;
         const { showError, showConfirmation } = this.state;
         const startWorking =
             user && user.start_working ? user.start_working : false;
@@ -61,6 +74,7 @@ class MyVocation extends PureComponent {
                     <Card>
                         <CardContent>
                             <CalendarWithSelect
+                                vocation={vocation}
                                 startWorking={startWorking}
                                 handleShowError={this.handleShowError}
                                 handleshowConfirmation={
@@ -104,7 +118,6 @@ class MyVocation extends PureComponent {
                 <Modal
                     open={showConfirmation}
                     handleClose={this.closeConfirmation}
-                    
                 >
                     <Card className={classes.modal}>
                         <CardContent>
@@ -172,12 +185,14 @@ const mapStateToProps = state => {
     return {
         data: state.dashboard.dashboardData,
         user: state.user.user,
-        error: state.dashboard.usersErrors
+        error: state.dashboard.usersErrors,
+        vocation: state.vocation.vacationData
     };
 };
 
 const mapDispatchToProps = dispatch => ({
     sendVocationAction: bindActionCreators(sendVocationAction, dispatch),
+    getAllVacation: bindActionCreators(getAllVacation, dispatch),
     dispatch
 });
 

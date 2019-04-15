@@ -166,12 +166,12 @@ class PagesController extends Controller
 
         $response = [
             'success' => true,
-//            'data'    => [
-//                'user_data'     => User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get(),
-//                'vacation_data' => Vacation::get(),
-//                'team_data'     => Event::get()
-//            ],
-            'data'   => $responseData
+            // 'data'          => [
+            //     'user_data'     => User::select('name', 'position', 'image', 'start_working', 'birthday', 'role_id')->get(),
+            //     'vacation_data' => Vacation::select('user_id','start','end'),
+            //     'team_data'     => Event::select('name','start','end','description', 'user_id')
+            //     ],
+            'data' => $responseData
         ];
 
         return response()->json($response, 201);

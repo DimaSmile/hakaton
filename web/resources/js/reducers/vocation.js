@@ -3,7 +3,10 @@ import { vocationonstants as types } from "../constants";
 const initialState = {
     requestLoading: false,
     requestSuccess: false,
-    usersErrors: null
+    usersErrors: null,
+    vacationData: null,
+    vacationDataLoading: false,
+    vacationDataErrors: null
 };
 
 export function vocation(state = initialState, action) {
@@ -23,6 +26,22 @@ export function vocation(state = initialState, action) {
             return {
                 ...state,
                 users: action.users
+            };
+        case types.GET_ALL_VACATION_LOADING:
+            return {
+                ...state,
+                vacationData: false,
+                vacationDataLoading: action.isLoading
+            };
+        case types.GET_ALL_VACATION_SUCCESS:
+            return {
+                ...state,
+                vacationData: action.data
+            };
+        case types.GET_ALL_VACATION_FAILURE:
+            return {
+                ...state,
+                vacationDataErrors: action.errors
             };
 
         default:

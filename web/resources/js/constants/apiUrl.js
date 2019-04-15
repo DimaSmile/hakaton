@@ -10,5 +10,6 @@ export const apiUrl = {
     USERINFO: "http://localhost:8080/api/get-team-info",
     sendVocation: "http://localhost:8080/api/set-vacation",
     BUTTONACTIVE: "http://localhost:8080/api/get-track-info",
-    TEAM_CALENDAR: "http://localhost:8080/api/get-team-calendar-info"
+    TEAM_CALENDAR: "http://localhost:8080/api/get-team-calendar-info",
+    ALL_VACATION: "http://localhost:8080/api/get-vacations"
 };

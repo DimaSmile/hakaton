@@ -47,13 +47,25 @@ class CalendarWithSelect extends Component {
         }
     };
     render() {
-        const { classes, startWorking } = this.props;
+        const { classes, startWorking, vocation } = this.props;
         let startDate;
-        if (startWorking) {
+        if (startWorking && vocation) {
             var D = new Date(startWorking);
             D.setMonth(D.getMonth() + 6);
             startDate = D;
+            let now = new Date();
+            if (startDate < now) {
+                startDate = now;
+            }
             this.startDate = startDate;
+            const usersVacations = vocation.vacations.map(item => {
+                return {
+                    start: new Date(item.start),
+                    end: new Date(item.end),
+                    title: item.id
+                };
+            });
+            console.log(usersVacations);
             return (
                 <div className={classes.root}>
                     <Typography className={classes.title} variant="h4">
@@ -72,7 +84,7 @@ class CalendarWithSelect extends Component {
                         selectable={true}
                         onSelectSlot={this.handleSlotSelection}
                         views={["month"]}
-                        events={[]}
+                        events={usersVacations}
                         style={{ height: "calc(100vh - 200px)" }}
                     />
                 </div>

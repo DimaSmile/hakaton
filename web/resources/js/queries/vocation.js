@@ -16,3 +16,11 @@ export function sendVocation(data) {
         id: data.id
     });
 }
+
+export function getAllVocations(id) {
+    const token = window.localStorage.getItem("auth_token");
+    return axios.post(apiUrl.ALL_VACATION, {
+        token: token,
+        id: id
+    });
+}
