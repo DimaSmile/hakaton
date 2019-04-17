@@ -12,14 +12,13 @@ export function saveProfileInfo(data) {
                 dispatch(RequestLoading(false));
                 if (response.data.success) {
                     dispatch(saveProfileInfoSuccess(response.data.data));
-                    history.push(routes.DASHBOARD_HOME)
+                    history.push(routes.DASHBOARD_HOME);
                 } else {
                     dispatch(saveProfileInfoFailure(response.data.errors));
                 }
             })
             .catch(function(error) {
                 dispatch(RequestLoading(false));
-                console.log(error);
             });
     };
     function saveProfileInfoFailure(errors) {

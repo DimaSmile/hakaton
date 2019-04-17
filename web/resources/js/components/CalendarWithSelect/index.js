@@ -60,7 +60,6 @@ class CalendarWithSelect extends Component {
     render() {
         const { classes, startWorking, vocation } = this.props;
         let startDate;
-        console.log("111111111111111", startWorking, vocation);
         if (startWorking && vocation) {
             var D = new Date(startWorking);
             D.setMonth(D.getMonth() + 6);
@@ -79,7 +78,6 @@ class CalendarWithSelect extends Component {
                     )
                 };
             });
-            console.log(usersVacations);
             return (
                 <div className={classes.root}>
                     <Typography className={classes.title} variant="h4">

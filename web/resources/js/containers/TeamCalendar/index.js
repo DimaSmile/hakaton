@@ -43,7 +43,6 @@ class TeamCalendar extends Component {
     render() {
         const { classes, dataUser, dataEvents } = this.props;
         const { value, user } = this.state;
-        console.log(dataEvents);
         if (dataUser && dataUser.role_id && dataEvents) {
             if (dataUser.role_id === 3) {
                 history.push(path.DASHBOARD_HOME);

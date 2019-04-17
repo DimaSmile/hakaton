@@ -8,6 +8,7 @@ export function userInfoAction() {
             .then(response => {
                 dispatch(RequestLoading(false));
                 if (response.data.success) {
+                    console.log(response.data.data);
                     dispatch(userListSuccess(response.data.data));
                 } else {
                     dispatch(userListFailure(response.data.errors));

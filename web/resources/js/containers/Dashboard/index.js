@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import * as path from "../../constants/routes";
-import { verifyToken, LogOut } from "../../actions/Auth";
-import { history } from "../../helpers/history";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { history } from "../../helpers/history";
+import * as path from "../../constants/routes";
+import { verifyToken, LogOut } from "../../actions/Auth";
+
 import Layout from "../../components/Layout";
+import Loader from "../../components/Loader";
 
 class Dashboard extends Component {
     componentWillMount() {
@@ -19,26 +21,31 @@ class Dashboard extends Component {
         }
     }
     render() {
-        const avatar =
-            this.props.user && this.props.user.image
-                ? this.props.user.image
-                : false;
-        const { LogOut } = this.props;
-        return (
-            <Layout
-                children={this.props.children}
-                user={this.props.user}
-                logOut={LogOut}
-                avatar={avatar}
-            />
-        );
+        const { isLoading, LogOut } = this.props;
+        if (!isLoading) {
+            const avatar =
+                this.props.user && this.props.user.image
+                    ? this.props.user.image
+                    : false;
+            return (
+                <Layout
+                    children={this.props.children}
+                    user={this.props.user}
+                    logOut={LogOut}
+                    avatar={avatar}
+                />
+            );
+        } else {
+            return <Loader />;
+        }
     }
 }
 
 const mapStateToProps = state => {
     return {
         isAuth: state.user.isAuth,
-        user: state.user.user
+        user: state.user.user,
+        isLoading: state.user.isLoading
     };
 };
 

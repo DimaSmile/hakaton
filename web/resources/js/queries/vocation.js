@@ -8,7 +8,6 @@ export function sendVocation(data) {
         end: data.end,
         id: data.id
     };
-    console.log(dataN);
     return axios.post(apiUrl.sendVocation, {
         token: token,
         start: data.start,

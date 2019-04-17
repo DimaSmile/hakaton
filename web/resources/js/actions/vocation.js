@@ -18,7 +18,6 @@ export function sendVocationAction(data) {
             })
             .catch(function(error) {
                 dispatch(sendVocationLoading(false));
-                console.log(error);
             });
     };
     function sendVocationFailure(error) {
@@ -41,7 +40,6 @@ export function getAllVacation(id) {
         getAllVocations(id)
             .then(response => {
                 dispatch(getAllVacationLoading(false));
-                console.log(response);
                 if (response.data.success) {
                     dispatch(getAllVacationSuccess(response.data.data));
                 } else {
@@ -50,7 +48,6 @@ export function getAllVacation(id) {
             })
             .catch(function(error) {
                 dispatch(getAllVacationLoading(false));
-                console.log(error);
             });
     };
     function getAllVacationFailure(error) {

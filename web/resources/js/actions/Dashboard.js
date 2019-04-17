@@ -1,10 +1,10 @@
 import { dashboardConstants as types } from "../constants/";
 import { dashboard } from "../queries/dashboard";
 
-export function dashboardAction(data) {
+export function dashboardAction() {
     return dispatch => {
         dispatch(RequestLoading(true));
-        dashboard(data)
+        dashboard()
             .then(response => {
                 dispatch(RequestLoading(false));
                 if (response.data.success) {
@@ -14,7 +14,6 @@ export function dashboardAction(data) {
             })
             .catch(function(error) {
                 dispatch(RequestLoading(false));
-                console.log(error);
             });
     };
     function dashboardFailure(error) {

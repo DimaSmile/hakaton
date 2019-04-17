@@ -4,14 +4,12 @@ import { teamCalendar } from "../queries/teamCalendar";
 import { history } from "../helpers/history";
 
 export function teamCalendarAction() {
-    console.log("1");
     return dispatch => {
         dispatch(RequestLoading(true));
 
         teamCalendar()
             .then(response => {
                 dispatch(RequestLoading(false));
-                console.log(response);
                 if (response.data.success) {
                     dispatch(teamCalendarSuccess(response.data.data));
                 } else {
@@ -20,7 +18,6 @@ export function teamCalendarAction() {
             })
             .catch(function(error) {
                 dispatch(RequestLoading(false));
-                console.log(error);
             });
     };
     function teamCalendarFailure(errors) {

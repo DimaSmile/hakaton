@@ -12,7 +12,6 @@ const initialState = {
 export function vocation(state = initialState, action) {
     switch (action.type) {
         case types.VOCATION_REQUEST_LOADING:
-            console.log(action.bool);
             return {
                 ...state,
                 requestLoading: action.isLoading

@@ -13,22 +13,26 @@ import { styles } from "./style";
 class Team extends Component {
     componentDidMount() {
         this.props.userInfoAction();
-        Pusher.logToConsole = true;
+        // Pusher.logToConsole = true;
         // Add API Key & cluster here to make the connection
-        var pusher = new Pusher('22228b2d68f08b618c6d', {
-            cluster: 'eu',
+        var pusher = new Pusher("22228b2d68f08b618c6d", {
+            cluster: "eu",
             forceTLS: true
         });
 
-        var channel = pusher.subscribe('dashboard');
-        channel.bind('my_event',
-        function(data) {
-            console.log(data);
+        var channel = pusher.subscribe("dashboard");
+        channel.bind("my_event", data => {
+            // console.log(this.props);
+            this.props.dispatch(userInfoAction());
         });
         // check if the user is subscribed to the above channel
-        channel.bind('pusher:subscription_succeeded', function(members) {
-            fetch('http://localhost:8080/api/isOnline/?token=' + window.localStorage.getItem("auth_token")+'&is_login=1');
-            console.log('successfully subscribed!');
+        channel.bind("pusher:subscription_succeeded", function(members) {
+            fetch(
+                "http://localhost:8080/api/isOnline/?token=" +
+                    window.localStorage.getItem("auth_token") +
+                    "&is_login=1"
+            );
+            // console.log("successfully subscribed!");
         });
     }
     render() {

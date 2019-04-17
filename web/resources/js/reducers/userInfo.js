@@ -18,10 +18,15 @@ export function userInfo(state = initialState, action) {
                 dataError: action.errors
             };
         case types.USERINFO_SUCCESS:
+            console.log("action", action.data);
             return {
                 ...state,
                 userInfoData: action.data
             };
+        // return {
+        //     ...state,
+        //     userInfoData: action.data
+        // };
 
         default:
             return state;

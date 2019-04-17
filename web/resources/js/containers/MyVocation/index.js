@@ -39,7 +39,6 @@ class MyVocation extends PureComponent {
             nextProps.user.id &&
             nextProps.vocation === null
         ) {
-            console.log(nextProps);
             this.props.getAllVacation(nextProps.user.id);
         }
     }

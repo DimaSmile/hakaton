@@ -12,14 +12,12 @@ export function registration(user) {
             .register(user)
             .then(response => {
                 dispatch(registrationRequestLoading(false));
-                console.log(response);
                 if (response.data.success) {
                     const user = {
                         name: response.data.data.name,
                         email: response.data.data.email,
                         id: response.data.data.id
                     };
-                    console.log(user);
                     localStorage.setItem(
                         "auth_token",
                         response.data.data.auth_token
