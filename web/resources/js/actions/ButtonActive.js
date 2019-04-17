@@ -6,9 +6,10 @@ export function ButtonActiveAction(id, status) {
         dispatch(RequestLoading(true));
         buttonActive(id, status)
             .then(response => {
+                console.log(response);
                 dispatch(RequestLoading(false));
-                if (response.data.success) {
-                    dispatch(buttonActiveSuccess(response.data.data));
+                if (response.statusText === "OK") {
+                    dispatch(buttonActiveSuccess(true));
                 } else {
                     dispatch(buttonActiveFailure(response.data.errors));
                 }
@@ -20,8 +21,8 @@ export function ButtonActiveAction(id, status) {
     function buttonActiveFailure(error) {
         return { type: types.BUTTONACTIVE_FAILURE, error };
     }
-    function buttonActiveSuccess(data) {
-        return { type: types.BUTTONACTIVE_SUCCESS, data };
+    function buttonActiveSuccess(bool) {
+        return { type: types.BUTTONACTIVE_SUCCESS, boolean: bool };
     }
     function RequestLoading(bool) {
         return {

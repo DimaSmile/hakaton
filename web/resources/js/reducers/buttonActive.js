@@ -1,6 +1,6 @@
 import { buttonActiveConstants as types } from "../constants";
 const initialState = {
-    data: null,
+    dataSuccess: false,
     dataError: null,
     dataLoading: false
 };
@@ -10,7 +10,7 @@ export function buttonActive(state = initialState, action) {
         case types.BUTTONACTIVE_REQUEST_LOADING:
             return {
                 ...state,
-                data: action.isLoading
+                dataLoading: action.isLoading
             };
         case types.BUTTONACTIVE_FAILURE:
             return {
@@ -20,7 +20,7 @@ export function buttonActive(state = initialState, action) {
         case types.BUTTONACTIVE_SUCCESS:
             return {
                 ...state,
-                dashboardData: action.data
+                dataSuccess: action.boolean
             };
 
         default:
