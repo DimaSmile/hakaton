@@ -1,32 +1,35 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CalendarDefault from "../../components/Calendar";
-import Event from "../../components/Event";
-import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { usersListAction } from "../../actions/UsersList";
+
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Grid from "@material-ui/core/Grid";
+
+import CalendarDefault from "../../components/Calendar";
+import Event from "../../components/Event";
+import { usersBirthdaysAction } from "../../actions/usersBirthdaysAction";
 
 import { styles } from "./style";
 
 class Birthdays extends Component {
-    componentDidMount() {
-        this.props.usersListAction();
+    componentWillReceiveProps(nextProps) {
+        nextProps.user && !nextProps.usersBirthdays
+            ? this.props.usersBirthdaysAction()
+            : false;
     }
     render() {
-        const { classes, users } = this.props;
-        let nextEvent = users ? users.closest_birthday : null;
+        const { classes, usersBirthdays } = this.props;
+        let nextEvent = usersBirthdays ? usersBirthdays.closest_birthday : null;
         return (
             <Grid container spacing={16}>
                 <Grid item xs={8}>
                     <Card className={classes.card}>
                         <CardContent className={classes.cardContent}>
                             <CalendarDefault
-                                birthdays={users}
+                                birthdays={usersBirthdays}
                                 nextEvent={nextEvent}
                             />
                         </CardContent>
@@ -48,13 +51,14 @@ Birthdays.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        users: state.usersList.users,
-        error: state.usersList.usersErrors
+        user: state.user.user,
+        usersBirthdays: state.usersBirthdaysList.users,
+        error: state.usersBirthdaysList.usersErrors
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    usersListAction: bindActionCreators(usersListAction, dispatch),
+    usersBirthdaysAction: bindActionCreators(usersBirthdaysAction, dispatch),
     dispatch
 });
 

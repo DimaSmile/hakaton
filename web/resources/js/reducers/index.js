@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { user } from "./user";
-import { usersList } from "./usersList";
+import { usersBirthdaysList } from "./usersBirthdaysList";
 import { dashboard } from "./dashboard";
 import { userSettings } from "./profileSettings";
 import { userInfo } from "./userInfo";
@@ -10,7 +10,7 @@ import { teamCalendar } from "./teamCalendar";
 
 export default combineReducers({
     user,
-    usersList,
+    usersBirthdaysList,
     dashboard,
     userSettings,
     userInfo,

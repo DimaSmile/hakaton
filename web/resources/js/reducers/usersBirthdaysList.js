@@ -1,5 +1,4 @@
-import { usersListConstants as types } from "../constants";
-import { CardActions } from "@material-ui/core";
+import { usersBirthdaysConstants as types } from "../constants";
 
 const initialState = {
     users: null,
@@ -7,19 +6,19 @@ const initialState = {
     usersErrors: null
 };
 
-export function usersList(state = initialState, action) {
+export function usersBirthdaysList(state = initialState, action) {
     switch (action.type) {
-        case types.USERLIST_REQUEST_LOADING:
+        case types.USERS_BIRTHDAYS_REQUEST_LOADING:
             return {
                 ...state,
                 usersIsLoading: action.isLoading
             };
-        case types.USERSLIST_FAILURE:
+        case types.USERS_BIRTHDAYS_FAILURE:
             return {
                 ...state,
                 usersErrors: action.errors
             };
-        case types.USERSLIST_SUCCESS:
+        case types.USERS_BIRTHDAYS_SUCCESS:
             return {
                 ...state,
                 users: action.users

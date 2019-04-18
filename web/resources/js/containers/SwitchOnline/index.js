@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Switch from "@material-ui/core/Switch";
-import { styles } from "./style";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
+import Switch from "@material-ui/core/Switch";
+import { userInfoAction } from "../../actions/UserInfo";
 import { ButtonActiveAction } from "../../actions/ButtonActive";
+import { styles } from "./style";
 
 class SwitchOnline extends Component {
     constructor(props) {
@@ -13,6 +15,19 @@ class SwitchOnline extends Component {
         this.state = {
             checkedB: false
         };
+    }
+    componentDidMount() {
+        // Pusher.logToConsole = true;
+        var pusher = new Pusher("22228b2d68f08b618c6d", {
+            cluster: "eu",
+            forceTLS: true
+        });
+
+        this.channel = pusher.subscribe("dashboard");
+
+        this.channel.bind("my_event", data => {
+            this.props.dispatch(userInfoAction());
+        });
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.user.tracker_status) {
@@ -27,6 +42,17 @@ class SwitchOnline extends Component {
         this.setState(
             { [name]: event.target.checked },
             this.props.ButtonActiveAction(id, event.target.checked)
+        );
+        this.channel.bind(
+            "pusher:subscription_succeeded",
+            (function(members) {
+                fetch(
+                    "http://localhost:8080/api/isOnline/?token=" +
+                        window.localStorage.getItem("auth_token") +
+                        "&is_login=1"
+                );
+                console.log("1");
+            })()
         );
     };
     render() {
@@ -63,6 +89,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     ButtonActiveAction: bindActionCreators(ButtonActiveAction, dispatch),
+    userInfoAction: bindActionCreators(userInfoAction, dispatch),
     dispatch
 });
 

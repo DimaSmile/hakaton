@@ -15,25 +15,25 @@ class Team extends Component {
         this.props.userInfoAction();
         // Pusher.logToConsole = true;
         // Add API Key & cluster here to make the connection
-        var pusher = new Pusher("22228b2d68f08b618c6d", {
-            cluster: "eu",
-            forceTLS: true
-        });
+        // var pusher = new Pusher("22228b2d68f08b618c6d", {
+        //     cluster: "eu",
+        //     forceTLS: true
+        // });
 
-        var channel = pusher.subscribe("dashboard");
-        channel.bind("my_event", data => {
-            // console.log(this.props);
-            this.props.dispatch(userInfoAction());
-        });
-        // check if the user is subscribed to the above channel
-        channel.bind("pusher:subscription_succeeded", function(members) {
-            fetch(
-                "http://localhost:8080/api/isOnline/?token=" +
-                    window.localStorage.getItem("auth_token") +
-                    "&is_login=1"
-            );
-            // console.log("successfully subscribed!");
-        });
+        // var channel = pusher.subscribe("dashboard");
+        // channel.bind("my_event", data => {
+        //     // console.log(this.props);
+        //     this.props.dispatch(userInfoAction());
+        // });
+        // // check if the user is subscribed to the above channel
+        // channel.bind("pusher:subscription_succeeded", function(members) {
+        //     fetch(
+        //         "http://localhost:8080/api/isOnline/?token=" +
+        //             window.localStorage.getItem("auth_token") +
+        //             "&is_login=1"
+        //     );
+        //     // console.log("successfully subscribed!");
+        // });
     }
     render() {
         const { classes, users } = this.props;
@@ -54,6 +54,7 @@ class Team extends Component {
                                         image={item.image}
                                         birthday={item.birthday}
                                         start_working={item.start_working}
+                                        online={item.is_active}
                                     />
                                 );
                             }

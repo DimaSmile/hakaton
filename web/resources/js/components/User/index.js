@@ -24,7 +24,7 @@ class User extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            open: false,
+            open: false
         };
         this.birthday = new Date();
         this.start_working = new Date();
@@ -44,10 +44,10 @@ class User extends Component {
             image,
             userName,
             position,
-            active,
             birthday,
             start_working,
-            saveProfileInfo
+            saveProfileInfo,
+            online
         } = this.props;
         return (
             <Formik
@@ -89,7 +89,7 @@ class User extends Component {
                                     {position}
                                 </Typography>
                             </CardContent>
-                            {active ? (
+                            {!!online ? (
                                 <img src={Online} className={classes.active} />
                             ) : (
                                 <img src={Offline} className={classes.active} />

@@ -6,7 +6,6 @@ export function ButtonActiveAction(id, status) {
         dispatch(RequestLoading(true));
         buttonActive(id, status)
             .then(response => {
-                console.log(response);
                 dispatch(RequestLoading(false));
                 if (response.statusText === "OK") {
                     dispatch(buttonActiveSuccess(true));
