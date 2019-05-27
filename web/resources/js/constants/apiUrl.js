@@ -1,16 +1,19 @@
 import { teamCalendar } from "../queries/teamCalendar";
 
-export const apiUrl = {
-    REGISTRATION: "http://localhost:8080/api/user/register",
-    LOGIN: "http://localhost:8080/api/user/login",
-    USER_VERIFY: "http://localhost:8080/api/user/list?token=",
-    DASHBOARD: "http://localhost:8080/api/get-dashboad-info",
-    USERS_BIRTHDAYS_LIST: "http://localhost:8080/api/users/list?token=",
-    SAVE_PROFILE_DATA: "http://localhost:8080/api/user/save-profile",
+var getUrl = window.location;
+var baseUrl = getUrl.host + "/";
 
-    USERINFO: "http://localhost:8080/api/get-team-info",
-    sendVocation: "http://localhost:8080/api/set-vacation",
-    BUTTONACTIVE: "http://localhost:8080/api/get-track-info",
-    TEAM_CALENDAR: "http://localhost:8080/api/get-team-calendar-info",
-    ALL_VACATION: "http://localhost:8080/api/get-vacations"
+export const apiUrl = {
+    REGISTRATION: "http://" + baseUrl + "api/user/register",
+    LOGIN: "http://" + baseUrl + "api/user/login",
+    USER_VERIFY: "http://" + baseUrl + "api/user/list?token=",
+    DASHBOARD: "http://" + baseUrl + " api/get-dashboad-info",
+    USERS_BIRTHDAYS_LIST: "http://" + baseUrl + "api/users/list?token=",
+    SAVE_PROFILE_DATA: "http://" + baseUrl + "api/user/save-profile",
+
+    USERINFO: "http://" + baseUrl + "api/get-team-info",
+    sendVocation: "http://" + baseUrl + "api/set-vacation",
+    BUTTONACTIVE: "http://" + baseUrl + "api/get-track-info",
+    TEAM_CALENDAR: "http://" + baseUrl + "api/get-team-calendar-info",
+    ALL_VACATION: "http://" + baseUrl + "api/get-vacations"
 };
