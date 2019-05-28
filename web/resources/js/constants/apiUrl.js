@@ -4,10 +4,10 @@ var getUrl = window.location;
 var baseUrl = getUrl.host + "/";
 
 export const apiUrl = {
-    REGISTRATION: "http://" + baseUrl + "api/user/register",
-    LOGIN: "http://" + baseUrl + "api/user/login",
+    REGISTRATION: "http://"+baseUrl+"api/user/register",
+    LOGIN: "http://"+baseUrl+"api/user/login",
     USER_VERIFY: "http://" + baseUrl + "api/user/list?token=",
-    DASHBOARD: "http://" + baseUrl + " api/get-dashboad-info",
+    DASHBOARD: "http://" + baseUrl + "api/get-dashboad-info",
     USERS_BIRTHDAYS_LIST: "http://" + baseUrl + "api/users/list?token=",
     SAVE_PROFILE_DATA: "http://" + baseUrl + "api/user/save-profile",
 
