@@ -25,6 +25,8 @@ class AddIsActiveColumn extends Migration
      */
     public function down()
     {
-        $table->dropColumn('is_active');  
+        Schema::table('users', function($table) {
+            $table->dropColumn('is_active');
+        });
     }
 }
