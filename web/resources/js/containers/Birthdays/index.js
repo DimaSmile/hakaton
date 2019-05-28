@@ -15,6 +15,9 @@ import { usersBirthdaysAction } from "../../actions/usersBirthdaysAction";
 import { styles } from "./style";
 
 class Birthdays extends Component {
+    componentDidMount() {
+        this.props.usersBirthdaysAction();
+    }
     componentWillReceiveProps(nextProps) {
         nextProps.user && !nextProps.usersBirthdays
             ? this.props.usersBirthdaysAction()
