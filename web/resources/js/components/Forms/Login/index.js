@@ -41,6 +41,7 @@ class LoginForm extends PureComponent {
                 }}
                 validationSchema={LoginSchema}
                 onSubmit={values => {
+                    values.rememberMe = this.state.rememberCheckbox;
                     login(values);
                 }}
             >

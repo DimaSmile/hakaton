@@ -58,10 +58,14 @@ export function login(user) {
                         ...response.data.data
                     };
                     delete data["auth_token"];
-                    localStorage.setItem(
-                        "auth_token",
-                        response.data.data.auth_token
-                    );
+
+                    if (user.rememberMe) {
+                        console.log(1);
+                        localStorage.setItem(
+                            "auth_token",
+                            response.data.data.auth_token
+                        )
+                    }              
                     dispatch(loginSuccess(data));
                     history.push(routes.DASHBOARD);
                 } else {
