@@ -9,6 +9,7 @@ import * as path from "../../../constants/routes";
 import { login } from "../../../actions/Auth";
 
 import { styles } from "./styles";
+import LogoImg from "../../../images/logo.png";
 
 import { Formik, Form, Field } from "formik";
 import TextInput from "../../FormElems/TextInput";
@@ -47,6 +48,9 @@ class LoginForm extends PureComponent {
             >
                 {() => (
                     <div className={"form-block " + classes.root}>
+                        <div className={classes.formLogo}>
+                            <img src={LogoImg} alt="RocklabLogo" />
+                        </div>
                         <Typography
                             component="h1"
                             variant="h3"
