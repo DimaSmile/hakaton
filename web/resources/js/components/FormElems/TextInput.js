@@ -36,7 +36,7 @@ class TextInput extends React.Component {
                 />
                 {touched[field.name] && errors[field.name] && (
                     <Typography
-                        variant="subtitle1"
+                        variant="caption"
                         gutterBottom
                         color={"error"}
                     >

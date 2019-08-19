@@ -6,10 +6,11 @@ import cyan from "@material-ui/core/colors/cyan";
 const primary = "#1e262e";
 const primaryLight = grey[300];
 const primaryDark = grey[400];
-const secondary = "#ef375e";
+const secondary = "#222222";
 
 export const CustomTheme = {
     typography: {
+        "fontFamily": "\"Helvetica\", \"Arial\", sans-serif",
         useNextVariants: true
     },
     palette: {
@@ -29,7 +30,12 @@ export const CustomTheme = {
         MuiButton: {
             root: {
                 minWidth: "100px",
-                background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
+                background: "#b71319 !important" ,
+                transition: 'background .5s',
+                outline: 'None !important',
+                '&:hover': {
+                    background: '#000 !important'
+                  }
             },
             outlined: {
                 padding: "5px 30px",

@@ -1,0 +1,10 @@
+@mixin typography($font-name, $font-longname) {
+    @font-face {
+        font-family: $font-name;
+        src: url("../fonts/" + $font-longname + ".eot");
+        src: local('☺'), url("../fonts/" + $font-longname + ".woff") format('woff'),
+            url("../fonts/" + $font-longname + ".ttf") format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+}
