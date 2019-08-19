@@ -12,8 +12,9 @@ export function dashboardAction() {
                     dispatch(dashboardFSuccess(response.data.data));
                 }
             })
-            .catch(function(error) {
-                dispatch(RequestLoading(false));
+            .catch(function(error) {  
+                dispatch(RequestLoading(false));        
+                dispatch(dashboardFailure(error.response.data));                                                      
             });
     };
     function dashboardFailure(error) {
