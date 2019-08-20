@@ -5,13 +5,14 @@ import { bindActionCreators } from "redux";
 import { history } from "../../helpers/history";
 import * as path from "../../constants/routes";
 import { verifyToken, LogOut } from "../../actions/Auth";
+import {tokenVal} from "../../helpers/auth-header";
 
 import Layout from "../../components/Layout";
 import Loader from "../../components/Loader";
 
 class Dashboard extends Component {
     componentWillMount() {
-        const token = window.localStorage.getItem("auth_token");
+        const token = tokenVal();
         if (!this.props.isAuth) {
             if (!token) {
                 history.push(path.LOGIN);

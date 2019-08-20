@@ -50,5 +50,11 @@ export const styles = theme => ({
         '& img': {
             maxWidth: '100px'
         }
+    },
+    rememberMeBtn: {
+        marginTop: '15px'
+    },
+    title: {
+        marginBottom: '15px'
     }
 });

@@ -1,7 +1,8 @@
 import { apiUrl } from "../constants/index";
+import {tokenVal} from '../helpers/auth-header';
 
 export function sendVocation(data) {
-    const token = window.localStorage.getItem("auth_token");
+    const token = tokenVal();
     const dataN = {
         token: token,
         start: data.start,
@@ -17,7 +18,7 @@ export function sendVocation(data) {
 }
 
 export function getAllVocations(id) {
-    const token = window.localStorage.getItem("auth_token");
+    const token = tokenVal();
     return axios.post(apiUrl.ALL_VACATION, {
         token: token,
         id: id

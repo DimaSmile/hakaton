@@ -1,7 +1,8 @@
 import { apiUrl } from "../constants/index";
+import {tokenVal} from '../helpers/auth-header';
 
 export function buttonActive(id, status) {
-    const token = window.localStorage.getItem("auth_token");
+    const token = tokenVal();
     const data = {
         token: token,
         id: id,

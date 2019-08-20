@@ -6,6 +6,7 @@ export function dashboardAction() {
         dispatch(RequestLoading(true));
         dashboard()
             .then(response => {
+                console.log(response)
                 dispatch(RequestLoading(false));
                 if (response.data.success) {
                     const data = response.data.data;

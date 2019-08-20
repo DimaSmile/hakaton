@@ -8,3 +8,8 @@ export function authHeader() {
         return {};
     }
 }
+
+export function tokenVal() {
+    let token = window.localStorage.getItem("auth_token") || window.sessionStorage.getItem("auth_token");
+    return token;
+}

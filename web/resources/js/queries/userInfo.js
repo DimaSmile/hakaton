@@ -1,7 +1,8 @@
 import { apiUrl } from "../constants/index";
+import {tokenVal} from '../helpers/auth-header';
 
 export function userInfo() {
-    const token = window.localStorage.getItem("auth_token");
+    const token = tokenVal();
     return axios.post(apiUrl.USERINFO, {
         token: token
     });

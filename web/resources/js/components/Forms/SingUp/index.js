@@ -19,6 +19,7 @@ import Button from "@material-ui/core/Button";
 // import iconGoogle from "../../../../img/icons/iconGoogle.png";
 
 import { styles } from "./styles";
+import LogoImg from "../../../images/logo.png";
 
 const SignUp = props => {
     const { registration, classes, errors } = props;
@@ -35,7 +36,11 @@ const SignUp = props => {
         >
             {() => (
                 <div className={"form-block " + classes.root}>
+                    <div className={classes.formLogo}>
+                        <img src={LogoImg} alt="RocklabLogo" />
+                    </div>
                     <Typography
+                        className={classes.title}
                         component="h1"
                         variant="h3"
                         gutterBottom

@@ -7,6 +7,8 @@ import { bindActionCreators } from "redux";
 import Switch from "@material-ui/core/Switch";
 import { userInfoAction } from "../../actions/UserInfo";
 import { ButtonActiveAction } from "../../actions/ButtonActive";
+
+import {Val} from '../../helpers/auth-header';
 import { styles } from "./style";
 
 class SwitchOnline extends Component {
@@ -47,9 +49,10 @@ class SwitchOnline extends Component {
         this.channel.bind(
             "pusher:subscription_succeeded",
             (function(members) {
+                const token = tokenVal();
                 fetch(
                     baseUrl + "/api/isOnline/?token=" +
-                        window.localStorage.getItem("auth_token") +
+                    token +
                         "&is_login=1"
                 );
                 console.log("1");

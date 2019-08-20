@@ -52,6 +52,7 @@ class LoginForm extends PureComponent {
                             <img src={LogoImg} alt="RocklabLogo" />
                         </div>
                         <Typography
+                            className={classes.title}
                             component="h1"
                             variant="h3"
                             gutterBottom
@@ -90,6 +91,7 @@ class LoginForm extends PureComponent {
                                 classProp={classes.formInput}
                             />
                             <FormControlLabel
+                                className={classes.rememberMeBtn}
                                 control={
                                     <Checkbox
                                         checked={this.state.rememberCheckbox}
