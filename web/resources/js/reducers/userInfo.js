@@ -15,7 +15,7 @@ export function userInfo(state = initialState, action) {
         case types.USERINFO_FAILURE:
             return {
                 ...state,
-                dataError: action.errors
+                dataError: action.error.message
             };
         case types.USERINFO_SUCCESS:
             return {

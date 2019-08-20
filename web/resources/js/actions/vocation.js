@@ -48,6 +48,7 @@ export function getAllVacation(id) {
             })
             .catch(function(error) {
                 dispatch(getAllVacationLoading(false));
+                dispatch(getAllVacationFailure(error.response.data));
             });
     };
     function getAllVacationFailure(error) {

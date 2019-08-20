@@ -15,6 +15,7 @@ import Button from "@material-ui/core/Button";
 import DatePickerField from "../../components/FormElems/DatePicker";
 import { Formik, Form, Field } from "formik";
 import Close from "@material-ui/icons/Close";
+import DataErrors from "../../components/DataErrors";
 
 class MyVocation extends PureComponent {
     state = {
@@ -71,118 +72,123 @@ class MyVocation extends PureComponent {
             data,
             user,
             sendVocationAction,
-            vocation
+            vocation,
+            error
         } = this.props;
         const { showError, showConfirmation } = this.state;
         const startWorking =
             user && user.start_working ? user.start_working : false;
         const vacation_days = data ? data.vacation_days : "";
-        return (
-            <Grid container spacing={16}>
-                <Grid item xs={10}>
-                    <Card>
-                        <CardContent>
-                            <CalendarWithSelect
-                                vocation={vocation}
-                                startWorking={startWorking}
-                                handleShowError={this.handleShowError}
-                                handleshowConfirmation={
-                                    this.handleshowConfirmation
-                                }
+        if(error){
+            return <DataErrors error={error}/>
+        }
+        else
+            return (
+                <Grid container spacing={16}>
+                    <Grid item xs={10}>
+                        <Card>
+                            <CardContent>
+                                <CalendarWithSelect
+                                    vocation={vocation}
+                                    startWorking={startWorking}
+                                    handleShowError={this.handleShowError}
+                                    handleshowConfirmation={
+                                        this.handleshowConfirmation
+                                    }
+                                />
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Card className={classes.card}>
+                            <CardContent className={classes.cardContent}>
+                                <Typography className={classes.title} variant="h2">
+                                    {vacation_days ? vacation_days : 0}
+                                </Typography>
+                                <Typography variant="h3" className={classes.title}>
+                                    {vacation_days == 1 || vacation_days == -1
+                                        ? "day"
+                                        : "days"}
+                                </Typography>
+                                <Typography variant="h5" className={classes.title}>
+                                    vacation
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Modal open={showError} handleClose={this.closeErrorModal}>
+                        <Card>
+                            <Close
+                                onClick={this.closeErrorModal}
+                                className={classes.close}
                             />
-                        </CardContent>
-                    </Card>
+                            <CardContent>
+                                <Typography variant="h5" className={classes.error}>
+                                    Error
+                                </Typography>
+                                <div>{this.state.errorText}</div>
+                            </CardContent>
+                        </Card>
+                    </Modal>
+                    <Modal
+                        open={showConfirmation}
+                        handleClose={this.closeConfirmation}
+                    >
+                        <Card className={classes.modal}>
+                            <CardContent>
+                                <Formik
+                                    enableReinitialize={true}
+                                    initialValues={{
+                                        id: user && user.id ? user.id : "",
+                                        start: this.state.startDate
+                                            ? this.state.startDate
+                                            : "",
+                                        end: this.state.endDate
+                                            ? this.state.endDate
+                                            : ""
+                                    }}
+                                    onSubmit={values => {
+                                        sendVocationAction(values);
+                                    }}
+                                >
+                                    {() => (
+                                        <div
+                                            className={"form-block " + classes.root}
+                                        >
+                                            <Form>
+                                                <Field
+                                                    type="text"
+                                                    name="start"
+                                                    label="Start Vocation"
+                                                    component={DatePickerField}
+                                                    classProp={classes.formInput}
+                                                    disabled={true}
+                                                />
+                                                <Field
+                                                    type="text"
+                                                    name="end"
+                                                    label="End Vocation"
+                                                    component={DatePickerField}
+                                                    classProp={classes.formInput}
+                                                    disabled={true}
+                                                />
+                                                <Button
+                                                    variant="contained"
+                                                    color="primary"
+                                                    className={classes.submitButton}
+                                                    type="submit"
+                                                >
+                                                    Submit
+                                                </Button>
+                                            </Form>
+                                        </div>
+                                    )}
+                                </Formik>
+                            </CardContent>
+                        </Card>
+                    </Modal>
                 </Grid>
-                <Grid item xs={2}>
-                    <Card className={classes.card}>
-                        <CardContent className={classes.cardContent}>
-                            <Typography className={classes.title} variant="h2">
-                                {vacation_days ? vacation_days : 0}
-                            </Typography>
-                            <Typography variant="h3" className={classes.title}>
-                                {vacation_days == 1 || vacation_days == -1
-                                    ? "day"
-                                    : "days"}
-                            </Typography>
-                            <Typography variant="h5" className={classes.title}>
-                                vacation
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Modal open={showError} handleClose={this.closeErrorModal}>
-                    <Card>
-                        <Close
-                            onClick={this.closeErrorModal}
-                            className={classes.close}
-                        />
-                        <CardContent>
-                            <Typography variant="h5" className={classes.error}>
-                                Error
-                            </Typography>
-                            <div>{this.state.errorText}</div>
-                        </CardContent>
-                    </Card>
-                </Modal>
-                <Modal
-                    open={showConfirmation}
-                    handleClose={this.closeConfirmation}
-                >
-                    <Card className={classes.modal}>
-                        <CardContent>
-                            <Formik
-                                enableReinitialize={true}
-                                initialValues={{
-                                    id: user && user.id ? user.id : "",
-                                    start: this.state.startDate
-                                        ? this.state.startDate
-                                        : "",
-                                    end: this.state.endDate
-                                        ? this.state.endDate
-                                        : ""
-                                }}
-                                onSubmit={values => {
-                                    sendVocationAction(values);
-                                }}
-                            >
-                                {() => (
-                                    <div
-                                        className={"form-block " + classes.root}
-                                    >
-                                        <Form>
-                                            <Field
-                                                type="text"
-                                                name="start"
-                                                label="Start Vocation"
-                                                component={DatePickerField}
-                                                classProp={classes.formInput}
-                                                disabled={true}
-                                            />
-                                            <Field
-                                                type="text"
-                                                name="end"
-                                                label="End Vocation"
-                                                component={DatePickerField}
-                                                classProp={classes.formInput}
-                                                disabled={true}
-                                            />
-                                            <Button
-                                                variant="contained"
-                                                color="primary"
-                                                className={classes.submitButton}
-                                                type="submit"
-                                            >
-                                                Submit
-                                            </Button>
-                                        </Form>
-                                    </div>
-                                )}
-                            </Formik>
-                        </CardContent>
-                    </Card>
-                </Modal>
-            </Grid>
-        );
+            );
     }
 }
 
@@ -194,7 +200,7 @@ const mapStateToProps = state => {
     return {
         data: state.dashboard.dashboardData,
         user: state.user.user,
-        error: state.dashboard.usersErrors,
+        error: state.vocation.vacationDataErrors,
         vocation: state.vocation.vacationData
     };
 };

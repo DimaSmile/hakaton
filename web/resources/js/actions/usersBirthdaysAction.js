@@ -17,6 +17,7 @@ export function usersBirthdaysAction() {
             })
             .catch(function(error) {
                 dispatch(usersBirthdaysRequestLoading(false));
+                dispatch(usersBirthdaysRequestFailure(error.response.data));
             });
     };
     function usersBirthdaysRequestFailure(error) {

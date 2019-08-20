@@ -13,6 +13,7 @@ import Event from "../../components/Event";
 import { usersBirthdaysAction } from "../../actions/usersBirthdaysAction";
 
 import { styles } from "./style";
+import DataErrors from "../../components/DataErrors";
 
 class Birthdays extends Component {
     componentDidMount() {
@@ -24,27 +25,31 @@ class Birthdays extends Component {
             : false;
     }
     render() {
-        const { classes, usersBirthdays } = this.props;
+        const { classes, usersBirthdays, error } = this.props;
         let nextEvent = usersBirthdays ? usersBirthdays.closest_birthday : null;
-        return (
-            <Grid container spacing={16}>
-                <Grid item xs={8}>
-                    <Card className={classes.card}>
-                        <CardContent className={classes.cardContent}>
-                            <CalendarDefault
-                                birthdays={usersBirthdays}
-                                nextEvent={nextEvent}
-                            />
-                        </CardContent>
-                    </Card>
+        if(error){
+            return <DataErrors error={error}/>          
+        }
+        else
+            return (
+                <Grid container spacing={16}>
+                    <Grid item xs={8}>
+                        <Card className={classes.card}>
+                            <CardContent className={classes.cardContent}>
+                                <CalendarDefault
+                                    birthdays={usersBirthdays}
+                                    nextEvent={nextEvent}
+                                />
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Card className={classes.card}>
+                            <Event nextEvent={nextEvent}/>
+                        </Card>
+                    </Grid>
                 </Grid>
-                <Grid item xs={4}>
-                    <Card className={classes.card}>
-                        <Event nextEvent={nextEvent} />
-                    </Card>
-                </Grid>
-            </Grid>
-        );
+            );
     }
 }
 

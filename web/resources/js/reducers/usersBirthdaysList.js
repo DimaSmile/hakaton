@@ -16,7 +16,7 @@ export function usersBirthdaysList(state = initialState, action) {
         case types.USERS_BIRTHDAYS_FAILURE:
             return {
                 ...state,
-                usersErrors: action.errors
+                usersErrors: action.error.message
             };
         case types.USERS_BIRTHDAYS_SUCCESS:
             return {

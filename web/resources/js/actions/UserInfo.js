@@ -15,6 +15,7 @@ export function userInfoAction() {
             })
             .catch(function(error) {
                 dispatch(RequestLoading(false));
+                dispatch(userListFailure(error.response.data));
             });
     };
     function userListFailure(error) {

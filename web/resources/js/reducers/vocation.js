@@ -24,7 +24,7 @@ export function vocation(state = initialState, action) {
         case types.VOCATION_REQUEST_FAILURE:
             return {
                 ...state,
-                users: action.users
+                users: action.users,
             };
         case types.GET_ALL_VACATION_LOADING:
             return {
@@ -40,7 +40,7 @@ export function vocation(state = initialState, action) {
         case types.GET_ALL_VACATION_FAILURE:
             return {
                 ...state,
-                vacationDataErrors: action.errors
+                vacationDataErrors: action.error.message
             };
 
         default:

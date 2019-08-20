@@ -8,7 +8,7 @@ import Switch from "@material-ui/core/Switch";
 import { userInfoAction } from "../../actions/UserInfo";
 import { ButtonActiveAction } from "../../actions/ButtonActive";
 
-import {Val} from '../../helpers/auth-header';
+import {tokenVal} from '../../helpers/auth-header';
 import { styles } from "./style";
 
 class SwitchOnline extends Component {

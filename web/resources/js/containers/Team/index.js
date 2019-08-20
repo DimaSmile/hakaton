@@ -9,6 +9,7 @@ import { userInfoAction } from "../../actions/UserInfo";
 import Loader from "../../components/Loader";
 
 import { styles } from "./style";
+import DataErrors from "../../components/DataErrors";
 
 class Team extends Component {
     componentDidMount() {
@@ -36,7 +37,7 @@ class Team extends Component {
         // });
     }
     render() {
-        const { classes, users } = this.props;
+        const { classes, users, error } = this.props;
         if (users) {
             return (
                 <div>
@@ -81,8 +82,13 @@ class Team extends Component {
                     </div>
                 </div>
             );
-        } else {
-            return <Loader />;
+        } 
+        
+        else {
+            if(error){
+                return <DataErrors error={error}/>
+            }
+            else return <Loader />;          
         }
     }
 }
