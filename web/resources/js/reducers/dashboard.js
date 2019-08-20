@@ -15,7 +15,7 @@ export function dashboard(state = initialState, action) {
         case types.DASHBOARD_FAILURE:
             return {
                 ...state,
-                dataError: action.errors
+                dataError: action.error.message
             };
         case types.DASHBOARD_SUCCESS:
             return {
@@ -24,6 +24,8 @@ export function dashboard(state = initialState, action) {
             };
 
         default:
-            return state;
+            return {
+                state
+            };
     }
 }

@@ -15,6 +15,7 @@ import { styles } from "./style";
 import WeekActivityChart from "../../components/Charts/WeekActivityChart";
 import GradienCard from "../../components/Cards/GradienCard";
 import Loader from "../../components/Loader";
+import DataErrors from "../../components/DataErrors";
 
 class DashboardHome extends PureComponent {
     componentDidMount() {
@@ -26,7 +27,7 @@ class DashboardHome extends PureComponent {
             : false;
     }
     render() {
-        const { classes, data } = this.props;
+        const { classes, data, dataError } = this.props;
 
         const vacation_days = data ? data.vacation_days : "0";
         const sick_days = data ? data.sick_days : "0";
@@ -61,9 +62,14 @@ class DashboardHome extends PureComponent {
                     </div>
                 </div>
             );
-        } else {
-            return <Loader />;
         }
+        else {
+            if (dataError){
+                return <DataErrors error={dataError}/>
+            } else {
+                return <Loader />;
+            }
+        } 
     }
 }
 
@@ -71,11 +77,12 @@ DashboardHome.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
+const mapStateToProps =  state => {
     return {
         user: state.user.user,
         data: state.dashboard.dashboardData,
-        error: state.dashboard.usersErrors
+        error: state.dashboard.usersErrors,
+        dataError: state.dashboard.dataError
     };
 };
 

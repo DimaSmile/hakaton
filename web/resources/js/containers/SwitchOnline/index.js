@@ -43,11 +43,12 @@ class SwitchOnline extends Component {
             { [name]: event.target.checked },
             this.props.ButtonActiveAction(id, event.target.checked)
         );
+        var baseUrl = window.location.origin;
         this.channel.bind(
             "pusher:subscription_succeeded",
             (function(members) {
                 fetch(
-                    "http://localhost:8080/api/isOnline/?token=" +
+                    baseUrl + "/api/isOnline/?token=" +
                         window.localStorage.getItem("auth_token") +
                         "&is_login=1"
                 );

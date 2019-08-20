@@ -21,7 +21,7 @@ export function teamCalendar(state = initialState, action) {
         case types.TEAM_CALENDAR_FAILURE:
             return {
                 ...state,
-                teamCalendarErrors: action.errors
+                teamCalendarErrors: action.errors           
             };
         default:
             return state;
